@@ -1,0 +1,245 @@
+/* --- ENTIRE PAGE --- */
+
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+#fullWrapper {
+	clear: both;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -80px; /* the bottom margin is the negative value of the footer's height */
+}
+
+/* --- HEADER --- */
+
+#headerWrapper {
+	width: 100%;
+	background-color: #000000;
+	border-bottom: 3px solid #CE2424;
+	padding: 5px 0px 5px 0px;
+	display: block;
+}
+
+#headerContainer {
+	width: 900px;
+	color: #ffffff;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top: 0px;
+}
+
+.headerContainer_Left {
+	text-align: left;
+	color: #CE2424;
+}
+
+.headerContainer_Right {
+	display: block;
+}
+
+.headerContainer_Right div {
+	min-height: 1em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.headerContainer_Right a:link, a:visited { color: #ffffff; text-decoration: none; }
+.headerContainer_Right a:hover { color: #CE2424;  text-decoration: none;}
+.headerContainer_Right a:active { color: #83170B;  text-decoration: none;}
+
+
+/* --- BODY --- */
+
+#bodyWrapper {
+	width:900px;
+	margin: 0px auto 80px auto;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+}
+
+/* --- FULL CONTENT PANE --- */
+
+#fullContentPaneWrapper {
+	width:900px;
+	display: block;
+	border: 1px solid #CE2424;
+}
+
+.fullContentPane_Content {
+	padding:10px;
+	font-size: 1em;
+}
+
+/* --- SPLIT CONTENT PANE --- */
+
+#splitContentPaneWrapper {
+	width: 900px;
+	margin: 0px;
+	padding: 0px;
+	display: block;
+}
+
+.splitContentPane_Left {
+	padding:10px;
+	font-size: 1em;
+	width:420px;
+	border: 1px solid #CE2424;
+	display: inline-block;
+}
+
+.splitContentPane_Right {
+	padding:10px;
+	font-size: 1em;
+	width:420px;
+	border: 1px solid #CE2424;
+	display: inline-block;
+}
+
+/* --- STAGGER CONTENT PANE --- */
+
+#staggerContentPaneWrapper {
+	width: 900px;
+	display: block;
+}
+
+.staggerContentPane_Max {
+	padding:10px;
+	font-size: 1em;
+	width:630px;
+	border: 1px solid #CE2424;
+	display: inline-block;
+}
+
+.staggerContentPane_Min {
+	padding:10px;
+	font-size: 1em;
+	width:210px;
+	border: 1px solid #CE2424;
+	display: inline-block;
+}
+
+/* --- DIVIDER --- */
+
+#headerToBodyDivider {
+	width: 900px;
+	height:10px;
+	background-color: #ffffff;
+}
+
+#bodyToFooterDivider {
+	width: 900px;
+	height:20px;
+	background-color: #ffffff;
+}
+
+#outerDividerLine {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:#777;
+	display: block;
+	height: 1px;
+}
+
+/* --- FOOTER --- */
+
+.push {
+	height: 80px;
+}
+
+#footerContainerWrapper {
+	clear: both;
+	width: 100%;
+	border-top: 3px solid #CE2424;
+	background-color: #000;
+	padding-top: 10px;
+	display: block;
+	bottom:0;
+	height: 80px;
+}
+
+#footerContentPane {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+	background: #000;
+	padding-bottom:10px;
+}
+
+.footerContentPaneLeft {
+	top: 0;
+	color:#777;
+	display: inline-block;
+	font-size:0.8em;
+	display:inline-block;
+}
+
+.footerContentPaneRight {
+	font-size: 1em;
+	display: inline-block;
+	vertical-align: top;
+	display:inline-block;
+	vertical-align: middle;
+	color: #ccc;
+}
+
+.footerContentPaneRight img {
+	min-height: 20px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+#footerContentPane a:link, a:visited { color: #ffffff; text-decoration: none; }
+#footerContentPane a:hover { color: #CE2424;  text-decoration: none;}
+#footerContentPane a:active { color: #83170B;  text-decoration: none;}
+
+/* --- TEXT TYPES --- */
+
+h1 {
+	font-size: 1.2em;
+	border-bottom: 1px solid #cccccc;
+	text-transform: uppercase;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	padding-left: 5px;
+}
+
+h2 {
+	font-size: 0.8em;
+	text-transform: uppercase;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	font-weight: bold;
+}
+
+h3 {
+	font-size: 0.8em;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	font-weight: normal;
+}
+
+p {
+	font-size: 1em;
+	display: block;
+	padding: 5px 0px 0px 5px;
+	margin: 0px;
+}

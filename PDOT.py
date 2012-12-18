@@ -1,7 +1,9 @@
+import os
+import sys
 from webob import Request, Response, exc
 from webob.dec import wsgify
 from Configuration import config
-from Administration.PageRouter import PageRouter
+from Website.PageRouter import PageRouter
 
 class PDOTApp:
     def __init__(self):
@@ -21,7 +23,7 @@ class PDOTApp:
                 hostname = hostname[:colonPosition]
             """
                 
-            if hostname == config['admin']['hostname']:
+            if hostname == config['address']['hostname']:
                 page = PageRouter(request)
                 response = page()
             else:
