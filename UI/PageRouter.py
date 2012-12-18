@@ -1,6 +1,7 @@
 import importlib
 from webob import Request, Response
-from Routes import map
+from Routes import *
+import Configuration
 
 class PageRouter:
     def __init__(self, request):
@@ -11,9 +12,14 @@ class PageRouter:
         print route
         
         try:
-            module = importlib.import_module("Website.PageControllers" + "." + route["controller"])
-            controllerClass = getattr(module, route['controller'] + 'Controller')
+            module = importlib.import_module(Configuration.pageControllersRoot + "." + route["controller"])            
+            controllerClass = getattr(module, route['controller'] + 'Controller')            
             method = getattr(controllerClass, route['action'])
+            
+            if Configuration.debugMode:
+                print 'Module: ' + repr(module)
+                print 'Controller: ' + repr(controllerClass)
+                print 'Method: ' + repr(method)
             
             # Resources will create their own response object
             if(route['controller'] == u'Resource'):

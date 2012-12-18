@@ -1,9 +1,10 @@
 import random
+import Configuration
 
 class FutureQuote:
     @staticmethod
     def getRandomQuote():
-        f = open('Administration//Website/resources/futureQuotes.txt', 'r')
+        f = open(Configuration.futureQuotesDirectory + Configuration.futureQuotesFile, 'r')
         l = list()
         listSize = 0;
         for line in f:

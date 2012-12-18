@@ -1,14 +1,21 @@
 config = { "address" : {  "hostname" : "localhost:9000"  }  }
 
-rootFolder = "Website/Website/"
+rootFolder = "UI\\Website\\"
 pagesFolder = rootFolder + 'pages'
 cssFolder = rootFolder + "css"
 imgFolder = rootFolder + "img"
 resourcesFolder = rootFolder + "resources"
 
 webpageDirectory = {
-        "master" : pagesFolder + "master.html"
+        "master" : "master.html"
 }
+
+pageControllersRoot = 'UI.PageControllers'
 
 imageDirectory = {"pdotBig" : imgFolder + "pdot_big.png",
                   "pdotSmall" : imgFolder + "pdot_small.png" }
+
+futureQuotesDirectory = 'UI/Website/resources/'
+futureQuotesFile = 'futureQuotes.txt'
+
+debugMode = False;

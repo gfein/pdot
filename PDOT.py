@@ -3,7 +3,7 @@ import sys
 from webob import Request, Response, exc
 from webob.dec import wsgify
 from Configuration import config
-from Website.PageRouter import PageRouter
+from UI.PageRouter import PageRouter
 
 class PDOTApp:
     def __init__(self):
