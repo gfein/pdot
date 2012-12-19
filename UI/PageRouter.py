@@ -1,7 +1,7 @@
 import importlib
 from webob import Request, Response
-from Routes import *
 import Configuration
+from Routes import *
 
 class PageRouter:
     def __init__(self, request):

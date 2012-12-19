@@ -4,6 +4,8 @@ from webob import Request, Response, exc
 from webob.dec import wsgify
 from Configuration import config
 from UI.PageRouter import PageRouter
+from Services.ServiceRouter import ServiceRouter
+import Configuration
 
 class PDOTApp:
     def __init__(self):
@@ -15,19 +17,18 @@ class PDOTApp:
         
         try:
             hostname = request.host
-            
-            # Strip out proxy number
-            """            
-            colonPosition = hostname.find(':')
-            if colonPosition != -1:
-                hostname = hostname[:colonPosition]
-            """
-                
-            if hostname == config['address']['hostname']:
-                page = PageRouter(request)
-                response = page()
-            else:
-                response = Response("Whoa bro, you seeing this?")
+
+            print '1:20 - ' + request.path[1:20]
+            # Is this a page request or a service request?
+            if request.path.__len__() > 20 and request.path[1:20] == Configuration.handleJQueryRequest:
+                service = ServiceRouter(request)
+                response = service()                                
+            else :
+                if hostname == config['address']['hostname']:
+                    page = PageRouter(request)
+                    response = page()
+                else:
+                    response = Response("Whoa bro, you seeing this?")
                 
         # Return HTTP exception
         except exc.HTTPException, e:

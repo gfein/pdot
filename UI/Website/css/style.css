@@ -243,3 +243,18 @@ p {
 	padding: 5px 0px 0px 5px;
 	margin: 0px;
 }
+
+.inputTextBox {
+	color:000;
+	background-color:#ccc;
+	border: 1px solid #CE2424;
+	padding: 3px;
+}
+
+.submitButton {
+	color:000;
+	background-color:#ccc;
+	border: 1px solid #CE2424;
+	padding: 3px;
+	font-weight: bold;
+}
