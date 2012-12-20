@@ -5,9 +5,9 @@
 	<title>
 		PDOT - Predict-o-Tron
 	</title>
-	<link href="../css/style.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
-	<script type="text/javascript" src="../js/jquery-pdot.js" ></script>		
+	<link href="/css/style.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="/js/jquery-1.8.3.min.js" ></script>
+	<script type="text/javascript" src="/js/jquery-pdot.js" ></script>		
 </head>
 
 <body>
@@ -22,7 +22,9 @@
 							<table width="100%" border="0" cellspacing="2" cellpadding="0">
 							<tr>
 								<td width="75">
-									<img src="../img/pdot_new_small.png">
+									<a href="/">
+									<img border="0" src="/img/pdot_new_small.png">
+									</a>
 								</td>
 								<td align="left" valign="bottom">
 									<h2>PDOT v.1.0</h2>									
@@ -84,9 +86,9 @@
 				<td align="right">
 					{% block footer %}    
 					<div class="footerContentPaneRight">
-						<a href="javascript:testAlert()"><img src ="img/icons/save.png"></a>&nbsp;
-						<a href="javascript:testAlert()"><img src ="img/icons/email.png"></a>&nbsp;
-						<a href="javascript:testAlert()"><img src ="img/icons/backToTop.png"></a><br>
+						<a href="javascript:testAlert()"><img src ="/img/icons/save.png"></a>&nbsp;
+						<a href="javascript:testAlert()"><img src ="/img/icons/email.png"></a>&nbsp;
+						<a href="javascript:testAlert()"><img src ="/img/icons/backToTop.png"></a><br>
 						{{ serverVersion }}
 					</div>
 					{% endblock %}

@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
+from Util.SQLUtil import *
 import urllib
+import Configuration
 
 class BaseScraper(object):
     mUrl  = None

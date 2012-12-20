@@ -23,6 +23,6 @@ imageDirectory = {"pdotBig" : imgFolder + "pdot_big.png",
 futureQuotesDirectory = 'UI/Website/resources/'
 futureQuotesFile = 'futureQuotes.txt'
 
-debugMode = True;
+debugMode = False;
 
 handleJQueryRequest = 'HandleJQueryRequest'
