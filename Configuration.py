@@ -7,7 +7,10 @@ imgFolder = rootFolder + "img"
 resourcesFolder = rootFolder + "resources"
 
 webpageDirectory = {
-        "master" : "master.html"
+        "home" : "main.html",
+        "about" : "main.html",               
+        "debug" : "debug.html",
+        "viewData" : "viewData.html"        
 }
 
 pageControllersRoot = 'UI.PageControllers'
@@ -18,6 +21,6 @@ imageDirectory = {"pdotBig" : imgFolder + "pdot_big.png",
 futureQuotesDirectory = 'UI/Website/resources/'
 futureQuotesFile = 'futureQuotes.txt'
 
-debugMode = False;
+debugMode = True;
 
 handleJQueryRequest = 'HandleJQueryRequest'

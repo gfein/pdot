@@ -1,24 +1,43 @@
-from webob import Request, Response
+from webob import Response
 from Services.Routes import *
-import Configuration
-from Services import Routes
-from Services.Instance.GetUnixTime import *
+import json
+from Util.Switch import *
 
 class ServiceRouter:
     def __init__(self, request):
         self.request = request
         
     def __call__(self):
-        serviceRoute = routes[self.request.path[21:]]
+        serviceName = self.request.path[21:]
+        serviceRoute = routes[serviceName]
         response = Response()
-        response.status = 200
+        response.status = 200        
         
-        if serviceRoute == routes['GetUnixTime']:
-            time = GetUnixTimeService.getTime()
-            response.body = self.wrapInJSON(time)
-        else :
-            response.body = "[0]"        
+        for case in Switch(serviceRoute):
+            if case(GetUnixTimeRoute):
+                response = self.handleUnixTimeService(response)
+                break
+            if case(PrimeAllDatabasesRoute):
+                response = self.handlePrimeAllDatabasesService(response)
+                break
+            if case(ScrapePlayersFromBBRRoute):
+                response = self.handleScrapeAllPlayersFromBBRService(response)
+                break
+            if case(): # default, could also just omit condition or 'if True'
+                response.body = json.dumps( { "result" : "Error: Could not understand the AJAX request in the handler." } )
+        
         return response;
     
-    def wrapInJSON(self, var):
-        return '[' + str(var) + ']'
+    
+    def handleScrapeAllPlayersFromBBRService(self, response):
+        response.body = json.dumps( { "result" : ScrapePlayers.scrapePlayersFromBBR() } )      
+        return response
+    
+    def handleUnixTimeService(self, response):
+        time = GetUnixTimeService.getTime()
+        response.body = json.dumps(time)
+        return response
+    
+    def handlePrimeAllDatabasesService(self, response):
+        response.body = json.dumps( { "result" : PrimeAllDatabasesResult.executePrimeAllDatabases() } )      
+        return response

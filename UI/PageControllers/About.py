@@ -7,6 +7,8 @@ class AboutController(BaseController):
         BaseController.importBaseController()
         
         env = Environment(loader=PackageLoader('PDOT', Configuration.pagesFolder))
-        template = env.get_template('master.html')
+        template = env.get_template(Configuration.webpageDirectory['about'])
         m = Model()
-        return template.render(route=m.getWriters(), futureQuote=FutureQuote.getRandomQuote(), serverVersion=DatabaseUtility.getVersion())
+        return template.render(futureQuote=BaseController.getFutureQuote(), 
+                               serverVersion=BaseController.getServerVersion(),
+                               content='About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>')

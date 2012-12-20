@@ -5,7 +5,7 @@ class DatabaseUtility:
     pword = 'pdot'
     host = '127.0.0.1'
     port = 9002
-    db = 'test'
+    db = 'pdot'
     
     @staticmethod
     def getConnection():

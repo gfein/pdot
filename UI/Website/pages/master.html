@@ -14,6 +14,9 @@
 			$('#pingResult').focus(function(){
 				$('#pingResult').blur();
 			});
+			
+			pageLoad_primeAllDatabases();
+			pageLoad_scrapeBBRPlayers();
 		});
 	</script>
 	
@@ -40,13 +43,7 @@
 					</td>
 					<td width="25%" valign="bottom">
 						<div class="headerContainer_Right">
-							<!--  
 							{% block headerRight %}
-							<div>
-								<a href="#"><img src="../img/icons/calendar.png" onclick="pressedButton()"></a>
-							</div>
-							<br>
-							-->
 							<div>
 								<a href="/">Home</a> | 
 								<a href="javascript:testAlert()">Item</a> | 
@@ -63,22 +60,18 @@
 	<div id="headerToBodyDivider"> &nbsp; </div>
 	
 	<div id="bodyWrapper">
-		{% block content %}
-		Content Pane:
-		<table width="100%" cellpadding="1" cellspacing="1" border="1">
-			<tr>
-				<td>Route</td>
-				<td> {{ route}} </td>
-			</tr>
-		</table>
-		{% endblock %}
+	
+		<div id="navigationBar" class="navigationBar">
+			<div class="navigationBarContent">
+				<a href="debug">Debug</a>
+				&nbsp;|&nbsp;
+				<a href="ViewData">View Data</a>
+			</div>
+		</div>
 		
-		<br>
-		<hr>
-		<br>
-		Ping Time:<br>
-		<input type="text" id="pingResult" class="inputTextBox">
-		<input type="button" value="Ping" class="submitButton" onclick="testAjax()">
+		{% block content %}
+		{% endblock %}
+				
 	</div>
 	
 	<div id="bodyToFooterDivider"> &nbsp; </div>

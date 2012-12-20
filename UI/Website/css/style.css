@@ -24,7 +24,7 @@ html, body {
 #headerWrapper {
 	width: 100%;
 	background-color: #000000;
-	border-bottom: 3px solid #CE2424;
+	border-bottom: 3px solid #ff0000;
 	padding: 5px 0px 5px 0px;
 	display: block;
 }
@@ -39,7 +39,7 @@ html, body {
 
 .headerContainer_Left {
 	text-align: left;
-	color: #CE2424;
+	color: #ff0000;
 }
 
 .headerContainer_Right {
@@ -53,8 +53,8 @@ html, body {
 }
 
 .headerContainer_Right a:link, a:visited { color: #ffffff; text-decoration: none; }
-.headerContainer_Right a:hover { color: #CE2424;  text-decoration: none;}
-.headerContainer_Right a:active { color: #83170B;  text-decoration: none;}
+.headerContainer_Right a:hover { color: #ff0000;  text-decoration: none;}
+.headerContainer_Right a:active { color: #8A0000;  text-decoration: none;}
 
 
 /* --- BODY --- */
@@ -67,12 +67,30 @@ html, body {
 	height: 100%;
 }
 
+/* --- NAVIGATION BAR --- */
+
+.navigationBar {
+	width:900px;
+	margin: 0px auto 10px auto;
+	height:30px;
+	border-bottom:1px solid #ff0000;
+}
+
+.navigationBarContent {
+	margin: 0px auto 0px auto;
+}
+
+.navigationBarContent a:link { color: #ff0000; text-decoration: none; font-weight: bold; }
+.navigationBarContent a:visited { color: #ff0000; text-decoration: none; font-weight: bold; }
+.navigationBarContent a:hover { color: #8A0000;  text-decoration: none; font-weight: bold; }
+.navigationBarContent a:active { color: #520000;  text-decoration: none; font-weight: bold; }
+
 /* --- FULL CONTENT PANE --- */
 
 #fullContentPaneWrapper {
 	width:900px;
 	display: block;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 }
 
 .fullContentPane_Content {
@@ -93,7 +111,7 @@ html, body {
 	padding:10px;
 	font-size: 1em;
 	width:420px;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 	display: inline-block;
 }
 
@@ -101,7 +119,7 @@ html, body {
 	padding:10px;
 	font-size: 1em;
 	width:420px;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 	display: inline-block;
 }
 
@@ -116,7 +134,7 @@ html, body {
 	padding:10px;
 	font-size: 1em;
 	width:630px;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 	display: inline-block;
 }
 
@@ -124,7 +142,7 @@ html, body {
 	padding:10px;
 	font-size: 1em;
 	width:210px;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 	display: inline-block;
 }
 
@@ -162,7 +180,7 @@ html, body {
 #footerContainerWrapper {
 	clear: both;
 	width: 100%;
-	border-top: 3px solid #CE2424;
+	border-top: 3px solid #ff0000;
 	background-color: #000;
 	padding-top: 10px;
 	display: block;
@@ -202,8 +220,8 @@ html, body {
 }
 
 #footerContentPane a:link, a:visited { color: #ffffff; text-decoration: none; }
-#footerContentPane a:hover { color: #CE2424;  text-decoration: none;}
-#footerContentPane a:active { color: #83170B;  text-decoration: none;}
+#footerContentPane a:hover { color: #ff0000;  text-decoration: none;}
+#footerContentPane a:active { color: #8A0000;  text-decoration: none;}
 
 /* --- TEXT TYPES --- */
 
@@ -247,14 +265,14 @@ p {
 .inputTextBox {
 	color:000;
 	background-color:#ccc;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 	padding: 3px;
 }
 
 .submitButton {
 	color:000;
 	background-color:#ccc;
-	border: 1px solid #CE2424;
+	border: 1px solid #ff0000;
 	padding: 3px;
 	font-weight: bold;
 }

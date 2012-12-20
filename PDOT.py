@@ -18,7 +18,6 @@ class PDOTApp:
         try:
             hostname = request.host
 
-            print '1:20 - ' + request.path[1:20]
             # Is this a page request or a service request?
             if request.path.__len__() > 20 and request.path[1:20] == Configuration.handleJQueryRequest:
                 service = ServiceRouter(request)

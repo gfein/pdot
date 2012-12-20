@@ -9,3 +9,11 @@ class BaseController:
     def importBaseController():
         b = BaseController()
         return b;
+    
+    @staticmethod
+    def getFutureQuote():
+        return FutureQuote.getRandomQuote()
+    
+    @staticmethod
+    def getServerVersion():
+        return DatabaseUtility.getVersion()
