@@ -15,7 +15,8 @@ class ResourceController(BaseController):
         else:
             filename = Configuration.rootFolder + route['base'] + '/' + route['filename']
                
-        print('Route Filename: ' + route['filename'] + '\n' + 'Filename: ' + filename)
+        if Configuration.debugMode:
+            print('Route Filename: ' + route['filename'] + '\n' + 'Filename: ' + filename)
                
         response.body = open(filename, 'rb').read()
         return response

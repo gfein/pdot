@@ -9,7 +9,9 @@ class PageRouter:
         
     def __call__(self):
         route = map.match(self.request.path)
-        print route
+        if Configuration.debugMode:
+            print 'Request Path: %s' % (repr(self.request.path))
+            print 'Route: %s' % (route) 
         
         try:             
             # Not the most elegant code, but necessary due to differing root directories of pages vs resources           
@@ -36,7 +38,8 @@ class PageRouter:
             
         except Exception, e:
             print 'PageRouter Exception: ' + repr(e)
-            response = Response()
-            response.status = 404
-            response.body = "Page Not Found"
-            return response;
+            route = map.match('/error')
+            module = importlib.import_module(Configuration.pageControllersRoot + "." + route["controller"])            
+            controllerClass = getattr(module, route['controller'] + 'Controller')            
+            method = getattr(controllerClass, route['action'])
+            return Response(method(self.request, route))

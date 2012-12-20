@@ -10,6 +10,7 @@ webpageDirectory = {
         "home" : "main.html",
         "about" : "about.html",               
         "debug" : "debug.html",
+        "error" : "error.html",
         "viewData" : "viewData.html"        
 }
 

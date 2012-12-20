@@ -8,8 +8,9 @@ from Services.ServiceRouter import ServiceRouter
 import Configuration
 
 class PDOTApp:
-    def __init__(self):
-        self.setupModel()
+    def __init__(self):        
+        # Need something here... 
+        0
         
     @wsgify
     def __call__(self, request):
@@ -42,10 +43,6 @@ class PDOTApp:
             
         # Return response to client
         return response;
-    
-    def setupModel(self):
-        #Model.getVersion()
-        print 'Insert creation logic'
         
 # Create simple_server for local testing
 # This code won't be executed in the wsgi environment
