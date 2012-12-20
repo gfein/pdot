@@ -8,7 +8,7 @@ resourcesFolder = rootFolder + "resources"
 
 webpageDirectory = {
         "home" : "main.html",
-        "about" : "main.html",               
+        "about" : "about.html",               
         "debug" : "debug.html",
         "viewData" : "viewData.html"        
 }

@@ -10,5 +10,4 @@ class AboutController(BaseController):
         template = env.get_template(Configuration.webpageDirectory['about'])
         m = Model()
         return template.render(futureQuote=BaseController.getFutureQuote(), 
-                               serverVersion=BaseController.getServerVersion(),
-                               content='About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>About Page<br><br>')
+                               serverVersion=BaseController.getServerVersion())
