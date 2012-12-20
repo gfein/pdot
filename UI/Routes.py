@@ -11,7 +11,6 @@ map.connect(None, "/favicon.ico", controller="Resource", action="Load", base=Non
 map.connect("home", "/", controller="Main", action="Home")
 map.connect("home", "/debug", controller="Main", action="Debug")
 map.connect("about", "/About", controller="About", action="About")
-map.connect("project", "/project/{projectId}", controller="Project", action="View")
 map.connect("view", "/ViewData", controller="ViewData", action="Main")
 map.connect("viewType", "/ViewData/{viewType}", controller="ViewData", action="Type")
 

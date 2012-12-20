@@ -11,21 +11,28 @@ class PageRouter:
         route = map.match(self.request.path)
         print route
         
-        try:
-            module = importlib.import_module(Configuration.pageControllersRoot + "." + route["controller"])            
-            controllerClass = getattr(module, route['controller'] + 'Controller')            
-            method = getattr(controllerClass, route['action'])
+        try:             
+            # Not the most elegant code, but necessary due to differing root directories of pages vs resources           
+            module = None
+            controllerClass = None
+            method = None
+            
+            # Resources will create their own response object
+            if(route['controller'] == u'Resource'):
+                module = importlib.import_module(Configuration.resourceControllerRoot + "." + route["controller"])            
+                controllerClass = getattr(module, route['controller'] + 'Controller')            
+                method = getattr(controllerClass, route['action'])
+                return method(self.request, route)
+            else:
+                module = importlib.import_module(Configuration.pageControllersRoot + "." + route["controller"])            
+                controllerClass = getattr(module, route['controller'] + 'Controller')            
+                method = getattr(controllerClass, route['action'])
+                return Response(method(self.request, route))
             
             if Configuration.debugMode:
                 print 'Module: ' + repr(module)
                 print 'Controller: ' + repr(controllerClass)
                 print 'Method: ' + repr(method)
-            
-            # Resources will create their own response object
-            if(route['controller'] == u'Resource'):
-                return method(self.request, route)
-            else:
-                return Response(method(self.request, route))
             
         except Exception, e:
             print 'PageRouter Exception: ' + repr(e)

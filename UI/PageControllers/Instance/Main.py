@@ -1,4 +1,4 @@
-from BaseController import *
+from UI.PageControllers.BaseController import *
 from Database.Instance.Model import *
 
 class MainController(BaseController):

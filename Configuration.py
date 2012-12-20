@@ -13,7 +13,8 @@ webpageDirectory = {
         "viewData" : "viewData.html"        
 }
 
-pageControllersRoot = 'UI.PageControllers'
+pageControllersRoot = 'UI.PageControllers.Instance'
+resourceControllerRoot = 'UI.PageControllers'
 
 imageDirectory = {"pdotBig" : imgFolder + "pdot_big.png",
                   "pdotSmall" : imgFolder + "pdot_small.png" }
