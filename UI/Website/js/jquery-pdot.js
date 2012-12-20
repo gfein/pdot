@@ -137,7 +137,7 @@
 
 (function ($) {
 	changeSearchContent = function (content) {
-		$('#searchTypeContent').html('<img src="/img/gifs/loadingCircle.gif">');
+		$('#searchTypeContent').html('<center><img src="/img/gifs/loadingCircle.gif"></center>');
 		$('#searchTypeTitle').text(content);		
 		
 		if(content == "By Player")
