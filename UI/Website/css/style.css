@@ -98,6 +98,11 @@ html, body {
 	font-size: 1em;
 }
 
+.fullContentPane_Content a:link { color: #ff0000; text-decoration: none; font-weight: normal; }
+.fullContentPane_Content a:visited { color: #ff0000; text-decoration: none; font-weight: normal; }
+.fullContentPane_Content a:hover { color: #8A0000;  text-decoration: none; font-weight: normal; }
+.fullContentPane_Content a:active { color: #520000;  text-decoration: none; font-weight: normal; }
+
 /* --- SPLIT CONTENT PANE --- */
 
 #splitContentPaneWrapper {
@@ -136,6 +141,16 @@ html, body {
 	width:630px;
 	border: 1px solid #ff0000;
 	display: inline-block;
+	vertical-align:top;
+}
+
+.staggerInnerContentPane_Max {
+	padding:10px;
+	font-size: 1em;
+	width:590px;
+	border: 1px solid #ff0000;
+	display: inline-block;
+	vertical-align:top;
 }
 
 .staggerContentPane_Min {
@@ -144,6 +159,7 @@ html, body {
 	width:210px;
 	border: 1px solid #ff0000;
 	display: inline-block;
+	vertical-align:top;
 }
 
 /* --- DIVIDER --- */
@@ -261,6 +277,11 @@ p {
 	display: block;
 	padding: 5px 0px 0px 5px;
 	margin: 0px;
+}
+
+ul 
+{
+	list-style-image:url('/img/icons/red-list-item.png');
 }
 
 .inputTextBox {

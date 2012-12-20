@@ -5,13 +5,18 @@ pagesFolder = rootFolder + 'pages'
 cssFolder = rootFolder + "css"
 imgFolder = rootFolder + "img"
 resourcesFolder = rootFolder + "resources"
+subviewFolder = pagesFolder + "\\subviews"
 
 webpageDirectory = {
         "home" : "main.html",
         "about" : "about.html",               
         "debug" : "debug.html",
         "error" : "error.html",
-        "viewData" : "viewData.html"        
+        "viewData" : "viewData.html"            
+}
+
+subviewPageDirectory = {
+        "subview_playerSearchCriteria" : "playerSearchCriteria.html"
 }
 
 pageControllersRoot = 'UI.PageControllers.Instance'

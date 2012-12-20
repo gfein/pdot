@@ -1,4 +1,56 @@
 {% extends "master.html" %}
 {% block content %}
-View Page    
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		pageLoad_viewData();
+	});
+</script>	
+	
+<div id="fullContentPaneWrapper">
+	<div class="fullContentPane_Content">
+		<h1>
+			View Data from Database
+		</h1>
+		<p>
+		Select from the search methods below on the left.
+		</p>
+		<br>
+		<p>
+			<div id="staggerContentPaneWrapper">
+				<table width="100%">
+					<tr>
+						<td valign="top">
+							<div class="staggerContentPane_Min">
+								<h1>
+									Search Types
+								</h1>
+								<p>
+									<ul>
+									<li><a href="#" id="searchType_byPlayer" onclick="changeSearchContent('By Player')">By Player</a></li>
+									<li><a href="#" id="searchType_default" onclick="changeSearchContent('By Y')">By Y</a></li>
+									<li><a href="#" id="searchType_default" onclick="changeSearchContent('By Z')">By Z</a></li>
+									</ul>
+								</p>
+							</div>
+						</td>
+						<td width="10px"> &nbsp; </td>
+						<td valign="top">
+							<div class="staggerInnerContentPane_Max">
+								<h1>
+									<div id="searchTypeTitle">Please Select a Search Type</div>									
+								</h1>
+								<p id="searchTypeContent">
+									Please Select a Search Type to see options
+								</p>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</p>
+	</div>
+</div>
+		
+		
 {% endblock %}

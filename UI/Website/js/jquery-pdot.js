@@ -79,13 +79,13 @@
 })(jQuery);
 
 //----------------------------------------------------------------- //
-// SCRAPE BASKETBALL REFERENCE PLAYERS LOGIC
+//SCRAPE BASKETBALL REFERENCE PLAYERS LOGIC
 //----------------------------------------------------------------- //
 
 (function ($) {
 	pageLoad_scrapeBBRPlayers = function () {
 		$('#scrapeBBRPlayers_loadingGif').hide();
- }
+}
 })(jQuery);
 
 (function ($) {
@@ -95,7 +95,7 @@
 			window.setTimeout("execute_scrapeBBRPlayers()", 500);
 			$('#scrapeBBRPlayersResult').html('');
 		}
- }
+}
 })(jQuery);
 
 (function ($) {
@@ -122,5 +122,56 @@
 	            	$('#scrapeBBRPlayers_loadingGif').fadeOut("slow");
 	            }
 	        })	        	       
- }
+}
+})(jQuery);
+
+//----------------------------------------------------------------- //
+// VIEW DATABASE SEARCHING
+//----------------------------------------------------------------- //
+
+(function ($) {
+	pageLoad_viewData = function () {
+		
+	}
+})(jQuery);
+
+(function ($) {
+	changeSearchContent = function (content) {
+		$('#searchTypeContent').html('<img src="/img/gifs/loadingCircle.gif">');
+		$('#searchTypeTitle').text(content);		
+		
+		if(content == "By Player")
+			window.setTimeout('displayContentFor_ByPlayer()', 1000);
+		else
+			window.setTimeout('displayContentFor_Default()', 1000);
+	}
+})(jQuery);
+
+(function ($) {
+	displayContentFor_ByPlayer = function () {		
+		$.ajax({
+            type: "POST",
+            url: "HandleJQueryRequest/GetPlayerSearchCriteria",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            	var items = '';
+            	if(data != null) {
+            		 $.each(data, function (key, value) {		                	
+		                	items += value;		                    
+		                });
+            		 $('#searchTypeContent').html(items);
+            	}
+            },
+            error: function (request, error) {
+            	$('#searchTypeContent').text('An error occured.  Check the logs: '+ Math.round((new Date()).getTime() / 1000));
+            }
+        })	        		
+	}
+})(jQuery);
+
+(function ($) {
+	displayContentFor_Default = function () {
+		$('#searchTypeContent').text('Could not find a paradigm to search by this instance.');
+	}
 })(jQuery);
