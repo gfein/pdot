@@ -39,4 +39,5 @@ class Queryable(object):
 		return 'Failed to insert \"' + id + '\" into ' + table + ': ' + reason	
 		   	
 	def __del__(self):
-		print 'Execution time: %s' % (time() - self.mStartTime)
+		if Configuration.debugMode:
+			print 'Execution time: %s' % (time() - self.mStartTime)

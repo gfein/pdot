@@ -1,4 +1,5 @@
 import MySQLdb
+import Configuration
 
 class DatabaseUtility:
     user = 'pdot'
