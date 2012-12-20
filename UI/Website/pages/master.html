@@ -7,19 +7,7 @@
 	</title>
 	<link href="../css/style.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="../js/jquery-1.8.3.min.js" ></script>
-	<script type="text/javascript" src="../js/jquery-pdot.js" ></script>
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#pingResult').focus(function(){
-				$('#pingResult').blur();
-			});
-			
-			pageLoad_primeAllDatabases();
-			pageLoad_scrapeBBRPlayers();
-		});
-	</script>
-	
+	<script type="text/javascript" src="../js/jquery-pdot.js" ></script>		
 </head>
 
 <body>
@@ -29,19 +17,22 @@
 			<table width="100%" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="75%">
-						<div class="headerContainer_Left">
+						<div class="headerContainer_Left" align="left">
 							{% block headerLeft %}
-							<h2>
-								<img src="../img/pdot_small.png"><br>
-								Predict-o-Tron
-							</h2>
-							<h3>
-								{{ futureQuote }} 
-							</h3>
+							<table width="100%" border="0" cellspacing="2" cellpadding="0">
+							<tr>
+								<td width="100">
+									<img src="../img/pdot_new_small.png">
+								</td>
+								<td align="left" valign="bottom">
+									<h2>PDOT v.1.0</h2>									
+							</td>
+							</tr>
+							</table>
 							{% endblock %}
 						</div>
 					</td>
-					<td width="25%" valign="bottom">
+					<td width="25%" valign="bottom" align="right">
 						<div class="headerContainer_Right">
 							{% block headerRight %}
 							<div>
@@ -82,11 +73,9 @@
 	<div id="footerContentPane">
 		<table>
 			<tr> 
-				<td valign="top" align="left">
+				<td valign="top" align="left" width="600">
 					<div class="footerContentPaneLeft">
-						PDOT (Predict-o-tron) was developed entirely by Gregory Fein for personal use.<br>  
-						If you have this, then you have somehow stolen it.  So, you should know something...<br>
-						I have a very specific set of skills--skills that make me a nightmare for men like you.  Thus, give it back.
+						{{ futureQuote }}
 					</div>
 				</td>
 				<td align="middle" width="120">
