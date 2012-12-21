@@ -15,14 +15,14 @@ class ScrapeBBRPlayerByLetter(BaseScraper):
             for row in playerTable.findAll('tr'):
                 col = row.findAll('td')
                 if len(col) > 0:                    
-                    name = SQLUtil.checkNameForSQL(col[0])                                        
+                    name = SQLUtil.checkNameForSQL(col[0])                                   
                     fromYear = SQLUtil.checkStringForSQL(col[1])                                        
                     toYear = SQLUtil.checkStringForSQL(col[2])                    
                     position = SQLUtil.checkStringForSQL(col[3]) # Unused                                       
-                    height = SQLUtil.checkStringForSQL(col[4])                                        
-                    weight = SQLUtil.checkStringForSQL(col[5])                                        
+                    height = SQLUtil.convertStringToHeight(col[4])                                        
+                    weight = SQLUtil.convertStringToInt(col[5])                                        
                     birthDate = SQLUtil.convertDateToSQL(col[6])                                                                        
-                    university = SQLUtil.checkStringForSQL(col[7]) # Unused
+                    university = SQLUtil.checkStringForSQL(col[7]) # Unused                                    
                     
                     if Configuration.debugMode:
                         print'Row #%s: Column #%s: %s' % (str(rowCounter), 0, name) # Name
@@ -34,7 +34,7 @@ class ScrapeBBRPlayerByLetter(BaseScraper):
                         print'Row #%s: Column #%s: %s' % (str(rowCounter), 6, birthDate) # Birth date
                         print'Row #%s: Column #%s: %s' % (str(rowCounter), 7, university) # Birth date                                    
                     
-                    bulkPlayers.append([name, height, weight, birthDate, fromYear, toYear])
+                    bulkPlayers.append([name, str(height), str(weight), birthDate, fromYear, toYear])
                     rowCounter = rowCounter + 1
             return playersDbLayer.bulkInsert(bulkPlayers)
     

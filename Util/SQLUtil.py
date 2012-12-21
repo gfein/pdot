@@ -63,3 +63,24 @@ class SQLUtil:
             return '0%d' % (day)
         else:
             return str(day)
+        
+    @staticmethod
+    def convertStringToHeight(val):
+        stringedHeight = SQLUtil.checkStringForSQL(val)
+        if stringedHeight is not 'None':
+            parts = stringedHeight.split('-')
+            feet = int(parts[0]) * 12
+            inches = int(parts[1])
+            total = feet + inches
+            return total
+        else:
+            return 0
+    
+    @staticmethod
+    def convertStringToInt(val):
+        stringedHeight = SQLUtil.checkStringForSQL(val)
+        if stringedHeight == 'None':
+            return 0            
+        else:
+            return int(SQLUtil.checkStringForSQL(val))
+            

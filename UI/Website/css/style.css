@@ -330,3 +330,28 @@ ul
 	margin-bottom:10px;
 	padding-left:10px;
 }
+
+.expandingContent table {
+	width:100%;
+	padding:5px;
+	border:0px;
+}
+
+.expandingContent td {
+	align:center;
+	text-align:center;
+}
+
+.expandedContentTitle {
+	font-weight:bold;
+	font-size:1.0em;
+}
+
+.numericSearchInputTextBox {
+	color:000;
+	background-color:#ccc;
+	border: 1px solid #ff0000;
+	padding: 3px;
+	width:30px;
+	text-align:center;
+}

@@ -21,8 +21,8 @@ class PlayersDbLayer(Queryable):
                 cur.execute("CREATE TABLE " + Database.Constants.K_PLAYERS_TABLE + 
                             "(Id INT PRIMARY KEY AUTO_INCREMENT, " + 
                             "Name VARCHAR(100), " +
-                            "Height VARCHAR(25), " +
-                            "Weight VARCHAR(25), " +
+                            "Height INT not NULL, " +
+                            "Weight INT not NULL, " +
                             "Born DATE, " +
                             "PlayedFrom INT, " +
                             "PlayedTo INT " +                    

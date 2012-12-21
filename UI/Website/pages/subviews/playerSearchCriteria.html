@@ -7,37 +7,445 @@
 	    //$("h4.expand").toggler({method: "fadeToggle"});
 	    $("h4.expand").toggler({method: "slideFadeToggle"});    
 	});
+	
+	$(document).ready(function(){
+		$('.numericSearchInputTextBox').focus(function(){
+			$('.numericSearchInputTextBox').blur();
+		});
+	});
+	
+	// --- BY HEIGHT --- //
+	
+	(function ($) {
+		feetDecrease = function() {
+			var feet = parseInt($("#heightDisplay_feet").val(), 10);
+			if(feet > 5)
+				feet--;
+			$("#heightDisplay_feet").val(feet);								
+		}
+	})(jQuery);
+	
+	(function ($) {
+		feetIncrease = function() {
+			var feet = parseInt($("#heightDisplay_feet").val(), 10);
+			if(feet < 9)
+				feet++;
+			$("#heightDisplay_feet").val(feet);		
+		}
+	})(jQuery);
+	
+	(function ($) {
+		inchesDecrease = function() {
+			var feet = parseInt($("#heightDisplay_inches").val(), 10);
+			if(feet > 0)
+				feet--;
+			$("#heightDisplay_inches").val(feet);
+		}
+	})(jQuery);
+	
+	(function ($) {
+		inchesIncrease = function() {
+			var feet = parseInt($("#heightDisplay_inches").val(), 10);
+			if(feet < 11)
+				feet++;
+			$("#heightDisplay_inches").val(feet);		
+		}
+	})(jQuery);
+	
+	// --- BY WEIGHT --- //
+	
+	(function ($) {
+		weightDecrease = function() {
+			var weight = parseInt($("#weightDisplay_pounds").val(), 10);
+			if(weight > 135)
+				weight-=5;
+			$("#weightDisplay_pounds").val(weight);
+		}
+	})(jQuery);
+	
+	(function ($) {
+		weightIncrease = function() {
+			var weight = parseInt($("#weightDisplay_pounds").val(), 10);
+			if(weight < 450)
+				weight+=5;
+			$("#weightDisplay_pounds").val(weight);		
+		}
+	})(jQuery);	
+	
+	// --- ACTIVE YEARS --- //
+	
+	(function ($) {
+		fromYearDecrease = function() {
+			var year = parseInt($("#activeYearsDisplay_fromYear").val(), 10);
+			if(year > 1950)
+				year--;
+			$("#activeYearsDisplay_fromYear").val(year);								
+		}
+	})(jQuery);
+	
+	(function ($) {
+		fromYearIncrease = function() {
+			var toYear = parseInt($("#activeYearsDisplay_toYear").val(), 10);
+			var fromYear = parseInt($("#activeYearsDisplay_fromYear").val(), 10);
+			if(fromYear < 2013 && ((fromYear + 1) != toYear))
+				fromYear++;
+			$("#activeYearsDisplay_fromYear").val(fromYear);		
+		}
+	})(jQuery);
+	
+	(function ($) {
+		toYearDecrease = function() {
+			var toYear = parseInt($("#activeYearsDisplay_toYear").val(), 10);
+			var fromYear = parseInt($("#activeYearsDisplay_fromYear").val(), 10);
+			if(toYear > 1950 && ((toYear - 1) != fromYear))
+				toYear--;
+			$("#activeYearsDisplay_toYear").val(toYear);
+		}
+	})(jQuery);
+	
+	(function ($) {
+		toYearIncrease = function() {
+			var year = parseInt($("#activeYearsDisplay_toYear").val(), 10);
+			if(year < 2013)
+				year++;
+			$("#activeYearsDisplay_toYear").val(year);		
+		}
+	})(jQuery);
+	
+	// --- BIRTH DATE --- //
+	
+	(function ($) {
+		monthDecrease = function() {
+			var monthInt = getIntForMonth($("#birthDisplay_month").val());
+			if(monthInt > 1)
+				monthInt--;
+			$("#birthDisplay_month").val(getMonthForInt(monthInt));		
+		}
+	})(jQuery);
+	
+	(function ($) {
+		monthIncrease = function() {
+			var monthInt = getIntForMonth($("#birthDisplay_month").val());
+			if(monthInt < 12)
+				monthInt++;
+			$("#birthDisplay_month").val(getMonthForInt(monthInt));		
+		}
+	})(jQuery);
+	
+	(function($) {
+		getMonthForInt = function(number) {
+			switch(number) {
+				case 1:
+					return "January";
+				case 2:
+					return "February";
+				case 3:
+					return "March";
+				case 4:
+					return "April";
+				case 5:
+					return "May";
+				case 6:
+					return "June";
+				case 7:
+					return "July";
+				case 8:
+					return "August";
+				case 9:
+					return "September";
+				case 10:
+					return "October";
+				case 11:
+					return "November";
+				case 12:
+					return "December";
+				default:
+					return "Error";
+			}		
+		}
+	})(jQuery);
+	
+	(function($) {
+		getIntForMonth = function(month) {
+			if (month == "January") {
+				return 1;
+			}
+			else if (month == "February") {
+				return 2;
+			}
+			else if (month == "March") {
+				return 3;
+			}
+			else if (month == "April") {
+				return 4;
+			}
+			else if (month == "May") {
+				return 5;
+			}
+			else if (month == "June") {
+				return 6;
+			}
+			else if (month == "July") {
+				return 7;
+			}
+			else if (month == "August") {
+				return 8;
+			}
+			else if (month == "September") {
+				return 9;
+			}
+			else if (month == "October") {
+				return 10;
+			}
+			else if (month == "November") {
+				return 11;
+			}
+			else if (month == "December") {
+				return 12;
+			}
+			else if (month == "Error") {
+				return 0;
+			}
+			else { 
+				return -1;
+			}
+		}
+	})(jQuery);
+	
+	(function($) {
+		dayDecrease = function () {
+			var day = parseInt($("#birthDisplay_day").val(), 10);
+			if(day > 1)
+				day--;
+			$("#birthDisplay_day").val(day);		
+		}
+	})(jQuery);
+	
+	(function($) {
+		dayIncrease = function () {
+			var day = parseInt($("#birthDisplay_day").val(), 10);
+			if(day < 31)
+				day++;
+			$("#birthDisplay_day").val(day);		
+		}
+	})(jQuery);
+	
+	(function($) {
+		yearDecrease = function () {
+			var year = parseInt($("#birthDisplay_year").val(), 10);
+			if(year > 1950)
+				year--;
+			$("#birthDisplay_year").val(year);		
+		}
+	})(jQuery);
+	
+	(function($) {
+		yearIncrease = function () {
+			var year = parseInt($("#birthDisplay_year").val(), 10);
+			if(year < 2013)
+				year++;
+			$("#birthDisplay_year").val(year);		
+		}
+	})(jQuery);
+	
+	(function($) {
+		isDateValid = function(month, day, year) {
+			var yearToCheck = year;
+			var monthToCheck = month - 1;    // 0-based... so 1 = february
+			var dateToCheck = day;
+			var dateObj = new Date(yearToCheck, monthToCheck, dateToCheck);
+			if (dateObj.getFullYear() == yearToCheck && 
+					dateObj.getMonth() == monthToCheck && 
+					dateObj.getDate() == dateToCheck)
+			    return true;
+			else
+			    return false;			
+		}
+	})(jQuery);
+	
+	// --- EXECUTE SEARCH --- /
+	(function($) {
+		excuteSearch = function() {
+			var month = getIntForMonth($("#birthDisplay_month").val());
+			var day = $("#birthDisplay_day").val();
+			var year = $("#birthDisplay_year").val();
+			if(isDateValid(month, day, year))
+				alert('Valid date! =D');
+			else
+				alert('Invalid date... =(');
+		}
+	})(jQuery);
+	
 </script>
 
 <div class="demo" style="padding:0px;">
+
+	<!-- NAME -->
 	<h4 class="expand">BY NAME</h4>
-		<div class="collapse">
-              <p class="expandingContent">
-              Hello World<br>JHello World<br>Hello world
-              </p>
-          </div>
-	<h4 class="expand">BY YEARS</h4>
-		<div class="collapse">
-              <p class="expandingContent">
-              Hello World<br>JHello World<br>Hello world
-              </p>
-          </div>
-       <h4 class="expand">BY WEIGHT</h4>
-       	<div class="collapse">
-              <p class="expandingContent">
-              Hello World<br>JHello World<br>Hello world
-              </p>
-          </div>		
-       <h4 class="expand">BY HEIGHT</h4>
-       	<div class="collapse">
-              <p class="expandingContent">
-              Hello World<br>JHello World<br>Hello world
-              </p>
-          </div>		
-       <h4 class="expand">BY BIRTHDATE</h4>
-       	<div class="collapse">
-              <p class="expandingContent">
-              Hello World<br>JHello World<br>Hello world
-              </p>
-          </div>		  
+	<div class="collapse">
+		<p class="expandingContent">
+            First Name:<Br>
+			Last Name:
+		</p>
+	</div>
+
+	<!-- ACTIVE YEARS -->         
+	<h4 class="expand">BY ACTIVE YEARS</h4>
+	<div class="collapse">
+            <div class="expandingContent">                  
+			<table>
+				<tr>
+					<td>
+						<span class="expandedContentTitle">FROM YEAR</span>
+              		</td>
+              		<td>
+              			<span class="expandedContentTitle">TO YEAR</span>
+              		</td>
+              		<td>
+              			<span class="expandedContentTitle">FILTER</span>
+              		</td>
+				</tr>
+              	<tr>
+              		<td>
+              			<a href="#" onclick="fromYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+						<input type="text" id="activeYearsDisplay_fromYear" class="numericSearchInputTextBox" value="2012">
+						<a href="#" onclick="fromYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              		</td>
+              		<td>
+						<a href="#" onclick="toYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+              			<input type="text" id="activeYearsDisplay_toYear" class="numericSearchInputTextBox" value="2013">
+              			<a href="#" onclick="toYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              		</td>
+              		<td>
+						<select>
+						  <option value="heightFilter_exactly">Exact Period</option>
+						  <option value="heightFilter_shorter">Played During Period</option>
+						</select>
+              		</td>	              		
+              	</tr>
+			</table>          	              
+             </div>
+         </div>
+         
+      <!--  WEIGHT -->
+      <h4 class="expand">BY WEIGHT</h4>
+      	<div class="collapse">
+             <div class="expandingContent">                  
+			<table>
+				<tr>
+					<td>
+						<span class="expandedContentTitle">WEIGHT (LBs)</span>
+              		</td>
+              		<td>
+              			<span class="expandedContentTitle">FILTER</span>
+              		</td>
+				</tr>
+              	<tr>
+              		<td>
+              			<a href="#" onclick="weightDecrease()"><img src="/img/icons/arrow-left.png"></a>
+						<input type="text" id="weightDisplay_pounds" class="numericSearchInputTextBox" value="200">
+						<a href="#" onclick="weightIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              		</td>	              		
+              		<td>
+						<select>
+						  <option value="weightFilter_exactly">Exactly</option>
+						  <option value="weightFilter_shorter">Lighter (inclusive)</option>
+						  <option value="weightFilter_taller">Heavier (inclusive)</option>
+						</select>
+              		</td>	              		
+              	</tr>
+			</table>          	              
+             </div>
+         </div>		
+         
+	<!-- HEIGHT -->
+	<h4 class="expand">BY HEIGHT</h4>
+	<div class="collapse">
+		<div class="expandingContent">                  
+			<table>
+				<tr>
+					<td>
+						<span class="expandedContentTitle">FEET</span>
+              		</td>
+              		<td>
+              			<span class="expandedContentTitle">INCHES</span>
+              		</td>
+              		<td>
+              			<span class="expandedContentTitle">FILTER</span>
+              		</td>
+				</tr>
+              	<tr>
+              		<td>
+              			<a href="#" onclick="feetDecrease()"><img src="/img/icons/arrow-left.png"></a>
+						<input type="text" id="heightDisplay_feet" class="numericSearchInputTextBox" value="6">
+						<a href="#" onclick="feetIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              		</td>
+              		<td>
+						<a href="#" onclick="inchesDecrease()"><img src="/img/icons/arrow-left.png"></a>
+              			<input type="text" id="heightDisplay_inches" class="numericSearchInputTextBox" value="6">
+              			<a href="#" onclick="inchesIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              		</td>
+              		<td>
+						<select>
+						  <option value="heightFilter_exactly">Exactly</option>
+						  <option value="heightFilter_shorter">Shorter (inclusive)</option>
+						  <option value="heightFilter_taller">Taller (inlusive)</option>
+						</select>
+              		</td>	              		
+              	</tr>
+			</table>          	              
+		</div>
+	</div>
+			
+	<h4 class="expand">BY BIRTHDATE</h4>
+	<div class="collapse">
+		<div class="expandingContent">                  
+			<table>
+				<tr>
+					<td>
+						<span class="expandedContentTitle">MONTH</span>
+					</td>
+             		<td>
+              			<span class="expandedContentTitle">DAY</span>
+             		</td>
+             		<td>
+              			<span class="expandedContentTitle">YEAR</span>
+             		</td>
+              		<td>
+             				<span class="expandedContentTitle">FILTER</span>
+              		</td>
+				</tr>	
+             	<tr>
+              		<td>
+       	      			<a href="#" onclick="monthDecrease()"><img src="/img/icons/arrow-left.png"></a>
+						<input type="text" id="birthDisplay_month" class="numericSearchInputTextBox" style="width:100px;" value="July">
+						<a href="#" onclick="monthIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             		</td>
+             		<td>
+						<a href="#" onclick="dayDecrease()"><img src="/img/icons/arrow-left.png"></a>
+             			<input type="text" id="birthDisplay_day" class="numericSearchInputTextBox" value="7">
+             			<a href="#" onclick="dayIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             		</td>
+             		<td>
+						<a href="#" onclick="yearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+             			<input type="text" id="birthDisplay_year" class="numericSearchInputTextBox" value="1988">
+             			<a href="#" onclick="yearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             		</td>
+             		<td>
+						<select>
+					  		<option value="heightFilter_exactly">Exactly</option>
+					  		<option value="heightFilter_shorter">Born Earlier (inclusive)</option>
+					  		<option value="heightFilter_taller">Born Later (inlusive)</option>
+						</select>
+             		</td>	              		
+             	</tr>
+			</table>          	              
+		</div>
+	</div>		
+	
+	<table width="100%" border="0">
+		<tr><td align="right">
+			<input type="button" value="Execute Search" class="submitButton" onclick="excuteSearch();">
+		</td></tr>
+	</table>
 </div>
