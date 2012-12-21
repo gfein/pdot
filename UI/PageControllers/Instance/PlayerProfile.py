@@ -18,8 +18,8 @@ class PlayerProfileController(BaseController):
                                    uniqueId=foundPlayer.uniqueId,
                                    firstName=foundPlayer.firstName,
                                    lastName=foundPlayer.lastName,
-                                   height=foundPlayer.playedFrom,
-                                   weight=foundPlayer.playedTo,
+                                   height=foundPlayer.height,
+                                   weight=foundPlayer.weight,
                                    born=foundPlayer.born,
                                    playedFrom=foundPlayer.playedFrom,
                                    playedTo=foundPlayer.playedTo)

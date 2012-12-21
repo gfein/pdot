@@ -22,5 +22,8 @@ map.connect("viewType", "/ViewData/{viewType}", controller="ViewData", action="T
 # Pages from Player Profiles
 map.connect("playerprofile", "/profile/{playerId}", controller="PlayerProfile", action="Profile")
 
+# Search Results
+map.connect("searchResults", "/search/{searchLetter}", controller="SearchResults", action="Display")
+
 # AJAX Requests
 map.connect("HandleJQueryRequest", "", controller="AJAX", action="AJAX")

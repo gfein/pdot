@@ -191,3 +191,23 @@ class PlayersDbLayer(Queryable):
             self.closeConnection()
                 
         return player         
+    
+    def queryByLetter(self, letter):
+        playerList = []
+        self.openConnection()
+        try:
+            with self.getConnection():
+                cur = self.getConnection().cursor()    
+                cur.execute('SELECT Id, FirstName, LastName, PlayedFrom, PlayedTo FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE LastName like \'' + str(letter) + '%\';')                
+                numrows = int(cur.rowcount)
+
+                for i in range(numrows):
+                    dbPlayer = cur.fetchone()
+                    l = [ dbPlayer[0], dbPlayer[1], dbPlayer[2], dbPlayer[3], dbPlayer[4] ]
+                    playerList.append(l)                                            
+        except Exception, e:
+            print 'Exception: %s' % (e)
+        finally:
+            self.closeConnection()
+                
+        return playerList

@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+{% block content %}
+<div id="fullContentPaneWrapper">
+	<div class="fullContentPane_Content">
+		<h1>
+			Search Results
+		</h1>
+		
+		<p>
+		Search results based off of query: {{ queryDescription }}
+		</p>
+					
+		<table width="100%" border="1">
+			{% for player in playerResult %}
+			
+				<tr>
+					<td>
+						<a href="/profile/{{ player[0] }}">
+						{{ player[1] + ' ' + player[2] }}
+						</a>
+					</td>
+					<td>
+						{{ player[3] }} - {{ player[4] }} 
+					</td>
+				</tr>
+			{% endfor %}			
+		</table>
+	</div>
+</div>
+		
+		
+{% endblock %}
