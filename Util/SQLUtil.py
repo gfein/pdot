@@ -8,7 +8,7 @@ class SQLUtil:
         nameparts = name.split()
         
         if part == 0 or len(nameparts) == 2:
-            return nameparts[part].encode('utf-8')
+            return nameparts[part].encode('utf-8').upper()
         else:
             fullName = ''
             index = 0
@@ -18,7 +18,7 @@ class SQLUtil:
                     if (index + 1) != len(nameparts):
                         fullName += ' '                
                 index = index + 1
-            return fullName.encode('utf-8')
+            return fullName.encode('utf-8').upper()
             
     
     @staticmethod
@@ -26,7 +26,7 @@ class SQLUtil:
         retStr = ''
         
         try:
-            retStr = val.string.strip().encode('utf-8')
+            retStr = val.string.strip().upper()
         except Exception:
             retStr = 'None'
             
@@ -42,7 +42,7 @@ class SQLUtil:
         except Exception:
             retStr = 'NULL'
             
-        return retStr.encode('utf-8')
+        return retStr.encode('utf-8').upper()
     
     @staticmethod
     def getNumberForMonth(val):
@@ -77,7 +77,7 @@ class SQLUtil:
         if day < 10:
             return '0%d' % (day)
         else:
-            return str(day)
+            return str(day).upper()
         
     @staticmethod
     def convertStringToHeight(val):

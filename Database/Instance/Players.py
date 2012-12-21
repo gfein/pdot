@@ -113,8 +113,11 @@ class PlayersDbLayer(Queryable):
                     birthDate = playerDetails[4]
                     fromYear = playerDetails[5]
                     toYear = playerDetails[6]
-                    
-                    str_list.append(self.insertWithCursor(cur, firstName, lastName, fromYear, toYear, height, weight, birthDate))                                    
+                           
+                    try:
+                        str_list.append(self.insertWithCursor(cur, firstName, lastName, fromYear, toYear, height, weight, birthDate))
+                    except Exception:
+                        print 'Error inserting for player: ' + firstName + ' ' + lastName                                                    
         except Exception, e:
             print 'Exception: %s' % (e)
             str_list.append(self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE))

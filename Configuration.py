@@ -29,5 +29,6 @@ futureQuotesDirectory = 'UI/Website/resources/'
 futureQuotesFile = 'futureQuotes.txt'
 
 debugMode = False;
+#debugMode = True;
 
 handleJQueryRequest = 'HandleJQueryRequest'

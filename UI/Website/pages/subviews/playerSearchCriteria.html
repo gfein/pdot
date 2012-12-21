@@ -66,7 +66,7 @@
 	(function ($) {
 		weightIncrease = function() {
 			var weight = parseInt($("#weightDisplay_pounds").val(), 10);
-			if(weight < 450)
+			if(weight < 350)
 				weight+=5;
 			$("#weightDisplay_pounds").val(weight);		
 		}
@@ -344,11 +344,11 @@
 							</tr>
 	              			<tr>
 	              				<td>
-									<input type="text" id="activeYearsDisplay_fromYear" class="textSearchInputTextBox" value="">
+									<input type="text" id="nameDisplay_firstName" class="textSearchInputTextBox" value="">
 	              				</td>
 	              				<td></td>
 	              				<td>
-	              					<input type="text" id="activeYearsDisplay_toYear" class="textSearchInputTextBox" value="">
+	              					<input type="text" id="nameDisplay_lastName" class="textSearchInputTextBox" value="">
 	              				</td>              		           	
 	              			</tr>
 						</table>  
@@ -377,9 +377,14 @@
 				<ul style="list-style-type:square; list-style-image:none;">
 					<li>
 						Name search is exact.  There is no ability to "figure out" bad spelling.<br>
+						<ul style="list-style-type:square; list-style-image:none;">
+							<li>
+								This does not mean capitalization.  Case insensitive.
+							</li>
+						</ul>
 					</li>
 					<li style="color:#000;">
-						Names with apostrophes are have been interpreted as having two aspotrophes.
+						Names with apostrophes are have been interpreted as having two apostrophes.
 						<ul style="list-style-type:square; list-style-image:none;">
 							<li>
 								Shaquille O'Neal is now Shaquille O''Neal.
@@ -418,15 +423,15 @@
 							</tr>
 	              			<tr>
 	              				<td>
-	              					<a href="#" onclick="fromYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+	              					<a href="#" onclick="fromYearDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
 									<input type="text" id="activeYearsDisplay_fromYear" class="numericSearchInputTextBox" value="2012">
-									<a href="#" onclick="fromYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+									<a href="#" onclick="fromYearIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
 	              				</td>
 	              				<td></td>
 	              				<td>
-									<a href="#" onclick="toYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<a href="#" onclick="toYearDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
 	              					<input type="text" id="activeYearsDisplay_toYear" class="numericSearchInputTextBox" value="2013">
-	              					<a href="#" onclick="toYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+	              					<a href="#" onclick="toYearIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
 	              				</td>              		           	
 	              			</tr>
 						</table>  
@@ -470,9 +475,9 @@
 								</tr>
               					<tr>
               						<td>
-              							<a href="#" onclick="weightDecrease()"><img src="/img/icons/arrow-left.png"></a>
+              							<a href="#" onclick="weightDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
 										<input type="text" id="weightDisplay_pounds" class="numericSearchInputTextBox" value="200">
-										<a href="#" onclick="weightIncrease()"><img src="/img/icons/arrow-right.png"></a>
+										<a href="#" onclick="weightIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
               						</td>	              		              						             	
               					</tr>
 							</table>  
@@ -519,15 +524,15 @@
 							</tr>
               				<tr>
               					<td>
-              						<a href="#" onclick="feetDecrease()"><img src="/img/icons/arrow-left.png"></a>
+              						<a href="#" onclick="feetDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
 									<input type="text" id="heightDisplay_feet" class="numericSearchInputTextBox" value="6">
-									<a href="#" onclick="feetIncrease()"><img src="/img/icons/arrow-right.png"></a>
+									<a href="#" onclick="feetIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
               					</td>
               					<td width="20">&nbsp;</td>
               					<td>
-									<a href="#" onclick="inchesDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<a href="#" onclick="inchesDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
               						<input type="text" id="heightDisplay_inches" class="numericSearchInputTextBox" value="6">
-              						<a href="#" onclick="inchesIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              						<a href="#" onclick="inchesIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
               					</td>              					             	
               				</tr>
 						</table>    
@@ -577,19 +582,19 @@
 							</tr>	
              				<tr>
               					<td>
-       	      						<a href="#" onclick="monthDecrease()"><img src="/img/icons/arrow-left.png"></a>
+       	      						<a href="#" onclick="monthDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
 									<input type="text" id="birthDisplay_month" class="numericSearchInputTextBox" style="width:100px;" value="July">
-									<a href="#" onclick="monthIncrease()"><img src="/img/icons/arrow-right.png"></a>
+									<a href="#" onclick="monthIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
              					</td>
              					<td>
-									<a href="#" onclick="dayDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<a href="#" onclick="dayDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
              						<input type="text" id="birthDisplay_day" class="numericSearchInputTextBox" value="7">
-             						<a href="#" onclick="dayIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             						<a href="#" onclick="dayIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
              					</td>
              					<td>
-									<a href="#" onclick="yearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<a href="#" onclick="yearDecrease();return false;"><img src="/img/icons/arrow-left.png"></a>
              						<input type="text" id="birthDisplay_year" class="numericSearchInputTextBox" value="1988">
-             						<a href="#" onclick="yearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             						<a href="#" onclick="yearIncrease();return false;"><img src="/img/icons/arrow-right.png"></a>
              					</td>             						              	
              				</tr>
 						</table>   
@@ -619,7 +624,7 @@
 	
 	<table width="100%" border="0">
 		<tr><td align="right">
-			<input type="button" value="Execute Search" class="submitButton" onclick="excuteSearch();">
+			<input type="button" value="Execute Search" class="submitButton" onclick="excuteSearch();return false;">
 		</td></tr>
 	</table>
 </div>

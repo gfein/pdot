@@ -16,15 +16,22 @@ class ScrapeBBRPlayerByLetter(BaseScraper):
                 col = row.findAll('td')
                 if len(col) > 0:                    
                     firstName = SQLUtil.checkNameForSQL(col[0], 0)
-                    lastName = SQLUtil.checkNameForSQL(col[0], 1)                                   
+                    lastName = SQLUtil.checkNameForSQL(col[0], 1)
+                    
+                    if firstName == 'DICK' and lastName == 'LEE':
+                        print 'debug'
+                    if firstName == 'DAVID' and lastName == 'LEE':
+                        print 'debug 2' 
+                                                           
                     fromYear = SQLUtil.checkStringForSQL(col[1])                                        
                     toYear = SQLUtil.checkStringForSQL(col[2])                    
                     position = SQLUtil.checkStringForSQL(col[3]) # Unused                                       
                     height = SQLUtil.convertStringToHeight(col[4])                                        
                     weight = SQLUtil.convertStringToInt(col[5])                                        
                     birthDate = SQLUtil.convertDateToSQL(col[6])                                                                        
-                    university = SQLUtil.checkStringForSQL(col[7]) # Unused                                    
-                    
+                    university = SQLUtil.checkStringForSQL(col[7]) # Unused    
+                                                                                        
+                        
                     if Configuration.debugMode:
                         print'Row #%s: Column #%s: %s' % (str(rowCounter), 0, firstName) # Name
                         print'Row #%s: Column #%s: %s' % (str(rowCounter), 1, lastName) # Name
