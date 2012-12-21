@@ -332,14 +332,16 @@ ul
 }
 
 .expandingContent table {
-	width:100%;
-	padding:5px;
 	border:0px;
 }
 
 .expandingContent td {
 	align:center;
 	text-align:center;
+}
+
+.expandingContent select {
+	width:150px;
 }
 
 .expandedContentTitle {
@@ -350,6 +352,15 @@ ul
 .numericSearchInputTextBox {
 	color:000;
 	background-color:#ccc;
+	border: 1px solid #ff0000;
+	padding: 3px;
+	width:30px;
+	text-align:center;
+}
+
+.textSearchInputTextBox {
+	color:000;
+	background-color:#fff;
 	border: 1px solid #ff0000;
 	padding: 3px;
 	width:30px;

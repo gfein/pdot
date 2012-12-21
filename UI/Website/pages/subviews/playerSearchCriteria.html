@@ -57,7 +57,7 @@
 	(function ($) {
 		weightDecrease = function() {
 			var weight = parseInt($("#weightDisplay_pounds").val(), 10);
-			if(weight > 135)
+			if(weight > 110)
 				weight-=5;
 			$("#weightDisplay_pounds").val(weight);
 		}
@@ -233,7 +233,7 @@
 	(function($) {
 		yearDecrease = function () {
 			var year = parseInt($("#birthDisplay_year").val(), 10);
-			if(year > 1950)
+			if(year > 1900)
 				year--;
 			$("#birthDisplay_year").val(year);		
 		}
@@ -265,181 +265,355 @@
 	
 	// --- EXECUTE SEARCH --- /
 	(function($) {
-		excuteSearch = function() {
-			var month = getIntForMonth($("#birthDisplay_month").val());
-			var day = $("#birthDisplay_day").val();
-			var year = $("#birthDisplay_year").val();
-			if(isDateValid(month, day, year))
+		excuteSearch = function() {			
+			
+			var visibleLinks = 'Visible Tabs:\n';
+			
+			var nameSection = $('#expand_name');
+			if (nameSection.is(":visible")) {
+				visibleLinks += '--- Name\n'
+			}			
+			
+			var activeYearsSection = $('#expand_activeYears');
+			if (activeYearsSection.is(":visible")) {
+				visibleLinks += '--- Active Years\n'
+			}			
+			
+			var weightSection = $('#expand_weight');
+			if (weightSection.is(":visible")) {
+				visibleLinks += '--- Weight\n'
+			}			
+			
+			var heightSection = $('#expand_height');
+			if (heightSection.is(":visible")) {
+				visibleLinks += '--- Height\n'
+			}			
+			
+			var bdaySection = $('#expand_birthdate');
+			if (bdaySection.is(":visible")) {
+				visibleLinks += '--- Birthdate'
+				
+				var month = getIntForMonth($("#birthDisplay_month").val());
+				var day = $("#birthDisplay_day").val();
+				var year = $("#birthDisplay_year").val();
+				if(isDateValid(month, day, year)) {
+					visibleLinks += ' (valid)';
+				}
+				else {
+					visibleLinks += ' (INVALID)';
+				} 
+			}				
+			
+			alert(visibleLinks);
+			
+			/*
+			if(validDate)
 				alert('Valid date! =D');
 			else
 				alert('Invalid date... =(');
+			*/							
 		}
 	})(jQuery);
 	
 </script>
 
 <div class="demo" style="padding:0px;">
-
+	<span style="font-size:0.8em;">
+	Search will only execute on opened tabs below.  
+	If the tab is closed, it will not be considered as 
+	part of the search parameters.
+	</span>
+	<br><br>
+	
 	<!-- NAME -->
 	<h4 class="expand">BY NAME</h4>
 	<div class="collapse">
-		<p class="expandingContent">
-            First Name:<Br>
-			Last Name:
-		</p>
+		<div class="expandingContent" id="expand_name">			
+			<table>
+	            <tr>
+		            <td width="90%" align="left">
+			            <table>
+							<tr>
+								<td>
+									<span class="expandedContentTitle">FIRST NAME</span>
+	              				</td>
+	              				<td width="20"&nbsp;</td>
+	              				<td>
+	              					<span class="expandedContentTitle">LAST NAME</span>
+	              				</td>              		
+							</tr>
+	              			<tr>
+	              				<td>
+									<input type="text" id="activeYearsDisplay_fromYear" class="textSearchInputTextBox" value="">
+	              				</td>
+	              				<td></td>
+	              				<td>
+	              					<input type="text" id="activeYearsDisplay_toYear" class="textSearchInputTextBox" value="">
+	              				</td>              		           	
+	              			</tr>
+						</table>  
+		            </td>
+		            <td width="10%" align="right">
+		            	 <table>
+		            	 	<tr>
+         						<td>
+              						<span class="expandedContentTitle">FILTER</span>
+              					</td>
+              				</tr>
+              				<tr>	              	
+              					<td>
+									<select>
+						  				<option value="heightFilter_exactly">First Name Only</option>
+						  				<option value="heightFilter_exactly">Last Name Only</option>
+						  				<option value="heightFilter_exactly">First And Last</option>
+									</select>
+              					</td>	
+              				</tr>
+              			</table>   
+		            </td>
+	            </tr>
+            </table>                
+            <span style="font-size:0.8em;">
+				<ul style="list-style-type:square; list-style-image:none;">
+					<li>
+						Name search is exact.  There is no ability to "figure out" bad spelling.<br>
+					</li>
+					<li style="color:#000;">
+						Names with apostrophes are have been interpreted as having two aspotrophes.
+						<ul style="list-style-type:square; list-style-image:none;">
+							<li>
+								Shaquille O'Neal is now Shaquille O''Neal.
+							</li>
+						</ul>
+					</li>
+					<li>
+						Multi-part names have been truncated as only the first word is the first name and thereafter is all last.
+						<ul style="list-style-type:square; list-style-image:none;">
+							<li>
+								Billy Ray Bates is "Billy" and "Ray Bates".
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</span> 			        	             
+		</div>
 	</div>
 
 	<!-- ACTIVE YEARS -->         
 	<h4 class="expand">BY ACTIVE YEARS</h4>
 	<div class="collapse">
-            <div class="expandingContent">                  
+		<div class="expandingContent" id="expand_activeYears"> 
 			<table>
-				<tr>
-					<td>
-						<span class="expandedContentTitle">FROM YEAR</span>
-              		</td>
-              		<td>
-              			<span class="expandedContentTitle">TO YEAR</span>
-              		</td>
-              		<td>
-              			<span class="expandedContentTitle">FILTER</span>
-              		</td>
-				</tr>
-              	<tr>
-              		<td>
-              			<a href="#" onclick="fromYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
-						<input type="text" id="activeYearsDisplay_fromYear" class="numericSearchInputTextBox" value="2012">
-						<a href="#" onclick="fromYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
-              		</td>
-              		<td>
-						<a href="#" onclick="toYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
-              			<input type="text" id="activeYearsDisplay_toYear" class="numericSearchInputTextBox" value="2013">
-              			<a href="#" onclick="toYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
-              		</td>
-              		<td>
-						<select>
-						  <option value="heightFilter_exactly">Exact Period</option>
-						  <option value="heightFilter_shorter">Played During Period</option>
-						</select>
-              		</td>	              		
-              	</tr>
-			</table>          	              
-             </div>
-         </div>
+	            <tr>
+		            <td width="90%" align="left">
+			            <table>
+							<tr>
+								<td>
+									<span class="expandedContentTitle">FROM YEAR</span>
+	              				</td>
+	              				<td width="20"&nbsp;</td>
+	              				<td>
+	              					<span class="expandedContentTitle">TO YEAR</span>
+	              				</td>              		
+							</tr>
+	              			<tr>
+	              				<td>
+	              					<a href="#" onclick="fromYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<input type="text" id="activeYearsDisplay_fromYear" class="numericSearchInputTextBox" value="2012">
+									<a href="#" onclick="fromYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+	              				</td>
+	              				<td></td>
+	              				<td>
+									<a href="#" onclick="toYearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+	              					<input type="text" id="activeYearsDisplay_toYear" class="numericSearchInputTextBox" value="2013">
+	              					<a href="#" onclick="toYearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+	              				</td>              		           	
+	              			</tr>
+						</table>  
+		            </td>
+		            <td width="10%" align="right">
+		            	 <table>
+		            	 	<tr>
+         						<td>
+              						<span class="expandedContentTitle">FILTER</span>
+              					</td>
+              				</tr>
+              				<tr>	              	
+              					<td>
+									<select>
+						  				<option value="heightFilter_exactly">Exact Period</option>
+						  				<option value="heightFilter_shorter">Played During Period</option>
+									</select>
+              					</td>	
+              				</tr>
+              			</table>   
+		            </td>
+	            </tr>
+            </table>                 			        	             
+		</div>
+	</div>
+        
          
       <!--  WEIGHT -->
       <h4 class="expand">BY WEIGHT</h4>
       	<div class="collapse">
-             <div class="expandingContent">                  
-			<table>
-				<tr>
-					<td>
-						<span class="expandedContentTitle">WEIGHT (LBs)</span>
-              		</td>
-              		<td>
-              			<span class="expandedContentTitle">FILTER</span>
-              		</td>
-				</tr>
-              	<tr>
-              		<td>
-              			<a href="#" onclick="weightDecrease()"><img src="/img/icons/arrow-left.png"></a>
-						<input type="text" id="weightDisplay_pounds" class="numericSearchInputTextBox" value="200">
-						<a href="#" onclick="weightIncrease()"><img src="/img/icons/arrow-right.png"></a>
-              		</td>	              		
-              		<td>
-						<select>
-						  <option value="weightFilter_exactly">Exactly</option>
-						  <option value="weightFilter_shorter">Lighter (inclusive)</option>
-						  <option value="weightFilter_taller">Heavier (inclusive)</option>
-						</select>
-              		</td>	              		
-              	</tr>
-			</table>          	              
-             </div>
-         </div>		
+             <div class="expandingContent" id="expand_weight">       
+	             <table>
+		            <tr>
+			            <td width="90%" align="left">
+			            	<table>
+								<tr>
+									<td>
+										<span class="expandedContentTitle">WEIGHT (LBs)</span>
+              						</td>
+              						
+								</tr>
+              					<tr>
+              						<td>
+              							<a href="#" onclick="weightDecrease()"><img src="/img/icons/arrow-left.png"></a>
+										<input type="text" id="weightDisplay_pounds" class="numericSearchInputTextBox" value="200">
+										<a href="#" onclick="weightIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              						</td>	              		              						             	
+              					</tr>
+							</table>  
+			            </td>
+			            <td width="10%" align="right">
+				            <table>
+					            <tr>
+						            <td>
+						            	<span class="expandedContentTitle">FILTER</span>
+						            </td>
+					            </tr>
+					            <tr>
+						            <td>
+						            	<select>
+							  				<option value="weightFilter_exactly">Exactly</option>
+							  				<option value="weightFilter_shorter">Lighter (inclusive)</option>
+							  				<option value="weightFilter_taller">Heavier (inclusive)</option>
+										</select>
+						            </td>
+					            </tr>			            
+				            </table>
+			            </td>			          
+					</tr>
+				</table>    	              
+			</div>
+		</div>		
          
 	<!-- HEIGHT -->
 	<h4 class="expand">BY HEIGHT</h4>
 	<div class="collapse">
-		<div class="expandingContent">                  
+		<div class="expandingContent" id="expand_height">       
 			<table>
-				<tr>
-					<td>
-						<span class="expandedContentTitle">FEET</span>
-              		</td>
-              		<td>
-              			<span class="expandedContentTitle">INCHES</span>
-              		</td>
-              		<td>
-              			<span class="expandedContentTitle">FILTER</span>
-              		</td>
-				</tr>
-              	<tr>
-              		<td>
-              			<a href="#" onclick="feetDecrease()"><img src="/img/icons/arrow-left.png"></a>
-						<input type="text" id="heightDisplay_feet" class="numericSearchInputTextBox" value="6">
-						<a href="#" onclick="feetIncrease()"><img src="/img/icons/arrow-right.png"></a>
-              		</td>
-              		<td>
-						<a href="#" onclick="inchesDecrease()"><img src="/img/icons/arrow-left.png"></a>
-              			<input type="text" id="heightDisplay_inches" class="numericSearchInputTextBox" value="6">
-              			<a href="#" onclick="inchesIncrease()"><img src="/img/icons/arrow-right.png"></a>
-              		</td>
-              		<td>
-						<select>
-						  <option value="heightFilter_exactly">Exactly</option>
-						  <option value="heightFilter_shorter">Shorter (inclusive)</option>
-						  <option value="heightFilter_taller">Taller (inlusive)</option>
-						</select>
-              		</td>	              		
-              	</tr>
-			</table>          	              
+	            <tr>
+		            <td width="90%" align="left">		
+		            	<table>
+							<tr>
+								<td>
+									<span class="expandedContentTitle">FEET</span>
+              					</td>
+              					<td width="20">&nbsp;</td>
+              					<td>
+              						<span class="expandedContentTitle">INCHES</span>
+              					</td>              					
+							</tr>
+              				<tr>
+              					<td>
+              						<a href="#" onclick="feetDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<input type="text" id="heightDisplay_feet" class="numericSearchInputTextBox" value="6">
+									<a href="#" onclick="feetIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              					</td>
+              					<td width="20">&nbsp;</td>
+              					<td>
+									<a href="#" onclick="inchesDecrease()"><img src="/img/icons/arrow-left.png"></a>
+              						<input type="text" id="heightDisplay_inches" class="numericSearchInputTextBox" value="6">
+              						<a href="#" onclick="inchesIncrease()"><img src="/img/icons/arrow-right.png"></a>
+              					</td>              					             	
+              				</tr>
+						</table>    
+		            </td>
+		            <td width="10%" walign="right">
+		            	<table>
+		            		<tr>
+		            			<td>
+              						<span class="expandedContentTitle">FILTER</span>
+              					</td>
+		            		</tr>
+		            		<tr>
+		            			<td>
+									<select>
+						  				<option value="heightFilter_exactly">Exactly</option>
+						  				<option value="heightFilter_shorter">Shorter (inclusive)</option>
+						  				<option value="heightFilter_taller">Taller (inlusive)</option>
+									</select>
+              					</td>	 
+		            		</tr>
+		            	</table>
+		            </td>
+				</tr>	    	 
+			</table>            
 		</div>
 	</div>
+	
+	  
 			
 	<h4 class="expand">BY BIRTHDATE</h4>
 	<div class="collapse">
-		<div class="expandingContent">                  
+		<div class="expandingContent" id="expand_birthdate">       
 			<table>
-				<tr>
-					<td>
-						<span class="expandedContentTitle">MONTH</span>
-					</td>
-             		<td>
-              			<span class="expandedContentTitle">DAY</span>
-             		</td>
-             		<td>
-              			<span class="expandedContentTitle">YEAR</span>
-             		</td>
-              		<td>
-             				<span class="expandedContentTitle">FILTER</span>
-              		</td>
-				</tr>	
-             	<tr>
-              		<td>
-       	      			<a href="#" onclick="monthDecrease()"><img src="/img/icons/arrow-left.png"></a>
-						<input type="text" id="birthDisplay_month" class="numericSearchInputTextBox" style="width:100px;" value="July">
-						<a href="#" onclick="monthIncrease()"><img src="/img/icons/arrow-right.png"></a>
-             		</td>
-             		<td>
-						<a href="#" onclick="dayDecrease()"><img src="/img/icons/arrow-left.png"></a>
-             			<input type="text" id="birthDisplay_day" class="numericSearchInputTextBox" value="7">
-             			<a href="#" onclick="dayIncrease()"><img src="/img/icons/arrow-right.png"></a>
-             		</td>
-             		<td>
-						<a href="#" onclick="yearDecrease()"><img src="/img/icons/arrow-left.png"></a>
-             			<input type="text" id="birthDisplay_year" class="numericSearchInputTextBox" value="1988">
-             			<a href="#" onclick="yearIncrease()"><img src="/img/icons/arrow-right.png"></a>
-             		</td>
-             		<td>
-						<select>
-					  		<option value="heightFilter_exactly">Exactly</option>
-					  		<option value="heightFilter_shorter">Born Earlier (inclusive)</option>
-					  		<option value="heightFilter_taller">Born Later (inlusive)</option>
-						</select>
-             		</td>	              		
-             	</tr>
-			</table>          	              
+	            <tr>
+		            <td width="90%" align="left">    
+		            	<table>
+							<tr>
+								<td>
+									<span class="expandedContentTitle">MONTH</span>
+								</td>
+             					<td>
+              						<span class="expandedContentTitle">DAY</span>
+             					</td>
+             					<td>
+              						<span class="expandedContentTitle">YEAR</span>
+             					</td>              					
+							</tr>	
+             				<tr>
+              					<td>
+       	      						<a href="#" onclick="monthDecrease()"><img src="/img/icons/arrow-left.png"></a>
+									<input type="text" id="birthDisplay_month" class="numericSearchInputTextBox" style="width:100px;" value="July">
+									<a href="#" onclick="monthIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             					</td>
+             					<td>
+									<a href="#" onclick="dayDecrease()"><img src="/img/icons/arrow-left.png"></a>
+             						<input type="text" id="birthDisplay_day" class="numericSearchInputTextBox" value="7">
+             						<a href="#" onclick="dayIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             					</td>
+             					<td>
+									<a href="#" onclick="yearDecrease()"><img src="/img/icons/arrow-left.png"></a>
+             						<input type="text" id="birthDisplay_year" class="numericSearchInputTextBox" value="1988">
+             						<a href="#" onclick="yearIncrease()"><img src="/img/icons/arrow-right.png"></a>
+             					</td>             						              	
+             				</tr>
+						</table>   
+		            </td>
+		            <td width="10%" walign="right">
+		            	<table>
+		            		<tr>
+		            			<td>
+             						<span class="expandedContentTitle">FILTER</span>
+              					</td>
+		            		</tr>
+		            		<tr>
+		            			<td>
+									<select>
+					  					<option value="heightFilter_exactly">Exactly</option>
+					  					<option value="heightFilter_shorter">Born Earlier (inclusive)</option>
+					  					<option value="heightFilter_taller">Born Later (inlusive)</option>
+									</select>
+             					</td>
+		            		</tr>
+		            	</table>
+		            </td>
+				</tr>	    	 
+			</table>             			        	             
 		</div>
 	</div>		
 	

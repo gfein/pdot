@@ -32,11 +32,11 @@ class Queryable(object):
 	def getFailureDropTableString(self, table):
 		return 'Failure to drop table: ' + table
 	
-	def getSuccessfulInsertString(self, table, id):
-		return 'Successfully inserted \"' + id + '\" into ' + table + '.'
+	def getSuccessfulInsertString(self, table, uniqueId):
+		return 'Successfully inserted \"' + uniqueId + '\" into ' + table + '.'
 	
-	def getFailureInsertString(self, table, id, reason):
-		return 'Failed to insert \"' + id + '\" into ' + table + ': ' + reason	
+	def getFailureInsertString(self, table, uniqueId, reason):
+		return 'Failed to insert \"' + uniqueId + '\" into ' + table + ': ' + reason	
 		   	
 	def __del__(self):
 		if Configuration.debugMode:

@@ -15,7 +15,8 @@ class ScrapeBBRPlayerByLetter(BaseScraper):
             for row in playerTable.findAll('tr'):
                 col = row.findAll('td')
                 if len(col) > 0:                    
-                    name = SQLUtil.checkNameForSQL(col[0])                                   
+                    firstName = SQLUtil.checkNameForSQL(col[0], 0)
+                    lastName = SQLUtil.checkNameForSQL(col[0], 1)                                   
                     fromYear = SQLUtil.checkStringForSQL(col[1])                                        
                     toYear = SQLUtil.checkStringForSQL(col[2])                    
                     position = SQLUtil.checkStringForSQL(col[3]) # Unused                                       
@@ -25,16 +26,17 @@ class ScrapeBBRPlayerByLetter(BaseScraper):
                     university = SQLUtil.checkStringForSQL(col[7]) # Unused                                    
                     
                     if Configuration.debugMode:
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 0, name) # Name
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 1, fromYear) # From Year
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 2, toYear) # To Year
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 3, position) # Position
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 4, height) # height
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 5, weight) # Weight
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 6, birthDate) # Birth date
-                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 7, university) # Birth date                                    
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 0, firstName) # Name
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 1, lastName) # Name
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 2, fromYear) # From Year
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 3, toYear) # To Year
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 4, position) # Position
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 5, height) # height
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 6, weight) # Weight
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 7, birthDate) # Birth date
+                        print'Row #%s: Column #%s: %s' % (str(rowCounter), 8, university) # Birth date                                    
                     
-                    bulkPlayers.append([name, str(height), str(weight), birthDate, fromYear, toYear])
+                    bulkPlayers.append([firstName, lastName, str(height), str(weight), birthDate, fromYear, toYear])
                     rowCounter = rowCounter + 1
             return playersDbLayer.bulkInsert(bulkPlayers)
     

@@ -3,8 +3,23 @@ import shlex
 class SQLUtil:
     
     @staticmethod
-    def checkNameForSQL(val):
-        return str(val.get_text()).strip('\*').replace('\'', '\'\'').strip().encode('utf-8')
+    def checkNameForSQL(val, part):
+        name =  str(val.get_text()).strip('\*').replace('\'', '\'\'').strip()
+        nameparts = name.split()
+        
+        if part == 0 or len(nameparts) == 2:
+            return nameparts[part].encode('utf-8')
+        else:
+            fullName = ''
+            index = 0
+            for part in nameparts:
+                if index > 0:
+                    fullName += part
+                    if (index + 1) != len(nameparts):
+                        fullName += ' '                
+                index = index + 1
+            return fullName.encode('utf-8')
+            
     
     @staticmethod
     def checkStringForSQL(val):
