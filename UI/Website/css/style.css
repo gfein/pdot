@@ -298,3 +298,35 @@ ul
 	padding: 3px;
 	font-weight: bold;
 }
+
+/* --- EXPANDING CONTENT --- */
+
+.expand a {
+ 		display:block;
+ 		padding:3px 10px
+}
+
+.expand a:link, .expand a:visited {
+ 		border-width:1px;
+ 		background-image:url(/img/icons/arrow-down.gif);
+ 		background-repeat:no-repeat;
+ 		background-position:98% 50%;
+ 		font-decoration:none;
+ 		font-weight:bold;
+}
+
+.expand a:hover, .expand a:active, .expand a:focus {
+ 		text-decoration:none
+}
+
+.expand a.open:link, .expand a.open:visited {
+ 		border-style:solid;
+ 		background:#eee url(/img/icons/arrow-up.gif) no-repeat 98% 50%
+}
+
+.expandingContent {
+	border-bottom:1px solid #ccc;
+	padding-bottom:5px;
+	margin-bottom:10px;
+	padding-left:10px;
+}

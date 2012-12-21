@@ -1,14 +1,43 @@
-<table border="2" cellspacing="2" cellpadding="2">
-	<tr>
-		<td>Item 1</td>
-		<td>Item 2</td>
-	</tr>
-	<tr>
-		<td>Item 3</td>
-		<td>Item 4</td>
-	</tr>
-	<tr>
-		<td>Item 5</td>
-		<td>Item 5</td>
-	</tr>
-</table>
+<script type="text/javascript">
+	$(function() {
+	    //$("h4.expand").toggler();
+	    //$("h4.expand").toggler({method: "toggle", speed: 0});
+	    //$("h4.expand").toggler({method: "toggle"});
+	    //$("h4.expand").toggler({speed: "fast"});
+	    //$("h4.expand").toggler({method: "fadeToggle"});
+	    $("h4.expand").toggler({method: "slideFadeToggle"});    
+	});
+</script>
+
+<div class="demo" style="padding:0px;">
+	<h4 class="expand">BY NAME</h4>
+		<div class="collapse">
+              <p class="expandingContent">
+              Hello World<br>JHello World<br>Hello world
+              </p>
+          </div>
+	<h4 class="expand">BY YEARS</h4>
+		<div class="collapse">
+              <p class="expandingContent">
+              Hello World<br>JHello World<br>Hello world
+              </p>
+          </div>
+       <h4 class="expand">BY WEIGHT</h4>
+       	<div class="collapse">
+              <p class="expandingContent">
+              Hello World<br>JHello World<br>Hello world
+              </p>
+          </div>		
+       <h4 class="expand">BY HEIGHT</h4>
+       	<div class="collapse">
+              <p class="expandingContent">
+              Hello World<br>JHello World<br>Hello world
+              </p>
+          </div>		
+       <h4 class="expand">BY BIRTHDATE</h4>
+       	<div class="collapse">
+              <p class="expandingContent">
+              Hello World<br>JHello World<br>Hello world
+              </p>
+          </div>		  
+</div>
