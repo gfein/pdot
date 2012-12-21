@@ -1,0 +1,80 @@
+{% extends "master.html" %}
+{% block content %}	
+<div id="fullContentPaneWrapper">
+	<div class="fullContentPane_Content">
+		<h1>
+			{{ playerName }}
+		</h1>
+		<p>
+			<table width="100%" border="2">
+				<tr>
+					<td>
+						Unique ID
+					</td>
+					<td>
+						{{ uniqueId }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						First Name
+					</td>
+					<td>
+						{{ firstName }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Last Name
+					</td>
+					<td>
+						{{ lastName }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Height
+					</td>
+					<td>
+						{{ height }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Weight
+					</td>
+					<td>
+						{{ weight }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Birthday
+					</td>
+					<td>
+						{{ born }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Played From
+					</td>
+					<td>
+						{{ playedFrom }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Played To
+					</td>
+					<td>
+						{{ playedTo }}
+					</td>
+				</tr>
+			</table>
+		</p>		
+	</div>
+</div>
+		
+		
+{% endblock %}

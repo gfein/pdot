@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+{% block content %}
+	<div id="fullContentPaneWrapper">
+			<div class="fullContentPane_Content">
+				<h1>
+					Player Profile Not Found for Unique ID: <b>{{ uniqueId }}</b>
+				</h1>
+				<p>
+				<table width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="100">
+							<center>
+								<img src="/img/misc/faceless.png">
+							</center>
+						</td>						
+						<td>
+							The player you are searching for does not appear to exist.<br><br>
+							There are only so many men to have played this glorious game.  Can you not
+							be happy with their sacrifice that you create false ones?!
+						</td>
+					</tr>				
+				</table>					
+				</p>					
+			</div>
+		</div>
+{% endblock %}

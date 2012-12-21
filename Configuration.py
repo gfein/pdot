@@ -12,7 +12,9 @@ webpageDirectory = {
         "about" : "about.html",               
         "debug" : "debug.html",
         "error" : "error.html",
-        "viewData" : "viewData.html"            
+        "viewData" : "viewData.html",
+        "playerProfile" : "playerProfile.html",
+        "playerProfileError" : "playerProfileError.html"            
 }
 
 subviewPageDirectory = {

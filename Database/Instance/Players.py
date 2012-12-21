@@ -1,5 +1,15 @@
 from Database.Queryable import *
 
+class Player():
+    uniqueId = None
+    firstName = None
+    lastName = None
+    height = None
+    weight = None
+    born = None
+    playedFrom = None
+    playedTo = None
+    
 class PlayersDbLayer(Queryable):
     
     def __init__(self):
@@ -157,4 +167,27 @@ class PlayersDbLayer(Queryable):
                 return self.getSuccessfulInsertString(Database.Constants.K_PLAYERS_TABLE, fullName) + '<br>'
             else:                    
                 return self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE, fullName, 'Duplicate Entry') + '<br>'
-        
+            
+            
+    def queryById(self, playerId):
+        player = Player()
+        self.openConnection()
+        try:
+            with self.getConnection():
+                cur = self.getConnection().cursor()    
+                cur.execute('SELECT * FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE Id=' + str(playerId))
+                dbPlayer = cur.fetchone()
+                player.uniqueId = dbPlayer[0] # Should be same as the one passed in
+                player.firstName = dbPlayer[1]
+                player.lastName = dbPlayer[2]
+                player.height = dbPlayer[3]
+                player.weight = dbPlayer[4]
+                player.born = dbPlayer[5]
+                player.playedFrom = dbPlayer[6]
+                player.playedTo = dbPlayer[7]                                            
+        except Exception, e:
+            print 'Exception: %s' % (e)
+        finally:
+            self.closeConnection()
+                
+        return player         
