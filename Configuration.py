@@ -19,7 +19,8 @@ webpageDirectory = {
 }
 
 subviewPageDirectory = {
-        "subview_playerSearchCriteria" : "playerSearchCriteria.html"
+        "playerSearchCriteria" : "playerSearchCriteria.html",
+        "playerSearchByLetterCriteria" : "playerByLetterSearchCriteria.html"
 }
 
 pageControllersRoot = 'UI.PageControllers.Instance'

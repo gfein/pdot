@@ -139,11 +139,14 @@
 	changeSearchContent = function (content) {
 		$('#searchTypeContent').html('<center><img src="/img/gifs/loadingCircle.gif"></center>');
 		$('#searchTypeTitle').text(content);		
+		timeoutLength = 1000;
 		
 		if(content == "By Player")
-			window.setTimeout('displayContentFor_ByPlayer()', 1000);
+			window.setTimeout('displayContentFor_ByPlayer()', timeoutLength);
+		else if(content == 'View All Players By Letter')
+			window.setTimeout('displayContentFor_PlayerByLetter()', timeoutLength);
 		else
-			window.setTimeout('displayContentFor_Default()', 1000);
+			window.setTimeout('displayContentFor_Default()', timeoutLength);
 	}
 })(jQuery);
 
@@ -152,6 +155,29 @@
 		$.ajax({
             type: "POST",
             url: "HandleJQueryRequest/GetPlayerSearchCriteria",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            	var items = '';
+            	if(data != null) {
+            		 $.each(data, function (key, value) {		                	
+		                	items += value;		                    
+		                });
+            		 $('#searchTypeContent').html(items);
+            	}
+            },
+            error: function (request, error) {
+            	$('#searchTypeContent').text('An error occured.  Check the logs: '+ Math.round((new Date()).getTime() / 1000));
+            }
+        })	        		
+	}
+})(jQuery);
+
+(function ($) {
+	displayContentFor_PlayerByLetter = function () {		
+		$.ajax({
+            type: "POST",
+            url: "HandleJQueryRequest/GetPlayerSearchByLetterCriteria",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {

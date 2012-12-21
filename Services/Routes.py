@@ -18,9 +18,14 @@ from Services.Instance.GetPlayerSearchCriteria import *
 GetPlayerSearchCriteriaRoute = index
 index = index + 1
 
+from Services.Instance.GetPlayerSearchByLetterCriteria import *
+GetPlayerSearchByLetterCriteriaRoute = index
+index = index + 1
+
 # The below strings should match the name of the service being called from the UI.
 
 routes = { "GetUnixTime" : GetUnixTimeRoute, 
           "PrimeAllDatabases" : PrimeAllDatabasesRoute,
           "ScrapePlayersFromBBR" : ScrapePlayersFromBBRRoute,
-          "GetPlayerSearchCriteria" :  GetPlayerSearchCriteriaRoute }
+          "GetPlayerSearchCriteria" :  GetPlayerSearchCriteriaRoute,
+          "GetPlayerSearchByLetterCriteria" : GetPlayerSearchByLetterCriteriaRoute }

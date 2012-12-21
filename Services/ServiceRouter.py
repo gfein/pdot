@@ -24,15 +24,21 @@ class ServiceRouter:
                 response = self.handleScrapeAllPlayersFromBBRService(response)
                 break
             if case(GetPlayerSearchCriteriaRoute):
-                response = self.handleGetPlayerSearchCritera(response)
+                response = self.handleGetPlayerSearchCriteria(response)
+                break;
+            if case(GetPlayerSearchByLetterCriteriaRoute):
+                response = self.handleGetPlayerSearchByLetterCriteria(response)
                 break;
             if case(): # default, could also just omit condition or 'if True'
                 response.body = json.dumps( { "result" : "Error: Could not understand the AJAX request in the handler." } )
         
         return response;
     
+    def handleGetPlayerSearchByLetterCriteria(self, response):
+        response.body = json.dumps( { "result" : GetPlayerSearchByLetterCriteria.getPlayerSearchHTML() } )
+        return response;
     
-    def handleGetPlayerSearchCritera(self, response):
+    def handleGetPlayerSearchCriteria(self, response):
         response.body = json.dumps( { "result" : GetPlayerSearchCriteria.getPlayerSearchHTML() } )
         return response;
     

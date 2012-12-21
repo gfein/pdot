@@ -1,0 +1,47 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#nameDisplay_lastName').keyup(function(){
+		    if($('#nameDisplay_lastName').val().length > 1){
+		        $('#nameDisplay_lastName').val($('#nameDisplay_lastName').val().substr(0, 1));
+			}
+		});
+	});		
+	
+	// --- EXECUTE SEARCH --- /
+	(function($) {
+		excuteSearch = function() {		
+			name = $('#nameDisplay_lastName').val();
+			if (name.length == 1)				
+				window.location.href = "/search/" + name;
+		}
+	})(jQuery);
+</script>
+
+<div class="demo" style="padding:0px;">
+	<span style="font-size:0.8em;">
+		This search functions only to allow you to input a letter to search by.  Just one, case insensitive.  Or use the links.
+	</span>
+	<br><br>
+	<div class="collapse">
+		<div class="expandingContent" id="expand_name">			
+			<table>
+	            <tr>
+		            <td width="90%" align="left">
+			            <table>
+	              			<tr>
+	              				<td>
+									<span class="expandedContentTitle">LAST NAME</span>
+									&nbsp;&nbsp;
+									<input type="text" id="nameDisplay_lastName" class="textSearchInputTextBox" value="">
+	              				</td>	              				              		           
+	              			</tr>
+						</table>  
+		            </td>
+		            <td width="10%" align="right">
+		            	 <input type="button" value="Execute Search" class="submitButton" onclick="excuteSearch();return false;">
+		            </td>
+	            </tr>
+            </table>                                         
+		</div>
+	</div>
+</div>
