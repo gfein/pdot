@@ -5,11 +5,48 @@
 		<h1>
 			Search Results
 		</h1>
+		<div class="alphabet">
+			<center>
+			<table width="90%" cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td><a href="/index/A/"><div>A</div></a></td>
+				<td><a href="/index/B/"><div>B</div></a></td>
+				<td><a href="/index/C/"><div>C</div></a></td>
+				<td><a href="/index/D/"><div>D</div></a></td>
+				<td><a href="/index/E/"><div>E</div></a></td>
+				<td><a href="/index/F/"><div>F</div></a></td>
+				<td><a href="/index/G/"><div>G</div></a></td>
+				<td><a href="/index/H/"><div>H</div></a></td>
+				<td><a href="/index/I/"><div>I</div></a></td>
+				<td><a href="/index/J/"><div>J</div></a></td>
+				<td><a href="/index/K/"><div>K</div></a></td>
+				<td><a href="/index/L/"><div>L</div></a></td>
+				<td><a href="/index/M/"><div>M</div></a></td>
+				<td><a href="/index/N/"><div>N</div></a></td>
+				<td><a href="/index/O/"><div>O</div></a></td>
+				<td><a href="/index/P/"><div>P</div></a></td>
+				<td><a href="/index/Q/"><div>Q</div></a></td>
+				<td><a href="/index/R/"><div>R</div></a></td>
+				<td><a href="/index/S/"><div>S</div></a></td>
+				<td><a href="/index/T/"><div>T</div></a></td>
+				<td><a href="/index/U/"><div>U</div></a></td>
+				<td><a href="/index/V/"><div>V</div></a></td>
+				<td><a href="/index/W/"><div>W</div></a></td>
+				<td><a href="/index/X/"><div>X</div></a></td>
+				<td><a href="/index/Y/"><div>Y</div></a></td>
+				<td><a href="/index/Z/"><div>Z</div></a></td>
+			</tr>
+			</table>			
+			</center>
+		</div>
+		<br>
 		
 		<p>
 		Search results based off of query: {{ queryDescription }}
 		</p>
-					
+		
+		{{ deepQueryParameters }}
+		
 		<table width="100%" border="1">
 			{% for player in playerResult %}
 			
@@ -24,7 +61,7 @@
 					</td>
 				</tr>
 			{% endfor %}			
-		</table>
+		</table>			
 	</div>
 </div>
 		

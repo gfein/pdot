@@ -267,51 +267,94 @@
 	(function($) {
 		excuteSearch = function() {			
 			
-			var visibleLinks = 'Visible Tabs:\n';
+			///search/fn/{firstName}/ln/{lastName}/fY/{fromYear}/tY/{toYear}/w/{weight}/h/{height}/bday/{birthDate}/
 			
-			var nameSection = $('#expand_name');
-			if (nameSection.is(":visible")) {
-				visibleLinks += '--- Name\n'
-			}			
+			var url = '/search/';
 			
-			var activeYearsSection = $('#expand_activeYears');
-			if (activeYearsSection.is(":visible")) {
-				visibleLinks += '--- Active Years\n'
-			}			
+			url += 'fN_' +  $('#nameDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_name').is(":visible")) {
+				var val = $('#nameDisplay_firstName').val();
+				if(val.length == 0)
+					url += 'NULL';
+				else
+					url += val;
+			}
+			else {
+				url += 'NULL';
+			}
+			url += '/';
 			
-			var weightSection = $('#expand_weight');
-			if (weightSection.is(":visible")) {
-				visibleLinks += '--- Weight\n'
-			}			
-			
-			var heightSection = $('#expand_height');
-			if (heightSection.is(":visible")) {
-				visibleLinks += '--- Height\n'
-			}			
-			
-			var bdaySection = $('#expand_birthdate');
-			if (bdaySection.is(":visible")) {
-				visibleLinks += '--- Birthdate'
+			url += 'lN_' +  $('#nameDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_name').is(":visible")) {
+				var val = $('#nameDisplay_lastName').val();
+				if(val.length == 0)
+					url += 'NULL';
+				else
+					url += val;
+			}		
+			else {
+				url += 'NULL';
+			}	
+			url += '/';
 				
+			url += 'fY_' +  $('#activeYearsDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_activeYears').is(":visible")) {
+				url += $('#activeYearsDisplay_fromYear').val();
+			}	
+			else {
+				url += 'NULL';
+			}		
+			url += '/';
+				
+			url += 'tY_' +  $('#activeYearsDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_activeYears').is(":visible")) {
+				url += $('#activeYearsDisplay_toYear').val();
+			}	
+			else {
+				url += 'NULL';
+			}		
+			url += '/';
+					
+			url += 'w_' +  $('#weightDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_weight').is(":visible")) {
+				url += $('#weightDisplay_pounds').val();
+			}	
+			else {
+				url += 'NULL';
+			}		
+			url += '/';
+				
+			url += 'h_' +  $('#heightDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_height').is(":visible")) {
+				var inches = parseInt($('#heightDisplay_feet').val()) * 12;
+				inches += parseInt($('#heightDisplay_inches').val());
+				url += inches;
+			}	
+			else {
+				url += 'NULL';
+			}		
+			url += '/';
+							
+			url += 'bday_' +  $('#birthdayDisplay_selector').find(":selected").val() + '/';
+			if ($('#expand_birthdate').is(":visible")) {
 				var month = getIntForMonth($("#birthDisplay_month").val());
 				var day = $("#birthDisplay_day").val();
 				var year = $("#birthDisplay_year").val();
 				if(isDateValid(month, day, year)) {
-					visibleLinks += ' (valid)';
+					url += year +'-' + month + '-' + day;
 				}
 				else {
-					visibleLinks += ' (INVALID)';
-				} 
-			}				
-			
-			alert(visibleLinks);
-			
-			/*
-			if(validDate)
-				alert('Valid date! =D');
-			else
-				alert('Invalid date... =(');
-			*/							
+					alert("Invalid date");
+					return;
+				}				
+			}	
+			else {
+				url += 'NULL';
+			}		
+			url += '/';	
+								
+			//alert('URL: ' + url);
+			window.location = url;
 		}
 	})(jQuery);
 	
@@ -362,10 +405,10 @@
               				</tr>
               				<tr>	              	
               					<td>
-									<select>
-						  				<option value="heightFilter_exactly">First Name Only</option>
-						  				<option value="heightFilter_exactly">Last Name Only</option>
-						  				<option value="heightFilter_exactly">First And Last</option>
+									<select id="nameDisplay_selector">
+						  				<option value="f">First Name Only</option>
+						  				<option value="l">Last Name Only</option>
+						  				<option value="b">First And Last</option>
 									</select>
               					</td>	
               				</tr>
@@ -445,9 +488,9 @@
               				</tr>
               				<tr>	              	
               					<td>
-									<select>
-						  				<option value="heightFilter_exactly">Exact Period</option>
-						  				<option value="heightFilter_shorter">Played During Period</option>
+									<select id="activeYearsDisplay_selector">
+						  				<option value="e">Exact Period</option>
+						  				<option value="d">Played During Period</option>
 									</select>
               					</td>	
               				</tr>
@@ -491,10 +534,10 @@
 					            </tr>
 					            <tr>
 						            <td>
-						            	<select>
-							  				<option value="weightFilter_exactly">Exactly</option>
-							  				<option value="weightFilter_shorter">Lighter (inclusive)</option>
-							  				<option value="weightFilter_taller">Heavier (inclusive)</option>
+						            	<select id="weightDisplay_selector">
+							  				<option value="e">Exactly</option>
+							  				<option value="l">Lighter (inclusive)</option>
+							  				<option value="h">Heavier (inclusive)</option>
 										</select>
 						            </td>
 					            </tr>			            
@@ -546,10 +589,10 @@
 		            		</tr>
 		            		<tr>
 		            			<td>
-									<select>
-						  				<option value="heightFilter_exactly">Exactly</option>
-						  				<option value="heightFilter_shorter">Shorter (inclusive)</option>
-						  				<option value="heightFilter_taller">Taller (inlusive)</option>
+									<select id="heightDisplay_selector">
+						  				<option value="e">Exactly</option>
+						  				<option value="s">Shorter (inclusive)</option>
+						  				<option value="t">Taller (inlusive)</option>
 									</select>
               					</td>	 
 		            		</tr>
@@ -608,10 +651,10 @@
 		            		</tr>
 		            		<tr>
 		            			<td>
-									<select>
-					  					<option value="heightFilter_exactly">Exactly</option>
-					  					<option value="heightFilter_shorter">Born Earlier (inclusive)</option>
-					  					<option value="heightFilter_taller">Born Later (inlusive)</option>
+									<select id="birthdayDisplay_selector">
+					  					<option value="e">Exactly</option>
+					  					<option value="b">Born Before (inclusive)</option>
+					  					<option value="a">Born After (inlusive)</option>
 									</select>
              					</td>
 		            		</tr>

@@ -26,16 +26,16 @@ class ServiceRouter:
             if case(GetPlayerSearchCriteriaRoute):
                 response = self.handleGetPlayerSearchCriteria(response)
                 break;
-            if case(GetPlayerSearchByLetterCriteriaRoute):
-                response = self.handleGetPlayerSearchByLetterCriteria(response)
+            if case(SearchPlayerByLetterRoute):
+                response = self.handleSearchPlayerByLetter(response)
                 break;
             if case(): # default, could also just omit condition or 'if True'
                 response.body = json.dumps( { "result" : "Error: Could not understand the AJAX request in the handler." } )
         
         return response;
     
-    def handleGetPlayerSearchByLetterCriteria(self, response):
-        response.body = json.dumps( { "result" : GetPlayerSearchByLetterCriteria.getPlayerSearchHTML() } )
+    def handleSearchPlayerByLetter(self, response):
+        response.body = json.dumps( { "result" : SearchPlayerByLetter.getPlayerSearchHTML() } )
         return response;
     
     def handleGetPlayerSearchCriteria(self, response):

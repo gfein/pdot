@@ -15,7 +15,8 @@ webpageDirectory = {
         "viewData" : "viewData.html",
         "playerProfile" : "playerProfile.html",
         "playerProfileError" : "playerProfileError.html",
-        "searchResults" : "searchResults.html"            
+        "searchResults" : "searchResults.html"           ,
+        "redirect" : "redirect.html" 
 }
 
 subviewPageDirectory = {

@@ -177,7 +177,7 @@
 	displayContentFor_PlayerByLetter = function () {		
 		$.ajax({
             type: "POST",
-            url: "HandleJQueryRequest/GetPlayerSearchByLetterCriteria",
+            url: "HandleJQueryRequest/SearchPlayerByLetter",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {

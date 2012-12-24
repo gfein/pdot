@@ -5,7 +5,8 @@
 }
 
 html, body {
-	height: 100%;
+	height: 100%;	
+	background-color:#ececec;	
 }
 
 #fullWrapper {
@@ -64,7 +65,7 @@ html, body {
 	margin: 0px auto 80px auto;
 	min-height: 100%;
 	height: auto !important;
-	height: 100%;
+	height: 100%;	
 }
 
 /* --- NAVIGATION BAR --- */
@@ -72,8 +73,8 @@ html, body {
 .navigationBar {
 	width:900px;
 	margin: 0px auto 10px auto;
-	height:30px;
-	border-bottom:1px solid #ff0000;
+	height:20px;
+	padding-left:10px;
 }
 
 .navigationBarContent {
@@ -90,7 +91,12 @@ html, body {
 #fullContentPaneWrapper {
 	width:900px;
 	display: block;
-	border: 1px solid #ff0000;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;	
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color:#fff;border: 1px solid #ff0000;
 }
 
 .fullContentPane_Content {
@@ -117,7 +123,14 @@ html, body {
 	font-size: 1em;
 	width:420px;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	display: inline-block;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;	
+	-moz-border-radius: 5px;
+	background-color:#fff;
 }
 
 .splitContentPane_Right {
@@ -125,7 +138,14 @@ html, body {
 	font-size: 1em;
 	width:420px;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	display: inline-block;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;	
+	-moz-border-radius: 5px;
+	background-color:#fff;
 }
 
 /* --- STAGGER CONTENT PANE --- */
@@ -140,8 +160,15 @@ html, body {
 	font-size: 1em;
 	width:630px;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	display: inline-block;
-	vertical-align:top;
+	vertical-align:top;-
+	moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;	
+	-moz-border-radius: 5px;
+	background-color:#fff;
 }
 
 .staggerInnerContentPane_Max {
@@ -149,8 +176,16 @@ html, body {
 	font-size: 1em;
 	width:590px;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	display: inline-block;
 	vertical-align:top;
+	moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;	
+	-moz-border-radius: 5px;
+	background-color:#fff;
+	
 }
 
 .staggerContentPane_Min {
@@ -158,8 +193,15 @@ html, body {
 	font-size: 1em;
 	width:210px;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	display: inline-block;
 	vertical-align:top;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;	
+	-moz-border-radius: 5px;
+	background-color:#fff;
 }
 
 /* --- DIVIDER --- */
@@ -167,13 +209,11 @@ html, body {
 #headerToBodyDivider {
 	width: 900px;
 	height:10px;
-	background-color: #ffffff;
 }
 
 #bodyToFooterDivider {
 	width: 900px;
 	height:20px;
-	background-color: #ffffff;
 }
 
 #outerDividerLine {
@@ -288,6 +328,8 @@ ul
 	color:000;
 	background-color:#ccc;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	padding: 3px;
 }
 
@@ -295,6 +337,8 @@ ul
 	color:000;
 	background-color:#ccc;
 	border: 1px solid #ff0000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	padding: 3px;
 	font-weight: bold;
 }
@@ -366,3 +410,15 @@ ul
 	width:150px;
 	text-align:center;
 }
+
+.alphabet  {				
+		padding:5px 0px;
+		border-bottom:1px solid #ccc;
+	}
+	
+	.alphabet div {
+		text-align:center;
+		font-size:1.2em;
+		font-weight: bold;
+		width:18px;
+	}
