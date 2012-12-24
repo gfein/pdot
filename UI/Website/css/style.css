@@ -96,7 +96,7 @@ html, body {
 	box-shadow: 0 0 5px #888;	
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	background-color:#fff;border: 1px solid #ff0000;
+	background-color:#fff;
 }
 
 .fullContentPane_Content {
@@ -121,8 +121,7 @@ html, body {
 .splitContentPane_Left {
 	padding:10px;
 	font-size: 1em;
-	width:420px;
-	border: 1px solid #ff0000;
+	width:420px;	
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	display: inline-block;
@@ -136,8 +135,7 @@ html, body {
 .splitContentPane_Right {
 	padding:10px;
 	font-size: 1em;
-	width:420px;
-	border: 1px solid #ff0000;
+	width:420px;	
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	display: inline-block;
@@ -158,8 +156,7 @@ html, body {
 .staggerContentPane_Max {
 	padding:10px;
 	font-size: 1em;
-	width:630px;
-	border: 1px solid #ff0000;
+	width:630px;	
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	display: inline-block;
@@ -174,8 +171,7 @@ html, body {
 .staggerInnerContentPane_Max {
 	padding:10px;
 	font-size: 1em;
-	width:590px;
-	border: 1px solid #ff0000;
+	width:590px;	
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	display: inline-block;
@@ -191,8 +187,7 @@ html, body {
 .staggerContentPane_Min {
 	padding:10px;
 	font-size: 1em;
-	width:210px;
-	border: 1px solid #ff0000;
+	width:210px;	
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	display: inline-block;
