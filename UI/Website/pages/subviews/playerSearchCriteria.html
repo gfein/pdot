@@ -268,11 +268,12 @@
 		excuteSearch = function() {			
 			
 			///search/fn/{firstName}/ln/{lastName}/fY/{fromYear}/tY/{toYear}/w/{weight}/h/{height}/bday/{birthDate}/
-			
+			var openPanes = 0;
 			var url = '/search/';
 			
 			url += 'fN_' +  $('#nameDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_name').is(":visible")) {
+				openPanes++;
 				var val = $('#nameDisplay_firstName').val();
 				if(val.length == 0)
 					url += 'NULL';
@@ -286,6 +287,7 @@
 			
 			url += 'lN_' +  $('#nameDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_name').is(":visible")) {
+				openPanes++;
 				var val = $('#nameDisplay_lastName').val();
 				if(val.length == 0)
 					url += 'NULL';
@@ -299,6 +301,7 @@
 				
 			url += 'fY_' +  $('#activeYearsDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_activeYears').is(":visible")) {
+				openPanes++;
 				url += $('#activeYearsDisplay_fromYear').val();
 			}	
 			else {
@@ -308,6 +311,7 @@
 				
 			url += 'tY_' +  $('#activeYearsDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_activeYears').is(":visible")) {
+				openPanes++;
 				url += $('#activeYearsDisplay_toYear').val();
 			}	
 			else {
@@ -317,6 +321,7 @@
 					
 			url += 'w_' +  $('#weightDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_weight').is(":visible")) {
+				openPanes++;
 				url += $('#weightDisplay_pounds').val();
 			}	
 			else {
@@ -326,6 +331,7 @@
 				
 			url += 'h_' +  $('#heightDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_height').is(":visible")) {
+				openPanes++;
 				var inches = parseInt($('#heightDisplay_feet').val()) * 12;
 				inches += parseInt($('#heightDisplay_inches').val());
 				url += inches;
@@ -337,6 +343,7 @@
 							
 			url += 'bday_' +  $('#birthdayDisplay_selector').find(":selected").val() + '/';
 			if ($('#expand_birthdate').is(":visible")) {
+				openPanes++;
 				var month = getIntForMonth($("#birthDisplay_month").val());
 				var day = $("#birthDisplay_day").val();
 				var year = $("#birthDisplay_year").val();
@@ -354,7 +361,11 @@
 			url += '/';	
 								
 			//alert('URL: ' + url);
-			window.location = url;
+			if(openPanes > 0)
+				window.location = url;
+			else {
+				alert('You must have at least one search critera!');
+			}
 		}
 	})(jQuery);
 	

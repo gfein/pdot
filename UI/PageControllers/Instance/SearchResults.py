@@ -61,7 +61,8 @@ class SearchResultsController(BaseController):
             searchParameter += '<li>' + item + '</li>'
         searchParameter += '</ul><br>'
                            
-        return template.render(route=route, futureQuote=FutureQuote.getRandomQuote(), serverVersion=DatabaseUtility.getVersion(),
+        return template.render(route=route, futureQuote=FutureQuote.getRandomQuote(), 
+                               serverVersion=DatabaseUtility.getVersion(),
                                queryDescription = 'Deep Query',
                                playerResult=foundPlayers,
                                deepQueryParameters=searchParameter)

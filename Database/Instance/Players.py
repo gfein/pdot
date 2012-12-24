@@ -207,12 +207,12 @@ class PlayersDbLayer(Queryable):
         try:
             with self.getConnection():
                 cur = self.getConnection().cursor()    
-                cur.execute('SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ' FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_LAST_NAME + ' like \'' + str(letter) + '%\';')                
+                cur.execute('SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ', ' + Player.COLUMN_BIRTHDATE + ' FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_LAST_NAME + ' like \'' + str(letter) + '%\';')                
                 numrows = int(cur.rowcount)
 
                 for i in range(numrows):
                     dbPlayer = cur.fetchone()
-                    l = [ dbPlayer[0], dbPlayer[1], dbPlayer[2], dbPlayer[3], dbPlayer[4] ]
+                    l = [ dbPlayer[0], dbPlayer[1], dbPlayer[2], dbPlayer[3], dbPlayer[4], dbPlayer[5] ]
                     playerList.append(l)                                            
         except Exception, e:
             print 'Exception: %s' % (e)
@@ -246,7 +246,7 @@ class PlayersDbLayer(Queryable):
                 whereArgument = whereArgument[:-4]
                 
                 cur = self.getConnection().cursor()    
-                query = 'SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ' FROM ' + Database.Constants.K_PLAYERS_TABLE
+                query = 'SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ', ' + Player.COLUMN_BIRTHDATE + ' FROM ' + Database.Constants.K_PLAYERS_TABLE
                 query += ' WHERE ' + whereArgument;                
                 print 'Query: %s' % (query)
                 cur.execute(query)                
@@ -254,7 +254,7 @@ class PlayersDbLayer(Queryable):
 
                 for i in range(numrows):
                     dbPlayer = cur.fetchone()
-                    l = [ dbPlayer[0], dbPlayer[1], dbPlayer[2], dbPlayer[3], dbPlayer[4] ]
+                    l = [ dbPlayer[0], dbPlayer[1], dbPlayer[2], dbPlayer[3], dbPlayer[4], dbPlayer[5] ]
                     playerList.append(l)                                            
         except Exception, e:
             print 'Exception: %s' % (e)
