@@ -1,5 +1,4 @@
 from UI.PageControllers.BaseController import *
-from Database.Instance.Model import *
 
 class RedirectController(BaseController):
     @staticmethod

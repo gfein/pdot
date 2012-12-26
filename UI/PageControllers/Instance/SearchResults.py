@@ -1,5 +1,4 @@
 from UI.PageControllers.BaseController import *
-from Database.Instance.Model import *
 from Database.Instance.Players import PlayersDbLayer
 
 class SearchResultsController(BaseController):

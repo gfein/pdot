@@ -1,5 +1,4 @@
 from UI.PageControllers.BaseController import *
-from Database.Instance.Model import *
 import Database.Instance.Players
 from Database.Instance.Players import PlayersDbLayer
 
