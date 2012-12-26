@@ -8,6 +8,7 @@
 			
 			pageLoad_primeAllDatabases();
 			pageLoad_scrapeBBRPlayers();
+			pageLoad_scrapeESPN();
 		});
 	</script>
 	
@@ -34,6 +35,16 @@
 	<img src="../img/gifs/loadingCircle.gif" id="scrapeBBRPlayers_loadingGif" width="14" height="14" />		
 	<br>
 	<span style="padding-left:10px;font-size:0.8em; font-style:italic;" id="scrapeBBRPlayersResult"></span>
+	
+	<br>
+	<hr>
+	<br>	
+	
+	Scrape ESPN :<br>
+	<input type="button" value="Scrape ESPN Player Stats" class="submitButton" onclick="scrapeESPN()">
+	<img src="../img/gifs/loadingCircle.gif" id="scrapeESPNStats_loadingGif" width="14" height="14" />		
+	<br>
+	<span style="padding-left:10px;font-size:0.8em; font-style:italic;" id="scrapeESPNResults"></span>
 	
 	<br>
 	<hr>

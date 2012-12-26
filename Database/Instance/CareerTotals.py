@@ -4,6 +4,7 @@ class CareerTotalsDbLayer(Queryable):
     
     def __init__(self):
         Queryable.__init__(self)   
+        self.mTableName = Database.Constants.K_CAREER_TOTALS_TABLE
         
     def dropAndRecreateTable(self):
         retStr = []
@@ -18,14 +19,14 @@ class CareerTotalsDbLayer(Queryable):
         try:
             with self.getConnection():
                 cur = self.getConnection().cursor()                
-                cur.execute("CREATE TABLE " + Database.Constants.K_CAREER_TOTALS_TABLE + 
+                cur.execute("CREATE TABLE " + self.mTableName + 
                             "(Id INT PRIMARY KEY AUTO_INCREMENT, " + 
                             "Name VARCHAR(25) " +
                             ")")                                
-                str_list.append(self.getSuccessfulCreateTableString(Database.Constants.K_CAREER_TOTALS_TABLE))
+                str_list.append(self.getSuccessfulCreateTableString(self.mTableName))
         except Exception, e:
             print 'Exception: %s' % (e)
-            str_list.append(self.getFailureCreateTableString(Database.Constants.K_CAREER_TOTALS_TABLE))
+            str_list.append(self.getFailureCreateTableString(self.mTableName))
         finally:
             self.closeConnection()           
             
@@ -38,11 +39,11 @@ class CareerTotalsDbLayer(Queryable):
         try:
             with self.getConnection():
                 cur = self.getConnection().cursor()
-                cur.execute("DROP TABLE IF EXISTS " + Database.Constants.K_CAREER_TOTALS_TABLE)                                                                
-                str_list.append(self.getSuccessfulDropTableString(Database.Constants.K_CAREER_TOTALS_TABLE))
+                cur.execute("DROP TABLE IF EXISTS " + self.mTableName)                                                                
+                str_list.append(self.getSuccessfulDropTableString(self.mTableName))
         except Exception, e:
             print 'Exception: %s' % (e)
-            str_list.append(self.getFailureDropTableString(Database.Constants.K_CAREER_TOTALS_TABLE))
+            str_list.append(self.getFailureDropTableString(self.mTableName))
         finally:
             self.closeConnection()           
             

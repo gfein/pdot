@@ -23,6 +23,7 @@ class PlayersDbLayer(Queryable):
     
     def __init__(self):
         Queryable.__init__(self)
+        self.mTableName = Database.Constants.K_PLAYERS_TABLE
         
     def dropAndRecreateTable(self):
         retStr = []
@@ -37,7 +38,7 @@ class PlayersDbLayer(Queryable):
         try:
             with self.getConnection():
                 cur = self.getConnection().cursor()                
-                cur.execute("CREATE TABLE " + Database.Constants.K_PLAYERS_TABLE + 
+                cur.execute("CREATE TABLE " + self.mTableName + 
                             "(" + Player.COLUMN_ID + " INT PRIMARY KEY AUTO_INCREMENT, " + 
                             Player.COLUMN_FIRST_NAME + " VARCHAR(100), " +
                             Player.COLUMN_LAST_NAME + " VARCHAR(100), " +
@@ -47,32 +48,15 @@ class PlayersDbLayer(Queryable):
                             Player.COLUMN_HEIGHT+ " INT, " +
                             Player.COLUMN_WEIGHT + " INT " +                    
                             ")")
-                str_list.append(self.getSuccessfulCreateTableString(Database.Constants.K_PLAYERS_TABLE))
+                str_list.append(self.getSuccessfulCreateTableString(self.mTableName))
         except Exception, e:
             print 'Exception: %s' % (e)
-            str_list.append(self.getFailureCreateTableString(Database.Constants.K_PLAYERS_TABLE))
+            str_list.append(self.getFailureCreateTableString(self.mTableName))
         finally:
             self.closeConnection()           
             
         return str_list      
-    
-    def dropTable(self):
-        self.openConnection()
-        str_list = []
         
-        try:
-            with self.getConnection():
-                cur = self.getConnection().cursor()
-                cur.execute("DROP TABLE IF EXISTS " + Database.Constants.K_PLAYERS_TABLE)                                
-                str_list.append(self.getSuccessfulDropTableString(Database.Constants.K_PLAYERS_TABLE))
-        except Exception, e:
-            print 'Exception: %s' % (e)
-            str_list.append(self.getFailureDropTableString(Database.Constants.K_PLAYERS_TABLE))
-        finally:
-            self.closeConnection()           
-            
-        return str_list      
-    
     def insert(self, firstName, lastName, fromYear, toYear, height, weight, birthDate):
         self.openConnection()
         str_list = []
@@ -81,8 +65,8 @@ class PlayersDbLayer(Queryable):
                 cur = self.getConnection().cursor()                            
                 fullName = str(firstName + ' ' + lastName)
                 if birthDate != 'NULL':                        
-                    if not cur.execute('SELECT (1) FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=\'' + birthDate + '\' LIMIT 1'):
-                        cur.execute("INSERT INTO " + Database.Constants.K_PLAYERS_TABLE + 
+                    if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=\'' + birthDate + '\' LIMIT 1'):
+                        cur.execute("INSERT INTO " + self.mTableName + 
                                     "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
                                     "'" + firstName + "', " + # First Name
                                     "'" + lastName + "', " + # Last Name
@@ -92,12 +76,12 @@ class PlayersDbLayer(Queryable):
                                     "" + fromYear + ", " + # From Year
                                     "" + toYear + " " + # To Year                                                    
                                     ")")
-                        str_list.append(self.getSuccessfulInsertString(Database.Constants.K_PLAYERS_TABLE, fullName + '<br>'))
+                        str_list.append(self.getSuccessfulInsertString(self.mTableName, fullName + '<br>'))
                     else:
-                        str_list.append(self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE, fullName, 'Duplicate Entry') + '<br>')
+                        str_list.append(self.getFailureInsertString(self.mTableName, fullName, 'Duplicate Entry') + '<br>')
                 else:                        
-                    if not cur.execute('SELECT (1) FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=' + birthDate + ' LIMIT 1'):
-                        cur.execute("INSERT INTO " + Database.Constants.K_PLAYERS_TABLE + 
+                    if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=' + birthDate + ' LIMIT 1'):
+                        cur.execute("INSERT INTO " + self.mTableName + 
                                 "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
                                 "'" + firstName + "', " + # First Name
                                 "'" + lastName + "', " + # Last Name
@@ -107,12 +91,12 @@ class PlayersDbLayer(Queryable):
                                 "" + fromYear + ", " + # From Year
                                 "" + toYear + " " + # To Year                                                    
                                 ")")
-                        str_list.append(self.getSuccessfulInsertString(Database.Constants.K_PLAYERS_TABLE, fullName + '<br>'))
+                        str_list.append(self.getSuccessfulInsertString(self.mTableName, fullName + '<br>'))
                     else:                    
-                        str_list.append(self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE, fullName, 'Duplicate Entry') + '<br>')
+                        str_list.append(self.getFailureInsertString(self.mTableName, fullName, 'Duplicate Entry') + '<br>')
         except Exception, e:
             print 'Exception: %s' % (e)
-            str_list.append(self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE))
+            str_list.append(self.getFailureInsertString(self.mTableName))
         finally:
             self.closeConnection()
         return ''.join(str_list)      
@@ -139,7 +123,7 @@ class PlayersDbLayer(Queryable):
                         print 'Error inserting for player: ' + firstName + ' ' + lastName                                                    
         except Exception, e:
             print 'Exception: %s' % (e)
-            str_list.append(self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE))
+            str_list.append(self.getFailureInsertString(self.mTableName))
         finally:
             self.closeConnection()
         return ''.join(str_list)  
@@ -147,8 +131,8 @@ class PlayersDbLayer(Queryable):
     def insertWithCursor(self, cur, firstName, lastName, fromYear, toYear, height, weight, birthDate):
         fullName = str(firstName + ' ' + lastName)
         if birthDate != 'NULL':                                 
-            if not cur.execute('SELECT (1) FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=\'' + birthDate + '\' LIMIT 1'):
-                cur.execute("INSERT INTO " + Database.Constants.K_PLAYERS_TABLE + 
+            if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=\'' + birthDate + '\' LIMIT 1'):
+                cur.execute("INSERT INTO " + self.mTableName + 
                                 "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
                                 "'" + firstName + "', " + # First Name
                                 "'" + lastName + "', " + # Last Name
@@ -158,12 +142,12 @@ class PlayersDbLayer(Queryable):
                                 "" + fromYear + ", " + # From Year
                                 "" + toYear + " " + # To Year                                                    
                                 ")")
-                return self.getSuccessfulInsertString(Database.Constants.K_PLAYERS_TABLE, fullName) + '<br>'
+                return self.getSuccessfulInsertString(self.mTableName, fullName) + '<br>'
             else:
-                return self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE, fullName, 'Duplicate Entry') + '<br>'
+                return self.getFailureInsertString(self.mTableName, fullName, 'Duplicate Entry') + '<br>'
         else:                        
-            if not cur.execute('SELECT (1) FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=' + birthDate + ' LIMIT 1'):
-                cur.execute("INSERT INTO " + Database.Constants.K_PLAYERS_TABLE + 
+            if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=' + birthDate + ' LIMIT 1'):
+                cur.execute("INSERT INTO " + self.mTableName + 
                                 "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
                                 "'" + firstName + "', " + # First Name
                                 "'" + lastName + "', " + # Last Name
@@ -173,9 +157,9 @@ class PlayersDbLayer(Queryable):
                                 "" + fromYear + ", " + # From Year
                                 "" + toYear + " " + # To Year                                                    
                                 ")")
-                return self.getSuccessfulInsertString(Database.Constants.K_PLAYERS_TABLE, fullName) + '<br>'
+                return self.getSuccessfulInsertString(self.mTableName, fullName) + '<br>'
             else:                    
-                return self.getFailureInsertString(Database.Constants.K_PLAYERS_TABLE, fullName, 'Duplicate Entry') + '<br>'
+                return self.getFailureInsertString(self.mTableName, fullName, 'Duplicate Entry') + '<br>'
             
             
     def queryById(self, playerId):
@@ -184,7 +168,7 @@ class PlayersDbLayer(Queryable):
         try:
             with self.getConnection():
                 cur = self.getConnection().cursor()    
-                cur.execute('SELECT * FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE Id=' + str(playerId))
+                cur.execute('SELECT * FROM ' + self.mTableName +' WHERE Id=' + str(playerId))
                 dbPlayer = cur.fetchone()
                 player.uniqueId = dbPlayer[0] # Should be same as the one passed in
                 player.firstName = dbPlayer[1]
@@ -207,7 +191,7 @@ class PlayersDbLayer(Queryable):
         try:
             with self.getConnection():
                 cur = self.getConnection().cursor()    
-                cur.execute('SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ', ' + Player.COLUMN_BIRTHDATE + ' FROM ' + Database.Constants.K_PLAYERS_TABLE +' WHERE ' + Player.COLUMN_LAST_NAME + ' like \'' + str(letter) + '%\';')                
+                cur.execute('SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ', ' + Player.COLUMN_BIRTHDATE + ' FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_LAST_NAME + ' like \'' + str(letter) + '%\';')                
                 numrows = int(cur.rowcount)
 
                 for i in range(numrows):
@@ -246,7 +230,7 @@ class PlayersDbLayer(Queryable):
                 whereArgument = whereArgument[:-4]
                 
                 cur = self.getConnection().cursor()    
-                query = 'SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ', ' + Player.COLUMN_BIRTHDATE + ' FROM ' + Database.Constants.K_PLAYERS_TABLE
+                query = 'SELECT ' + Player.COLUMN_ID + ', ' + Player.COLUMN_FIRST_NAME + ', ' + Player.COLUMN_LAST_NAME + ', ' + Player.COLUMN_FROM_YEAR + ', ' + Player.COLUMN_TO_YEAR + ', ' + Player.COLUMN_BIRTHDATE + ' FROM ' + self.mTableName
                 query += ' WHERE ' + whereArgument;                
                 print 'Query: %s' % (query)
                 cur.execute(query)                
