@@ -1,4 +1,5 @@
 from Database.Queryable import *
+from Database.Instance.PlayerAlias import *
 
 class Player():
     uniqueId = None
@@ -18,6 +19,7 @@ class Player():
     COLUMN_WEIGHT = 'Weight'
     COLUMN_HEIGHT = 'Height'
     COLUMN_BIRTHDATE = 'Born'
+    COLUMN_ALIAS_FLAG = 'Alias'
     
 class PlayersDbLayer(Queryable):
     
@@ -46,7 +48,8 @@ class PlayersDbLayer(Queryable):
                             Player.COLUMN_TO_YEAR + " INT not NULL, " +
                             Player.COLUMN_BIRTHDATE + " DATE, " +
                             Player.COLUMN_HEIGHT+ " INT, " +
-                            Player.COLUMN_WEIGHT + " INT " +                    
+                            Player.COLUMN_WEIGHT + " INT, " +
+                            Player.COLUMN_ALIAS_FLAG + " BIT(1) "                    
                             ")")
                 str_list.append(self.getSuccessfulCreateTableString(self.mTableName))
         except Exception, e:
@@ -57,7 +60,7 @@ class PlayersDbLayer(Queryable):
             
         return str_list      
         
-    def insert(self, firstName, lastName, fromYear, toYear, height, weight, birthDate):
+    def insert(self, firstName, lastName, fromYear, toYear, height, weight, birthDate, alias):
         self.openConnection()
         str_list = []
         try:
@@ -67,14 +70,15 @@ class PlayersDbLayer(Queryable):
                 if birthDate != 'NULL':                        
                     if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=\'' + birthDate + '\' LIMIT 1'):
                         cur.execute("INSERT INTO " + self.mTableName + 
-                                    "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
+                                    "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ", " + Player.COLUMN_ALIAS_FLAG + ") VALUES(" + 
                                     "'" + firstName + "', " + # First Name
                                     "'" + lastName + "', " + # Last Name
                                     "'" + height + "', " + # Height
                                     "'" + weight + "', " + # Weight
                                     "'" + birthDate + "', " + # Birthdate
                                     "" + fromYear + ", " + # From Year
-                                    "" + toYear + " " + # To Year                                                    
+                                    "" + toYear + ", " + # To Year
+                                    "b\'" + str(alias) + "\' " +                                      
                                     ")")
                         str_list.append(self.getSuccessfulInsertString(self.mTableName, fullName + '<br>'))
                     else:
@@ -89,7 +93,8 @@ class PlayersDbLayer(Queryable):
                                 "'" + weight + "', " + # Weight
                                 "" + birthDate + ", " + # Birthdate
                                 "" + fromYear + ", " + # From Year
-                                "" + toYear + " " + # To Year                                                    
+                                "" + toYear + ", " + # To Year
+                                "b\'" + str(alias) + "\' " +                                                    
                                 ")")
                         str_list.append(self.getSuccessfulInsertString(self.mTableName, fullName + '<br>'))
                     else:                    
@@ -118,7 +123,7 @@ class PlayersDbLayer(Queryable):
                     toYear = playerDetails[6]
                            
                     try:
-                        str_list.append(self.insertWithCursor(cur, firstName, lastName, fromYear, toYear, height, weight, birthDate))
+                        str_list.append(self.insertWithCursor(cur, firstName, lastName, fromYear, toYear, height, weight, birthDate, 0))
                     except Exception:
                         print 'Error inserting for player: ' + firstName + ' ' + lastName                                                    
         except Exception, e:
@@ -128,19 +133,20 @@ class PlayersDbLayer(Queryable):
             self.closeConnection()
         return ''.join(str_list)  
     
-    def insertWithCursor(self, cur, firstName, lastName, fromYear, toYear, height, weight, birthDate):
+    def insertWithCursor(self, cur, firstName, lastName, fromYear, toYear, height, weight, birthDate, alias):
         fullName = str(firstName + ' ' + lastName)
         if birthDate != 'NULL':                                 
             if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=\'' + birthDate + '\' LIMIT 1'):
                 cur.execute("INSERT INTO " + self.mTableName + 
-                                "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
+                                "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ", " + Player.COLUMN_ALIAS_FLAG + ") VALUES(" + 
                                 "'" + firstName + "', " + # First Name
                                 "'" + lastName + "', " + # Last Name
                                 "'" + height + "', " + # Height
                                 "'" + weight + "', " + # Weight
                                 "'" + birthDate + "', " + # Birthdate
                                 "" + fromYear + ", " + # From Year
-                                "" + toYear + " " + # To Year                                                    
+                                "" + toYear + ", " + # To Year
+                                "b\'" + str(alias) + "\' " +                                                    
                                 ")")
                 return self.getSuccessfulInsertString(self.mTableName, fullName) + '<br>'
             else:
@@ -148,14 +154,15 @@ class PlayersDbLayer(Queryable):
         else:                        
             if not cur.execute('SELECT (1) FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + firstName + '\'' +' AND ' + Player.COLUMN_LAST_NAME + '=\'' + lastName + '\'' + ' AND ' + Player.COLUMN_BIRTHDATE + '=' + birthDate + ' LIMIT 1'):
                 cur.execute("INSERT INTO " + self.mTableName + 
-                                "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ") VALUES(" + 
+                                "(" + Player.COLUMN_FIRST_NAME + ", " + Player.COLUMN_LAST_NAME + ", " + Player.COLUMN_HEIGHT + ", " + Player.COLUMN_WEIGHT + ", " + Player.COLUMN_BIRTHDATE + ", " + Player.COLUMN_FROM_YEAR + ", " + Player.COLUMN_TO_YEAR + ", " + Player.COLUMN_ALIAS_FLAG + ") VALUES(" + 
                                 "'" + firstName + "', " + # First Name
                                 "'" + lastName + "', " + # Last Name
                                 "'" + height + "', " + # Height
                                 "'" + weight + "', " + # Weight
                                 "" + birthDate + ", " + # Birthdate
                                 "" + fromYear + ", " + # From Year
-                                "" + toYear + " " + # To Year                                                    
+                                "" + toYear + ", " + # To Year
+                                "b\'" + str(alias) + "\' " +                                             
                                 ")")
                 return self.getSuccessfulInsertString(self.mTableName, fullName) + '<br>'
             else:                    
@@ -173,11 +180,11 @@ class PlayersDbLayer(Queryable):
                 player.uniqueId = dbPlayer[0] # Should be same as the one passed in
                 player.firstName = dbPlayer[1]
                 player.lastName = dbPlayer[2]
-                player.height = dbPlayer[3]
-                player.weight = dbPlayer[4]
+                player.height = dbPlayer[6]
+                player.weight = dbPlayer[7]
                 player.born = dbPlayer[5]
-                player.playedFrom = dbPlayer[6]
-                player.playedTo = dbPlayer[7]                                            
+                player.playedFrom = dbPlayer[3]
+                player.playedTo = dbPlayer[4]                                            
         except Exception, e:
             print 'Exception: %s' % (e)
         finally:
@@ -323,4 +330,32 @@ class PlayersDbLayer(Queryable):
                 return Player.COLUMN_BIRTHDATE + ' <= \'' + str(birthdate) + '\' '            
         else:
             return None
-        
+    
+    # ------------------------------------------
+    # -- ESPN SCRAPE/ OTHER NAMES QUERY
+    # ------------------------------------------
+    
+    def findPlayerIdByName(self, firstName, lastName):
+        self.openConnection()
+        uniqueId = None
+        try:
+            with self.getConnection():
+                cur = self.getConnection().cursor()    
+                cur.execute('SELECT ' + Player.COLUMN_ID + ' FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + str(firstName) + '\' AND ' + Player.COLUMN_LAST_NAME + '=\'' + str(lastName) + '\'')
+                dbPlayer = cur.fetchone()
+                if dbPlayer is not None:
+                    uniqueId = dbPlayer[0] # Should be same as the one passed in
+                else:                                
+                    aliasLayer = AliasDbLayer()
+                    foundName = aliasLayer.queryByName(str(firstName), str(lastName))
+                    firstName = foundName.split()[0]
+                    lastName = foundName.split()[1]
+                    cur = self.getConnection().cursor()    
+                    cur.execute('SELECT ' + Player.COLUMN_ID + ' FROM ' + self.mTableName +' WHERE ' + Player.COLUMN_FIRST_NAME + '=\'' + str(firstName) + '\' AND ' + Player.COLUMN_LAST_NAME + '=\'' + str(lastName) + '\'')
+                    dbPlayer = cur.fetchone()
+                    uniqueId = dbPlayer[0]                  
+        except Exception, e:
+            print 'Exception: %s' % (e)
+        finally:
+            self.closeConnection()                
+        return uniqueId

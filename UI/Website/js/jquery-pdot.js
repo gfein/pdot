@@ -31,6 +31,15 @@
     }
 })(jQuery);
 
+(function ($) {
+	convertInchesToReadable = function(inches) {
+		alert('1');
+		var leftoverInches = inches % 12;
+		var feet = parseInt(inches / 12);
+		return feet + "'" + inches + '\""';
+    }
+})(jQuery);
+
 //----------------------------------------------------------------- //
 //PRIME DATABASE LOGIC
 //----------------------------------------------------------------- //
@@ -73,6 +82,53 @@
 	            error: function (request, error) {
 	            	$('#primeResult').html('Priming Databases Results:<br>An error occured.  Check the logs: '+ Math.round((new Date()).getTime() / 1000));
 	            	$('#primeDatabases_loadingGif').fadeOut("slow");
+	            }
+	        })	        	       
+}
+})(jQuery);
+
+//----------------------------------------------------------------- //
+//PRIME DATABASE LOGIC
+//----------------------------------------------------------------- //
+
+(function ($) {
+	pageLoad_loadFromBackup = function () {
+		$('#loadFromBackup_loadingGif').hide();
+}
+})(jQuery);
+
+(function ($) {
+	loadFromBackup = function () {
+		if(!$('#loadFromBackup_loadingGif').is("visible")) {
+			$('#loadFromBackup_loadingGif').fadeIn("fast");
+			window.setTimeout("execute_loadFromBackup()", 500);
+			$('#backupResult').html('');
+		}
+}
+})(jQuery);
+
+(function ($) {
+	execute_loadFromBackup = function () {				
+		 $.ajax({
+	            type: "POST",
+	            url: "HandleJQueryRequest/LoadFromBackup",
+	            contentType: "application/json; charset=utf-8",
+	            dataType: "json",
+	            success: function (data) {
+	            	var items = '';
+	            	if(data != null) {
+		                $.each(data, function (key, value) {
+		                	for (var i=0, len=value.length; i < len; i++) {
+		                		items += ' - ' + value[i] + '<br>';
+		                    }
+		                });
+		            	$('#backupResult').html('Priming Databases Results:<br>' + items);
+	            	}
+	            	$('#loadFromBackup_loadingGif').fadeOut("slow");
+	            },
+	            error: function (request, error) {
+	            	$('#backupResult').html('Priming Databases Results:<br>An error occured.  Check the logs: '+ Math.round((new Date()).getTime() / 1000));
+	            	$('#loadFromBackup_loadingGif').fadeOut("slow");
 	            }
 	        })	        	       
 }
@@ -132,28 +188,25 @@
 
 (function ($) {
 	pageLoad_scrapeESPN = function () {
-		$('#scrapeESPNStats_loadingGif').hide();
-}
+		$('#scrapeESPNScoringSummaries_loadingGif').hide();
+	}
 })(jQuery);
 
 (function ($) {
-	scrapeESPN = function () {
-		if(!$('#scrapeESPNStats_loadingGif').is("visible")) {
-			$('#scrapeESPNStats_loadingGif').fadeIn("fast");
-			window.setTimeout("execute_scrapeESPN()", 500);
-			$('#"scrapeESPNResults"').html('');
+	scrapeESPNScoringSummaries = function () {		
+		if(!$('#scrapeESPNScoringSummaries_loadingGif').is("visible")) {
+			$('#scrapeESPNScoringSummariesResults').html('');
+			$('#scrapeESPNScoringSummaries_loadingGif').fadeIn("fast");
+			window.setTimeout("execute_scrapeESPNScoringSummaries()", 500);			
 		}
 }
 })(jQuery);
 
 (function ($) {
-	execute_scrapeESPN = function () {		
-		alert('Write scrape ESPN logic');
-		$('#scrapeESPNStats_loadingGif').fadeOut("slow");
-		/*
+	execute_scrapeESPNScoringSummaries = function () {		
 		 $.ajax({
 	            type: "POST",
-	            url: "HandleJQueryRequest/ScrapePlayersFromBBR",
+	            url: "HandleJQueryRequest/ScrapeESPNScoringSummaries",
 	            contentType: "application/json; charset=utf-8",
 	            dataType: "json",
 	            success: function (data) {
@@ -164,16 +217,16 @@
 			                		items += value[i];
 			                    }
 			                });
-		            	$('#scrapeBBRPlayersResult').html('<b>Scrape BBR Players Results</b>:<br>' + items);
+		            	$('#scrapeESPNScoringSummariesResults').html('<b>Scrape ESPN Scoring Summaries Results</b>:<br>' + items);
 	            	}
-	            	$('#scrapeBBRPlayers_loadingGif').fadeOut("slow");
+	            	$('#scrapeESPNScoringSummaries_loadingGif').fadeOut("slow");
 	            },
 	            error: function (request, error) {
-	            	$('#scrapeBBRPlayersResult').html('Scraping BBR Players Results:<br>An error occured.  Check the logs: '+ Math.round((new Date()).getTime() / 1000));
+	            	$('#scrapeESPNScoringSummariesResults').html('Scraping ESPN Scoring Summaries Results:<br>An error occured.  Check the logs: '+ Math.round((new Date()).getTime() / 1000));
+	            	$('#scrapeESPNScoringSummaries_loadingGif').fadeOut("slow");
 	            	
 	            }
 	        })	        	      
-	        */ 
 }
 })(jQuery);
 

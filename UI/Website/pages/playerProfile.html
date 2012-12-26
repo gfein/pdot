@@ -2,11 +2,47 @@
 {% block content %}	
 <div id="fullContentPaneWrapper">
 	<div class="fullContentPane_Content">
-		<h1>
+		<h5>
 			{{ playerName }}
-		</h1>
+		</h5>
+		<div style="padding-left:8px;padding-top:5px; display:block;">
+			<span id="formattedHeight"></span>
+			<script type="text/javascript">
+				var finalText = parseInt({{ height }} / 12) + "'" + ({{ height }} % 12)+ '"';
+				$('#formattedHeight').text(finalText + ',');
+			</script>			
+			<span id="formattedWeight"></span>
+			<script type="text/javascript">
+				var finalText = parseInt({{ weight }}) + " lbs";
+				$('#formattedWeight').text(finalText);
+			</script>
+		</div>		
 		<p>
-			<table width="100%" border="2">
+			<table style="padding-left:8px; font-size:0.8em;" width="300" border="0" cellpadding="0" cellspacing="0">				
+				<tr>
+					<td>
+						Born
+					</td>
+					<td>
+						{{ born }}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Career
+					</td>
+					<td>
+						{{ playedFrom }} - {{ playedTo }}
+					</td>
+				</tr>				
+				<tr>
+					<td>
+						Known Aliases
+					</td>
+					<td>
+						{{ aliases }}
+					</td>
+				</tr>
 				<tr>
 					<td>
 						Unique ID
@@ -15,64 +51,121 @@
 						{{ uniqueId }}
 					</td>
 				</tr>
-				<tr>
-					<td>
-						First Name
-					</td>
-					<td>
-						{{ firstName }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Last Name
-					</td>
-					<td>
-						{{ lastName }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Height
-					</td>
-					<td>
-						{{ height }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Weight
-					</td>
-					<td>
-						{{ weight }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Birthday
-					</td>
-					<td>
-						{{ born }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Played From
-					</td>
-					<td>
-						{{ playedFrom }}
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Played To
-					</td>
-					<td>
-						{{ playedTo }}
-					</td>
-				</tr>
 			</table>
 		</p>		
+		
+		<style ype="text/css">
+			#statsTable {
+				text-align:center;
+			}
+			
+			#headerRow {
+				background-color:#999;
+			}
+			
+			#statsTable tr:nth-child(odd) td {
+				background-color:#ccc;
+			}
+			#statsTable tr:nth-child(even) td {
+				background-color:#fff;								
+			}
+		</style>
+		<p>
+		<table id="statsTable" width="100%" cellpadding="4" cellspacing="0" border="0">
+			<tr id="headerRow">
+				<td>
+					Season
+				</td>
+				<td>
+					Team
+				</td>
+				<td>
+					GP
+				</td>
+				<td>
+					MPG
+				</td>
+				<td>
+					P
+				</td>
+				<td>
+					FGA
+				</td>
+				<td>
+					FGM
+				</td>
+				<td>
+					FG%
+				</td>
+				<td>
+					TPM
+				</td>
+				<td>
+					TPA
+				</td>
+				<td>
+					TP%
+				</td>
+				<td>
+					FTM
+				</td>
+				<td>
+					FTA
+				</td>
+				<td>
+					FT%
+				</td>
+			</tr>
+			
+			{% for statRow in statsResults %}
+			<tr>
+				<td>
+					{{ statRow.mSeasonName }}
+				</td>
+				<td>
+					{{ statRow.mTeamName }}
+				</td>
+				<td>
+					{{ statRow.mData[2] }}
+				</td>
+				<td>
+					{{ statRow.mData[3] }}
+				</td>
+				<td>
+					{{ statRow.mData[4] }}
+				</td>
+				<td>
+					{{ statRow.mData[5] }}
+				</td>
+				<td>
+					{{ statRow.mData[6] }}
+				</td>
+				<td>
+					{{ statRow.mData[7] }}
+				</td>
+				<td>
+					{{ statRow.mData[8] }}
+				</td>
+				<td>
+					{{ statRow.mData[9] }}
+				</td>
+				<td>
+					{{ statRow.mData[10] }}
+				</td>
+				<td>
+					{{ statRow.mData[11] }}
+				</td>
+				<td>
+					{{ statRow.mData[12] }}
+				</td>
+				
+				<td>
+					{{ statRow.mData[13] }}
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		</p>
 	</div>
 </div>
 		

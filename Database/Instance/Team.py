@@ -36,7 +36,7 @@ class TeamDbLayer(Queryable):
                             "(" + Team.COLUMN_ID + " INT PRIMARY KEY AUTO_INCREMENT, " + 
                             Team.COLUMN_CITY + " VARCHAR(50), " +
                             Team.COLUMN_NAME + " VARCHAR(50), " +
-                            Team.COLUMN_ABBREVIATION + " VARCHAR(3), " +
+                            Team.COLUMN_ABBREVIATION + " VARCHAR(4), " +
                             Team.COLUMN_DIVISION + " VARCHAR(50) " +
                             ")")
                 str_list.append(self.getSuccessfulCreateTableString(self.mTableName))
@@ -73,14 +73,35 @@ class TeamDbLayer(Queryable):
             self.closeConnection()
         return ''.join(str_list)  
     
+    def getTeamAbbreviationForId(self, uniqueId):
+        self.openConnection()
+        str_list = []
+        
+        try:
+            with self.getConnection():
+                cur = self.getConnection().cursor()                
+                cur.execute("SELECT " +  
+                            Team.COLUMN_ABBREVIATION + " " +
+                            "FROM " + self.mTableName + " " + 
+                            "WHERE " + Team.COLUMN_ID + "=" + str(uniqueId))
+                teamObj = cur.fetchone()
+                str_list.append(str(teamObj[0]))
+        except Exception, e:
+            print 'Exception: %s' % (e)
+            str_list.append(self.getFailureCreateTableString(self.mTableName))
+        finally:
+            self.closeConnection()           
+            
+        return ''.join(str_list)
+          
     def primeWithData(self):
         self.insert('Boston', 'Celtics', 'BOS', 'Atlantic')
         self.insert('Brooklyn', 'Nets', 'BKN', 'Atlantic')
-        self.insert('New York', 'Knicks', 'NYK', 'Atlantic')
+        self.insert('New York', 'Knicks', 'NY', 'Atlantic')
         self.insert('Philadelphia', '76ers', 'PHI', 'Atlantic')
         self.insert('Toronto', 'Raptors', 'TOR', 'Atlantic')
         
-        self.insert('Golden State', 'Warriors', 'GSW', 'Pacific')
+        self.insert('Golden State', 'Warriors', 'GS', 'Pacific')
         self.insert('Los Angeles', 'Clippers', 'LAC', 'Pacific')
         self.insert('Los Angeles', 'Lakers', 'LAL', 'Pacific')
         self.insert('Phoenix', 'Suns', 'PHX', 'Pacific')
@@ -95,20 +116,25 @@ class TeamDbLayer(Queryable):
         self.insert('Dallas', 'Mavericks', 'DAL', 'Southwest')
         self.insert('Houston', 'Rockets', 'HOU', 'Southwest')
         self.insert('Memphis', 'Grizzlies', 'MEM', 'Southwest')
-        self.insert('New Orleans', 'Hornets', 'NOH', 'Southwest')
-        self.insert('San Antonio', 'Spurs', 'SAC', 'Southwest')
+        self.insert('New Orleans', 'Hornets', 'NO', 'Southwest')
+        self.insert('San Antonio', 'Spurs', 'SA', 'Southwest')
         
         self.insert('Atlanta', 'Hawks', 'ATL', 'Southeast')
         self.insert('Charlotte', 'Bobcats', 'CHA', 'Southeast')
         self.insert('Miami', 'Heat', 'MIA', 'Southeast')
         self.insert('Orlando', 'Magic', 'ORL', 'Southeast')
-        self.insert('Washington', 'Wizards', 'WAS', 'Southeast')
+        self.insert('Washington', 'Wizards', 'WSH', 'Southeast')
         
         self.insert('Denver', 'Nuggets', 'DEN', 'Northwest')
         self.insert('Minnesota', 'Timberwolves', 'MIN', 'Northwest')
         self.insert('Oklahoma City', 'Thunder', 'OKC', 'Northwest')
         self.insert('Portland', 'Trail Blazers', 'POR', 'Northwest')
-        self.insert('Utah', 'Jazz', 'UTA', 'Northwest')
+        self.insert('Utah', 'Jazz', 'UTAH', 'Northwest')
+        
+        # DEFUNCT TEAMS
+        self.insert('Seattle', 'Supersonics', 'SEA', 'Northwest')
+        self.insert('New Jersey', 'Nets', 'NJ', 'Atlantic') 
+        self.insert('Vancouver', 'Grizzlies', 'VAN', 'Central')
                 
                
     

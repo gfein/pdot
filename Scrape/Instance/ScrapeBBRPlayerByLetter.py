@@ -17,11 +17,6 @@ class ScrapeBBRPlayerByLetter(BaseScraper):
                 if len(col) > 0:                    
                     firstName = SQLUtil.checkNameForSQL(col[0], 0)
                     lastName = SQLUtil.checkNameForSQL(col[0], 1)
-                    
-                    if firstName == 'DICK' and lastName == 'LEE':
-                        print 'debug'
-                    if firstName == 'DAVID' and lastName == 'LEE':
-                        print 'debug 2' 
                                                            
                     fromYear = SQLUtil.checkStringForSQL(col[1])                                        
                     toYear = SQLUtil.checkStringForSQL(col[2])                    

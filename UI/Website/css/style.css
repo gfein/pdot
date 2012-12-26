@@ -307,6 +307,18 @@ h3 {
 	text-align:left;
 }
 
+
+h5 {
+	font-size: 1.6em;
+	border-bottom: 1px solid #cccccc;
+	text-transform: uppercase;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	padding-left: 5px;
+}
+
 p {
 	font-size: 1em;
 	display: block;

@@ -70,9 +70,31 @@ class SeasonDbLayer(Queryable):
     
     def primeWithData(self):
         # Real start is 001, but we minus 1
-        for x in range(2002, 2014):
+        for x in range(2001, 2014):
             if x == 2012:
                 shortened = 'True'
             else:
                 shortened = 'False'
             self.insert((x-1), x, shortened)
+            
+    def getSeasonNameForId(self, uniqueId):
+        self.openConnection()
+        str_list = []
+        
+        try:
+            with self.getConnection():
+                cur = self.getConnection().cursor()                
+                cur.execute("SELECT " +  
+                            Season.COLUMN_FROM_YEAR + ", " +
+                            Season.COLUMN_TO_YEAR + " " +
+                            "FROM " + self.mTableName + " " + 
+                            "WHERE " + Season.COLUMN_SEASON_ID + "=" + str(uniqueId))
+                seasonObj = cur.fetchone()
+                str_list.append(str(seasonObj[0]) + '-' + str(seasonObj[1]))
+        except Exception, e:
+            print 'Exception: %s' % (e)
+            str_list.append(self.getFailureCreateTableString(self.mTableName))
+        finally:
+            self.closeConnection()           
+            
+        return ''.join(str_list)      

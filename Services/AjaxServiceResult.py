@@ -7,3 +7,7 @@ class AjaxResult:
     def importAjaxResult():
         r = AjaxResult()
         return r;
+    
+    @staticmethod
+    def printLine():
+        print '---------------------------------------------------------'

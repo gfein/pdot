@@ -1,10 +1,16 @@
 import shlex
+import unicodedata
 
 class SQLUtil:
     
     @staticmethod
     def checkNameForSQL(val, part):
-        name =  str(val.get_text()).strip('\*').replace('\'', '\'\'').strip()
+        try:
+            val = val.get_text()
+        except Exception:
+            0 # Nothing.
+            
+        name =  str(val).strip('\*').replace('\'', '\'\'').strip()
         nameparts = name.split()
         
         if part == 0 or len(nameparts) == 2:
@@ -19,7 +25,16 @@ class SQLUtil:
                         fullName += ' '                
                 index = index + 1
             return fullName.encode('utf-8').upper()
+        
+    @staticmethod
+    def checkLastNameForSQL(val, part):
+        try:
+            val = val.get_text()
+        except Exception:
+            0 # Nothing.
             
+        name =  str(val).strip('\*').replace('\'', '\'\'').strip().upper()
+        return name.encode('utf-8')        
     
     @staticmethod
     def checkStringForSQL(val):
@@ -98,4 +113,55 @@ class SQLUtil:
             return 0            
         else:
             return int(SQLUtil.checkStringForSQL(val))
+        
+    @staticmethod
+    def ESPN_GetNameFromPositionString(val, pos):
+        val = str(val.get_text()).upper().split(',')[0]
+        val = val.strip().upper()
+        val = SQLUtil.removeAccents(val)
+        strList = val.split()
+        if pos == 0 or len(strList) == 2:
+            return strList[pos].encode('utf-8')
+        else:
+            fullName = ''
+            index = 0
+            for part in strList:
+                if index > 0:
+                    fullName += part
+                    if (index + 1) != len(strList):
+                        fullName += ' '                
+                index = index + 1
+            return fullName.encode('utf-8')
+    
+    @staticmethod
+    def splitByHyphen(val, pos):
+        val = str(val.get_text()).upper().replace('-', ' ')
+        strList = val.split()
+        retStr = strList[pos].strip().encode('utf-8')
+        return retStr
+    
+    @staticmethod
+    def getValueFromColumn(val):
+        val = str(val.get_text()).upper()
+        retStr = val.strip().encode('utf-8')
+        return retStr
             
+    @staticmethod
+    def isFinalPageESPN(val):
+        val = val.get_text()
+        val = val.upper()
+        val = val.replace(' OF ', '-')
+        val = val.split('-')
+        if val[0] == val[1]:
+            return True
+        else:
+            return False
+    @staticmethod
+    def getTeamFromAbbreviation(val):
+        return SQLUtil.getValueFromColumn(val).split('/')
+        
+    @staticmethod
+    def removeAccents(input_str):
+        nkfd_form = unicodedata.normalize('NFKD', unicode(input_str))
+        only_ascii = nkfd_form.encode('ASCII', 'ignore')
+        return only_ascii

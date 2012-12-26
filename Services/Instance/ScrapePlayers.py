@@ -1,5 +1,6 @@
 from Services.AjaxServiceResult import *
 from Scrape.Instance.ScrapeBBRPlayerByLetter import *
+from Database.Instance.PlayerAlias import *
 
 class ScrapePlayers(AjaxResult):
     @staticmethod
@@ -12,6 +13,9 @@ class ScrapePlayers(AjaxResult):
             str_list.append(ScrapePlayers.scrapePlayersFromBBRWithName(chr(number)))
             str_list.append('<br><br>')
 
+        layer = AliasDbLayer()
+        layer.dropAndRecreateAndPrimeTable()
+        
         return str_list            
         
     @staticmethod
@@ -21,13 +25,9 @@ class ScrapePlayers(AjaxResult):
         scraper.getWebpage()
         retList = scraper.scrapeIntoDatabase()
         print 'Scrape for %s:\n Finished' % (letter)
-        ScrapePlayers.printLine()
+        AjaxResult.printLine()
         return retList
         
     @staticmethod
     def getUrl(letter):
-        return 'http://www.basketball-reference.com/players/%s/' % (letter)
-    
-    @staticmethod
-    def printLine():
-        print '---------------------------------------------------------'
+        return 'http://www.basketball-reference.com/players/%s/' % (letter)        

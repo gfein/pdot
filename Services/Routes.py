@@ -22,10 +22,20 @@ from Services.Instance.SearchPlayerByLetter import *
 SearchPlayerByLetterRoute = index
 index = index + 1
 
+from Services.Instance.ScrapeESPN import *
+ScrapeESPNScoringSummariesRoute = index
+index = index + 1
+
+from Services.Instance.LoadFromBackup import *
+LoadFromBackupRoute = index
+index = index + 1
+
 # The below strings should match the name of the service being called from the UI.
 
 routes = { "GetUnixTime" : GetUnixTimeRoute, 
           "PrimeAllDatabases" : PrimeAllDatabasesRoute,
           "ScrapePlayersFromBBR" : ScrapePlayersFromBBRRoute,
           "GetPlayerSearchCriteria" :  GetPlayerSearchCriteriaRoute,
-          "SearchPlayerByLetter" : SearchPlayerByLetterRoute }
+          "SearchPlayerByLetter" : SearchPlayerByLetterRoute,
+          "ScrapeESPNScoringSummaries" : ScrapeESPNScoringSummariesRoute,
+          "LoadFromBackup" : LoadFromBackupRoute }

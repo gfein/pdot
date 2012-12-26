@@ -4,6 +4,8 @@ import json
 from Util.Switch import *
 
 class ServiceRouter:
+    K_RESULT = 'result'
+    
     def __init__(self, request):
         self.request = request
         
@@ -29,21 +31,35 @@ class ServiceRouter:
             if case(SearchPlayerByLetterRoute):
                 response = self.handleSearchPlayerByLetter(response)
                 break;
+            if case(ScrapeESPNScoringSummariesRoute):
+                response = self.handleScrapeESPNScoringSummaries(response)
+                break;
+            if case(LoadFromBackupRoute):
+                response = self.handleLoadFromBackup(response)
+                break;
             if case(): # default, could also just omit condition or 'if True'
-                response.body = json.dumps( { "result" : "Error: Could not understand the AJAX request in the handler." } )
+                response.body = json.dumps( { self.K_RESULT : "Error: Could not understand the AJAX request in the handler." } )
         
         return response;
     
+    def handleLoadFromBackup(self, response):
+        response.body = json.dumps({ self.K_RESULT : LoadFromBackup.load() })
+        return response
+    
+    def handleScrapeESPNScoringSummaries(self, response):
+        response.body = json.dumps({ self.K_RESULT : ScrapeESPN.scrapeScoringSummaries() })
+        return response
+    
     def handleSearchPlayerByLetter(self, response):
-        response.body = json.dumps( { "result" : SearchPlayerByLetter.getPlayerSearchHTML() } )
+        response.body = json.dumps( { self.K_RESULT : SearchPlayerByLetter.getPlayerSearchHTML() } )
         return response;
     
     def handleGetPlayerSearchCriteria(self, response):
-        response.body = json.dumps( { "result" : GetPlayerSearchCriteria.getPlayerSearchHTML() } )
+        response.body = json.dumps( { self.K_RESULT : GetPlayerSearchCriteria.getPlayerSearchHTML() } )
         return response;
     
     def handleScrapeAllPlayersFromBBRService(self, response):
-        response.body = json.dumps( { "result" : ScrapePlayers.scrapePlayersFromBBR() } )      
+        response.body = json.dumps( { self.K_RESULT : ScrapePlayers.scrapePlayersFromBBR() } )      
         return response
     
     def handleUnixTimeService(self, response):
@@ -52,5 +68,5 @@ class ServiceRouter:
         return response
     
     def handlePrimeAllDatabasesService(self, response):
-        response.body = json.dumps( { "result" : PrimeAllDatabasesResult.executePrimeAllDatabases() } )      
+        response.body = json.dumps( { self.K_RESULT : PrimeAllDatabasesResult.executePrimeAllDatabases() } )      
         return response

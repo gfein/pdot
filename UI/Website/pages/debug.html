@@ -9,6 +9,7 @@
 			pageLoad_primeAllDatabases();
 			pageLoad_scrapeBBRPlayers();
 			pageLoad_scrapeESPN();
+			pageLoad_loadFromBackup();
 		});
 	</script>
 	
@@ -30,6 +31,17 @@
 	<hr>
 	<br>
 	
+	Load From Backup:<br>
+	<input type="button" value="Load From Backup" class="submitButton" onclick="loadFromBackup()">
+	<img src="../img/gifs/loadingCircle.gif" id="loadFromBackup_loadingGif" width="14" height="14" />		
+	<br>
+	<span style="padding-left:10px;font-size:0.8em; font-style:italic;" id="backupResult"></span>
+	
+	<br>
+	<hr>
+	<br>	
+	
+	
 	Scrape BBR Players:<br>
 	<input type="button" value="Scrape BBR Players" class="submitButton" onclick="scrapeBBRPlayers()">
 	<img src="../img/gifs/loadingCircle.gif" id="scrapeBBRPlayers_loadingGif" width="14" height="14" />		
@@ -40,11 +52,11 @@
 	<hr>
 	<br>	
 	
-	Scrape ESPN :<br>
-	<input type="button" value="Scrape ESPN Player Stats" class="submitButton" onclick="scrapeESPN()">
-	<img src="../img/gifs/loadingCircle.gif" id="scrapeESPNStats_loadingGif" width="14" height="14" />		
+	Scrape ESPN Scoring Summaries:<br>
+	<input type="button" value="Scrape ESPN Player Scoring Summaries" class="submitButton" onclick="scrapeESPNScoringSummaries()">
+	<img src="../img/gifs/loadingCircle.gif" id="scrapeESPNScoringSummaries_loadingGif" width="14" height="14" />		
 	<br>
-	<span style="padding-left:10px;font-size:0.8em; font-style:italic;" id="scrapeESPNResults"></span>
+	<span style="padding-left:10px;font-size:0.8em; font-style:italic;" id="scrapeESPNScoringSummariesResults"></span>
 	
 	<br>
 	<hr>
