@@ -165,16 +165,90 @@
 			{% endfor %}
 		</table>
 		</p>
-		<br><hr><br>		
+		<br><hr><br>
+		
+		<style>
+			#navList li
+			{
+				display: inline;
+				list-style-type: none;
+				padding-right: 20px;
+			}
+		</style>		
 		<center>
-		<iframe frameborder="0" height="400" id="graphFrame" marginheight="0" marginwidth="0" scrolling="no" src="/dom/d3Test.html?data=" width="850"></iframe>
+		<div>
+			<div>
+				<ul id="navList">
+					<li><a href="#" onclick="reloadFrame('gamesPlayed');return false;">Games Played</a></li>
+					<li><a href="#" onclick="reloadFrame('minutesPerGame');return false;">Minutes Per Game</a></li>
+					<li><a href="#" onclick="reloadFrame('points');return false;">Points</a></li>
+					<li><a href="#" onclick="reloadFrame('bar');return false;">Field Goals</a></li>
+					<li><a href="#" onclick="reloadFrame('line');return false;">Three Points</a></li>
+					<li><a href="#" onclick="reloadFrame('bar');return false;">Free Throws</a></li>
+				</ul>
+			</div>
+			<div>
+				<iframe frameborder="0" height="300" id="graphFrame" marginheight="0" marginwidth="0" scrolling="no" src="" width="850"></iframe>
+			</div>
+		</div>
 		</center>
 		<script type="text/javascript">
-			var original = $('#graphFrame').attr('src');
-			var json = '[{"title":"Revenue","subtitle":"US$, in thousands","ranges":[150,225,300],"measures":[220,270],"markers":[250]},{"title":"Profit","subtitle":"%","ranges":[20,25,30],"measures":[21,23],"markers":[26]},{"title":"Order Size","subtitle":"US$, average","ranges":[350,500,600],"measures":[100,320],"markers":[550]},{"title":"New Customers","subtitle":"count","ranges":[1400,2000,2500],"measures":[1000,1650],"markers":[2100]},{"title":"Satisfaction","subtitle":"out of 5","ranges":[3.5,4.25,5],"measures":[3.2,4.7],"markers":[4.4]}]';
-			var base64json = encode64(json);
-			var newUrl = original + base64json;
-			$('#graphFrame').attr('src', newUrl);
+			function reloadFrame(type) {
+				var json;
+				var url;
+				
+				if(type == 'bar') {
+					json = '[{"title":"Revenue","subtitle":"US$, in thousands","ranges":[150,225,300],"measures":[220,270],"markers":[250]},{"title":"Profit","subtitle":"%","ranges":[20,25,30],"measures":[21,23],"markers":[26]},{"title":"Order Size","subtitle":"US$, average","ranges":[350,500,600],"measures":[100,320],"markers":[550]},{"title":"New Customers","subtitle":"count","ranges":[1400,2000,2500],"measures":[1000,1650],"markers":[2100]},{"title":"Satisfaction","subtitle":"out of 5","ranges":[3.5,4.25,5],"measures":[3.2,4.7],"markers":[4.4]}]';
+					url = '/dom/d3Test.html?data=';
+				}
+				else if(type == 'line') {
+					json = '[1,2,4,6,2,8,5,5,0,3,1,3,7,9,8,6,8,1,5,4]';
+					url = '/dom/d3Test2.html?data=';
+				}
+				else if (type == 'gamesPlayed') {
+					var gpArray = new Array();
+					var index = 0;
+					$("#statsTable tr").each(function(){
+						if(index > 0) {
+							var innerHTML = $(this).find("td")[2].innerHTML;
+							gpArray[index-1] = innerHTML;
+						}
+						index += 1;
+					});
+					json = JSON.stringify(gpArray);
+					url = '/dom/d3Test2.html?data=';
+				}
+				else if (type == 'minutesPerGame') {
+					var mpgArray = new Array();
+					var index = 0;
+					$("#statsTable tr").each(function(){
+						if(index > 0) {
+							var innerHTML = $(this).find("td")[3].innerHTML;
+							mpgArray[index-1] = innerHTML;
+						}
+						index += 1;
+					});
+					json = JSON.stringify(mpgArray);
+					url = '/dom/d3Test2.html?data=';
+				}
+				else if (type == 'points') {
+					var mpgArray = new Array();
+					var index = 0;
+					$("#statsTable tr").each(function(){
+						if(index > 0) {
+							var innerHTML = $(this).find("td")[4].innerHTML;
+							mpgArray[index-1] = innerHTML;
+						}
+						index += 1;
+					});
+					json = JSON.stringify(mpgArray);
+					url = '/dom/d3Test2.html?data=';
+				}
+				
+				var base64json = encode64(json);
+				var newUrl = url + base64json;
+				$('#graphFrame').attr('src', newUrl);
+			}
 		</script>		
 	</div>
 </div>
