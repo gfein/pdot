@@ -306,3 +306,10 @@
 		$('#searchTypeContent').text('Could not find a paradigm to search by this instance.');
 	}
 })(jQuery);
+
+(function ($) {
+	closeDOMWinow = function() {
+		$('.fixedAjaxDOMWindow').closeDOMWindow();
+	}
+})(jQuery);
+

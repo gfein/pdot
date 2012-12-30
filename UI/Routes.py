@@ -37,8 +37,9 @@ map.connect('deepSearch',
                             'bdaySearch':'(bday_[e,b,a]){1}'})
 
 
-# AJAX Requests
-map.connect('HandleJQueryRequest', '', controller='AJAX', action='AJAX')
+# DOM Window Controller
+#map.connect('/dom/{filename:.*}', controller='DOM', action='Filter')
+map.connect(None, '/dom/{filename:.*}', controller='Resource', action='Load', base='dom', conditions={'method':'GET'})
 
 # Redirects
 map.connect('indexRedirect', '/index', controller='Redirect', action='ViewData')

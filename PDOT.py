@@ -14,17 +14,17 @@ class PDOTApp:
         
     @wsgify
     def __call__(self, request):
-        response = None
-        
+        response = None                
+             
         try:
             hostname = request.host
-
+            #print 'Query String for sessionId: %s' % (request.GET['sessionId'])
             # Is this a page request or a service request?
             if request.path.__len__() > 20 and request.path[1:20] == Configuration.handleJQueryRequest:
                 service = ServiceRouter(request)
                 response = service()                                
             else :
-                if hostname == config['address']['hostname']:
+                if hostname == config['address']['hostname']:                    
                     page = PageRouter(request)
                     response = page()
                 else:

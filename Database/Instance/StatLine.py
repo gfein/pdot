@@ -90,7 +90,7 @@ class StatLineDbLayer(Queryable):
 			str_list.append(self.getFailureCreateTableString(self.mTableName))
 		finally:
 			self.closeConnection()
-
+		
 		return str_list      
 	
 	def bulkInsert(self, dataList):
@@ -175,7 +175,7 @@ class StatLineDbLayer(Queryable):
 				else:
 					strList.append(self.getFailureInsertString(self.mTableName, fullName, 'Duplicate Entry') + '<br>')		
 			else:
-				strList.append('Could not find full Trifecta of PKs for %s %s' % (str(firstName), str(lastName)) + '<br>')
+				strList.append('Could not find full Trifecta of PKs for %s %s' % (str(firstName), str(lastName)) + '<br>')		
 		return ''.join(strList)
 	
 	def queryStatsForId(self, uniqueId):
@@ -209,7 +209,10 @@ class StatLineDbLayer(Queryable):
 					statRowObject = StatRowObject()
 					statRowObject.mData = row
 					statRowObject.mSeasonName = str(seasonDbLayer.getSeasonNameForId(row[0]))
-					statRowObject.mTeamName = str(teamDbLayer.getTeamAbbreviationForId(row[1]))					
+					statRowObject.mTeamName = str(teamDbLayer.getTeamAbbreviationForId(row[1]))		
+					statRowObject.mFGP = '%.1f' %  (row[7] * 100)		
+					statRowObject.mTPP = '%.1f' %  (row[10] * 100)
+					statRowObject.mFTP = '%.1f' %  (row[13] * 100)
 					str_list.append(statRowObject)														
 		except Exception, e:
 			print 'Exception: %s' % (e)
@@ -217,9 +220,17 @@ class StatLineDbLayer(Queryable):
 		finally:
 			self.closeConnection()
 
+		if len(str_list) == 0:
+			rowObject = StatRowObject()
+			rowObject.mError = "No career data for this player" 
+			str_list.append(rowObject)
 		return str_list      
 	
 class StatRowObject():
 	mData = None
 	mSeasonName = None
 	mTeamName = None
+	mFGP = None
+	mFTP = None
+	mTPP = None
+	mError = None

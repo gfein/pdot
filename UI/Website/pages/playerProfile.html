@@ -74,98 +74,108 @@
 		<table id="statsTable" width="100%" cellpadding="4" cellspacing="0" border="0">
 			<tr id="headerRow">
 				<td>
-					Season
+					<a onmouseover="popup('Season');" href="#">Season</a>
 				</td>
 				<td>
-					Team
+					<a onmouseover="popup('Team Abbreviation');" href="#">Team</a>
 				</td>
 				<td>
-					GP
+					<a onmouseover="popup('Games Played');" href="#">GP</a>
 				</td>
 				<td>
-					MPG
+					<a onmouseover="popup('Minutes Per Game (Average)');" href="#">MPG</a>
 				</td>
 				<td>
-					P
+					<a onmouseover="popup('Points per game  (Average)');" href="#">P</a>
 				</td>
 				<td>
-					FGA
+					<a onmouseover="popup('Field Goals Attempted (Average)');" href="#">FGA</a>
 				</td>
 				<td>
-					FGM
+					<a onmouseover="popup('Field Goals Made (Average)');" href="#">FGM</a>
 				</td>
 				<td>
-					FG%
+					<a onmouseover="popup('Field Goal Percentage (Average)');" href="#">FG%</a>
 				</td>
 				<td>
-					TPM
+					<a onmouseover="popup('Three Pointers Made (Average)');" href="#">TPM</a>
 				</td>
 				<td>
-					TPA
+					<a onmouseover="popup('Three Pointers Attempted (Average)');" href="#">TPA</a>
 				</td>
 				<td>
-					TP%
+					<a onmouseover="popup('Three Pointer Percentage (Average)');" href="#">TP%</a>
 				</td>
 				<td>
-					FTM
+					<a onmouseover="popup('Free Throws Made (Average)');" href="#">FTM</a>
 				</td>
 				<td>
-					FTA
+					<a onmouseover="popup('Free Throws Attempted (Average)');" href="#">FTA</a>
 				</td>
 				<td>
-					FT%
+					<a onmouseover="popup('Free Throws Percentage (Average)');" href="#">FT%</a>
 				</td>
 			</tr>
 			
 			{% for statRow in statsResults %}
-			<tr>
-				<td>
-					{{ statRow.mSeasonName }}
-				</td>
-				<td>
-					{{ statRow.mTeamName }}
-				</td>
-				<td>
-					{{ statRow.mData[2] }}
-				</td>
-				<td>
-					{{ statRow.mData[3] }}
-				</td>
-				<td>
-					{{ statRow.mData[4] }}
-				</td>
-				<td>
-					{{ statRow.mData[5] }}
-				</td>
-				<td>
-					{{ statRow.mData[6] }}
-				</td>
-				<td>
-					{{ statRow.mData[7] }}
-				</td>
-				<td>
-					{{ statRow.mData[8] }}
-				</td>
-				<td>
-					{{ statRow.mData[9] }}
-				</td>
-				<td>
-					{{ statRow.mData[10] }}
-				</td>
-				<td>
-					{{ statRow.mData[11] }}
-				</td>
-				<td>
-					{{ statRow.mData[12] }}
-				</td>
-				
-				<td>
-					{{ statRow.mData[13] }}
-				</td>
-			</tr>
+				<tr>
+					<td>
+						{{ statRow.mSeasonName }}
+					</td>
+					<td>
+						{{ statRow.mTeamName }}
+					</td>
+					<td>
+						{{ statRow.mData[2] }}
+					</td>
+					<td>
+						{{ statRow.mData[3] }}
+					</td>
+					<td>
+						{{ statRow.mData[4] }}
+					</td>
+					<td>
+						{{ statRow.mData[5] }}
+					</td>
+					<td>
+						{{ statRow.mData[6] }}
+					</td>
+					<td id="percentageCol">
+						{{ statRow.mFGP }}%
+					</td>
+					<td>
+						{{ statRow.mData[8] }}
+					</td>
+					<td>
+						{{ statRow.mData[9] }}
+					</td>
+					<td id="percentageCol">
+						{{ statRow.mTPP }}%
+					</td>
+					<td>
+						{{ statRow.mData[11] }}
+					</td>
+					<td>
+						{{ statRow.mData[12] }}
+					</td>				
+					<td id="percentageCol">
+						{{ statRow.mFTP }}%
+					</td>
+				</tr>
 			{% endfor %}
 		</table>
 		</p>
+		<br><hr><br>		
+		<center>
+		<iframe frameborder="0" height="400" id="graphFrame" marginheight="0" marginwidth="0" scrolling="no" src="/dom/d3Test.html?data=" width="850"></iframe>
+		</center>
+		<script type="text/javascript">
+			var original = $('#graphFrame').attr('src');
+			var json = '[{"title":"Revenue","subtitle":"US$, in thousands","ranges":[150,225,300],"measures":[220,270],"markers":[250]},{"title":"Profit","subtitle":"%","ranges":[20,25,30],"measures":[21,23],"markers":[26]},{"title":"Order Size","subtitle":"US$, average","ranges":[350,500,600],"measures":[100,320],"markers":[550]},{"title":"New Customers","subtitle":"count","ranges":[1400,2000,2500],"measures":[1000,1650],"markers":[2100]},{"title":"Satisfaction","subtitle":"out of 5","ranges":[3.5,4.25,5],"measures":[3.2,4.7],"markers":[4.4]}]';
+			var base64json = encode64(json);
+			var newUrl = original + base64json;
+			$('#graphFrame').attr('src', newUrl);
+		</script>		
 	</div>
 </div>
 		
