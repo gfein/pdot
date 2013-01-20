@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<script type="text/javascript" src="/js/jquery-1.8.3.min.js" ></script>
+<script type="text/javascript" src="/js/d3.js"></script>
+<script type="text/javascript" src="/js/jquery-json2.js"></script>
+<script type="text/javascript" src="/js/jquery-base64.js"></script>
+<script type="text/javascript" src="/js/jquery-utf8.js"></script>
+<script type="text/javascript" src="/js/jquery-tipsy.js"></script>
+<link href="/css/tipsy.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('svg title').parent().tipsy({
+        gravity: 'sw',
+        hoverlock:true,
+        html: true,
+    //    title: function() { return $(this).find('title').text(); }
+      });
+    });
+    </script>    
+    </head>
+<body>
+  <div id="chart"></div>
+  <script type="text/javascript">
+
+    var w = 960,
+        h = 320,
+        m = [ 15, 5, 15, 5 ], // top, right, bottom, left (ala css)
+        data = [ { l: "Jan", v: 10 }, { l: "Feb", v: 12 }, { l: "Mar", v: 14 }, { l: "Apr", v: 16 } ];
+
+    var x = d3.scale.ordinal().domain(d3.range(data.length))
+          .rangeBands([0, w - m[1] - m[3]], 0.1),
+        y = d3.scale.linear().domain([0, d3.max(data, function(d) { return d.v; })])
+          .range([0, h - m[0] - m[2]]);
+
+    var vis = d3.select("#chart")
+      .append("svg:svg")
+        .attr("width", w)
+        .attr("height", h)
+      .append("svg:g")
+        .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+    vis.selectAll("rect.bar")
+        .data(data)
+      .enter().append("svg:rect")
+        .attr("class", "bar")
+        .attr("x", function(d, i) { return x(i); })
+        .attr("y", function(d) { return h - m[0] - m[2] - y(d.v); })
+        .attr("width", x.rangeBand())
+        .attr("height", function(d) { return y(d.v); })
+      .append("svg:title")
+        .text(function(d) { return "Bar: " + d.l + "," + d.v; });
+
+    vis.selectAll("text.value")
+        .data(data)
+      .enter().append("svg:text")
+        .attr("class", "value")
+        .attr("x", function(d, i) { return x(i) + x.rangeBand() / 2; })
+        .attr("y", function(d) { return h - m[0] - m[2] - y(d.v); })
+        .attr("dy", -2)
+        .attr("text-anchor", "middle")
+        .text(function(d) { return d.v; })
+      .append("svg:title")
+        .text(function(d) { return "Bar value: " + d.v; });
+
+    vis.selectAll("text.label")
+        .data(data)
+      .enter().append("svg:text")
+        .attr("class", "label")
+        .attr("x", function(d, i) { return x(i) + x.rangeBand() / 2; })
+        .attr("y", h - m[0] - m[2] - y(0))
+        .attr("dy", 12)
+        .attr("text-anchor", "middle")
+        .text(function(d) { return d.l; })
+      .append("svg:title")
+        .text(function(d) { return "Bar label<br/>" + d.l + "<br/><a href=\"http://www.google.com\">google</a>"; });
+
+    vis.append("svg:line")
+      .attr("class", "xaxis")
+      .attr("x1", 0)
+      .attr("x2", w - m[1] - m[3])
+      .attr("y1", h - m[0] - m[2] - y(0))
+      .attr("y2", h - m[0] - m[2] - y(0));    
+  </script>
+</body>

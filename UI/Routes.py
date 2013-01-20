@@ -8,26 +8,26 @@ map.connect(None, '/img/{filename:.*}', controller='Resource', action='Load', ba
 map.connect(None, '/favicon.ico', controller='Resource', action='Load', base=None, filename='favicon.ico', conditions={'method' : 'GET'})
 
 # Pages from root of MainController
-map.connect('home', '/', controller='Main', action='Home')
-map.connect('error', '/error', controller='Main', action='Error')
-map.connect('debug', '/Debug', controller='Main', action='Debug')
+map.connect('home', '/', controller='Main', action='ViewHome')
+map.connect('error', '/error', controller='Main', action='ViewError')
+map.connect('databaseUtilities', '/DatabaseUtilities', controller='Main', action='ViewDatabaseUtilities')
 
 # Pages from root of AboutController
-map.connect('about', '/About', controller='About', action='About')
+map.connect('about', '/About', controller='About', action='ViewAbout')
 
 # Pages from root of ViewDataController
-map.connect('view', '/ViewData', controller='ViewData', action='Main')
-map.connect('viewType', '/ViewData/{viewType}', controller='ViewData', action='Type')
+map.connect('viewPlayerData', '/PlayerData', controller='ViewPlayerData', action='ViewMain')
+map.connect('viewType', '/PlayerData/{viewType}', controller='ViewPlayerData', action='ViewType')
 
 # Pages from Player Profiles
-map.connect('playerprofile', '/profile/{playerId}', controller='PlayerProfile', action='Profile')
+map.connect('playerprofile', '/profile/{playerId}', controller='PlayerProfile', action='ViewProfile')
 
 # Search Results
-map.connect('searchLetterIndex', '/index/{searchLetter}/', controller='SearchResults', action='Display', requirements={'searchLetter':'[A-Za-z]'})
+map.connect('searchLetterIndex', '/index/{searchLetter}/', controller='SearchResults', action='ViewDisplay', requirements={'searchLetter':'[A-Za-z]'})
 map.connect('deepSearch', 
             '/search/{fnSearch}/{firstName}/{lnSearch}/{lastName}/{fySearch}/{fromYear}/{tySearch}/{toYear}/{wSearch}/{weight}/{hSearch}/{height}/{bdaySearch}/{birthDate}/',
             controller='SearchResults', 
-            action='ByPlayerSearch',
+            action='ViewByPlayerSearch',
              requirements= {'fnSearch':'(fN_[f,l,b]){1}',
                             'lnSearch':'(lN_[f,l,b]){1}',
                             'fySearch':'(fY_[e,d]){1}',

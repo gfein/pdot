@@ -182,9 +182,10 @@
 					<li><a href="#" onclick="reloadFrame('gamesPlayed');return false;">Games Played</a></li>
 					<li><a href="#" onclick="reloadFrame('minutesPerGame');return false;">Minutes Per Game</a></li>
 					<li><a href="#" onclick="reloadFrame('points');return false;">Points</a></li>
-					<li><a href="#" onclick="reloadFrame('bar');return false;">Field Goals</a></li>
+					<li><a href="#" onclick="reloadFrame('fieldGoals');return false;">Field Goals</a></li>
 					<li><a href="#" onclick="reloadFrame('line');return false;">Three Points</a></li>
 					<li><a href="#" onclick="reloadFrame('bar');return false;">Free Throws</a></li>
+					<li><a href="#" onclick="reloadFrame('test5');return false;">Percentages</a></li>
 				</ul>
 			</div>
 			<div>
@@ -244,11 +245,36 @@
 					json = JSON.stringify(mpgArray);
 					url = '/dom/d3Test2.html?data=';
 				}
+				else if(type == 'fieldGoals') {
+					var fgaArray = new Array();
+					var fgmArray = new Array();					
+					var index = 0;
+					$("#statsTable tr").each(function(){
+						if(index > 0) {
+							fgaArray[index-1] = $(this).find("td")[5].innerHTML;
+							fgmArray[index-1] = $(this).find("td")[6].innerHTML;
+						}
+						index += 1;
+					});
+					var payload = [fgmArray, fgaArray];
+					payload.xAxis = 'Season';
+					payload.yAxis = 'Field Goals'
+					json = JSON.stringify(payload);
+					url = '/dom/d3Test3.html?data=';
+				}				
+				else if(type == 'test4') {
+					url = '/dom/d3Test4.html?data=';
+					json = '';
+				}
+				else if(type == 'test5') {
+					url = '/dom/d3Test5.html?data=';
+					json = '';
+				}
 				
 				var base64json = encode64(json);
 				var newUrl = url + base64json;
 				$('#graphFrame').attr('src', newUrl);
-			}
+			}			
 		</script>		
 	</div>
 </div>

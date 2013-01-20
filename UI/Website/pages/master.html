@@ -45,9 +45,9 @@
 						<div class="headerContainer_Right">
 							{% block headerRight %}
 							<div>
-								<a href="/">Home</a> | 
+								<a href="{{ url ('home') }} ">Home</a> | 
 								<a href="/dom/test.html" class="fixedAjaxDOMWindow">Item</a> | 
-								<a href="/About">About</a>
+								<a href="{{ url('about') }}">About</a>
 							</div>
 							{% endblock %}
 						</div>
@@ -63,9 +63,12 @@
 	
 		<div id="navigationBar" class="navigationBar">
 			<div class="navigationBarContent">
-				<a href="/Debug">Debug</a>
+				<a href="{{ url ('home') }} ">Home</a>
 				&nbsp;|&nbsp;
-				<a href="/ViewData">View Data</a>
+				<a href="{{ url ('viewPlayerData') }} ">Player Data</a>
+				&nbsp;|&nbsp;
+				<a href="{{ url ('databaseUtilities') }} ">Database Utilities</a>
+				&nbsp;|&nbsp;
 			</div>
 		</div>
 		

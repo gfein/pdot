@@ -22,12 +22,12 @@ class PageRouter:
             # Resources will create their own response object
             if(route['controller'] == u'Resource'):
                 module = importlib.import_module(Configuration.resourceControllerRoot + "." + route["controller"])            
-                controllerClass = getattr(module, route['controller'] + 'Controller')            
+                controllerClass = getattr(module, route['controller'] + 'Controller')(self.request, map, route)            
                 method = getattr(controllerClass, route['action'])
                 return method(self.request, route)
             else:
                 module = importlib.import_module(Configuration.pageControllersRoot + "." + route["controller"])            
-                controllerClass = getattr(module, route['controller'] + 'Controller')            
+                controllerClass = getattr(module, route['controller'] + 'Controller')(self.request, map, route)           
                 method = getattr(controllerClass, route['action'])
                 return Response(method(self.request, route))
             
@@ -40,6 +40,6 @@ class PageRouter:
             print 'PageRouter Exception: ' + repr(e)
             route = map.match('/error')
             module = importlib.import_module(Configuration.pageControllersRoot + "." + route["controller"])            
-            controllerClass = getattr(module, route['controller'] + 'Controller')            
+            controllerClass = getattr(module, route['controller'] + 'Controller')(self.request, map, route)          
             method = getattr(controllerClass, route['action'])
             return Response(method(self.request, route))

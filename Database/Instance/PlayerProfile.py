@@ -4,7 +4,7 @@ from Database.Instance.Players import PlayersDbLayer
 
 class PlayerProfileController(BaseController):
     @staticmethod
-    def Profile(request, route):
+    def ViewProfile(request, route):
         BaseController.importBaseController()
         env = Environment(loader=PackageLoader('PDOT', Configuration.pagesFolder))
         dbLayer = PlayersDbLayer()

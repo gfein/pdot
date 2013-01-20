@@ -10,38 +10,7 @@
 	<script type="text/javascript" src="/js/jquery-json2.js"></script>
 	<script type="text/javascript" src="/js/jquery-base64.js"></script>
 	<script type="text/javascript" src="/js/jquery-utf8.js"></script>
-	<script type="text/javascript" src="/js/jquery-tipsy.js"></script>
-	<link href="/css/tipsy.css" rel="stylesheet" type="text/css" />
 	<style type="text/css">
-		path {
-		    stroke: steelblue;
-		    stroke-width: 2;
-		    fill: none;
-		}
-
-		line {
-		    stroke: black;
-		}
-
-		text {
-		    font-family: Arial;
-		    font-size: 9pt;
-		}
-	</style>
-	
-	
-<script type="text/javascript">
-    $(document).ready(function() {
-      $('svg title').parent().tipsy({
-        gravity: 'sw',
-        hoverlock:true,
-        html: true,
-    //    title: function() { return $(this).find('title').text(); }
-      });
-    });
-    </script>
-    
-    <style type="text/css">
 		path {
 		    stroke: steelblue;
 		    stroke-width: 2;
@@ -207,17 +176,6 @@
 		  stroke-opacity: .5;
 		}
 	</style>	
-	<script type="text/javascript">
-    $(document).ready(function() {
-      $('svg title').parent().tipsy({
-        gravity: 'sw',
-        hoverlock:true,
-        html: true,
-    //    title: function() { return $(this).find('title').text(); }
-      });
-    });
-    </script>
-    </head>	
   </head>
   <body>
 	<script type="text/javascript">
@@ -240,8 +198,8 @@
 			w = 800,
 			h = 250,
 			margin = 20,
-			y = d3.scale.linear().domain([0, d3.max(data)]).range([0 + margin, h - margin]),
-			x = d3.scale.linear().domain([0, data.length]).range([0 + margin, w - margin])
+			y = d3.scale.linear().domain([0, d3.max(data[0])]).range([0 + margin, h - margin]),
+			x = d3.scale.linear().domain([0, data[0].length]).range([0 + margin, w - margin])
 
 			var vis = d3.select("body")
 			    .append("svg:svg")
@@ -252,10 +210,16 @@
 			    .attr("transform", "translate(0, 250)");
 			
 			var line = d3.svg.line()
-			    .x(function(d,i) { return x(i); })
-			    .y(function(d) { return -1 * y(d); })
-			
-			g.append("svg:path").attr("d", line(data));				
+	    		.x(function(d,i) { return x(i); })
+	    		.y(function(d) { return -1 * y(d); })
+	
+			g.append("svg:path").attr("d", line(data[0]));
+		
+			var line2 = d3.svg.line()
+	    		.x(function(d,i) { return x(i); })
+	    		.y(function(d) { return -1 * y(d); })
+	
+			g.append("svg:path").attr("d", line2(data[1]));
 			
 			g.append("svg:line")
 			    .attr("x1", x(0))
@@ -267,7 +231,7 @@
 			    .attr("x1", x(0))
 			    .attr("y1", -1 * y(0))
 			    .attr("x2", x(0))
-			    .attr("y2", -1 * y(d3.max(data)))
+			    .attr("y2", -1 * y(d3.max(data[0])))
 			
 			g.selectAll(".xLabel")
 			    .data(x.ticks(5))
@@ -304,29 +268,23 @@
 			    .attr("y1", function(d) { return -1 * y(d); })
 			    .attr("x1", x(-0.3))
 			    .attr("y2", function(d) { return -1 * y(d); })
-			    .attr("x2", x(0))			
+			    .attr("x2", x(0))
 			    
-			    g.selectAll(".points")
-			    .enter().append("svg:text")
-		      	.append("svg:title")
-		        .text(function(d) { return "Poopsicle"});;
-		        
-		        
-				chart.dispatch.on('showTooltip', function(e) {
-	  				var offset = $('#test1').offset(), // { left: 0, top: 0 }
-	        		left = e.pos[0] + offset.left,
-	        		top = e.pos[1] + offset.top,
-	        		formatter = d3.format(".04f")
-	        		.xAxis.label(data.xAxis)
-	        		.yAxis.label(data.yAxis);
+			chart.dispatch.on('showTooltip', function(e) {
+  				var offset = $('#test1').offset(), // { left: 0, top: 0 }
+        		left = e.pos[0] + offset.left,
+        		top = e.pos[1] + offset.top,
+        		formatter = d3.format(".04f")
+        		.xAxis.label(data.xAxis)
+        		.yAxis.label(data.yAxis);
 
-	    			var content = '<h3>' + e.series.label + '</h3>' +
-	                  '<p>' +
-	                  '<span class="value">[' + e.point[0] + ', ' + formatter(e.point[1]) + ']</span>' +
-	                  '</p>';
+    			var content = '<h3>' + e.series.label + '</h3>' +
+                  '<p>' +
+                  '<span class="value">[' + e.point[0] + ', ' + formatter(e.point[1]) + ']</span>' +
+                  '</p>';
 
-	    			nvtooltip.show([left, top], content);
-	  			});
+    			nvtooltip.show([left, top], content);
+  			});
 		</script>
   </body>
 </html>

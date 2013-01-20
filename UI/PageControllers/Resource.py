@@ -3,10 +3,7 @@ import mimetypes
 from webob import Response
 
 class ResourceController(BaseController):
-    @staticmethod
-    def Load(request, route):
-        BaseController.importBaseController()
-        
+    def Load(self, request, route):        
         response = Response()
         response.status = 200
         response.content_type = mimetypes.guess_type(route['filename'])[0]

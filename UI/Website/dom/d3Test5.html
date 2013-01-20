@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <style>
+  body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img { 
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;}
+  
+  </style>                              
+      <script type='text/javascript' src="/js/jquery-1.8.3.min.js"></script>
+      <script type='text/javascript' src="/js/d3.js"></script>            
+      <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+      <link rel="stylesheet" type="text/css" href="/css/nvd3.css">
+  <style type='text/css'>
+      #chart svg {
+    height: 300px;
+  }
+  </style>
+  
+
+
+<script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+
+    nv.addGraph(function() {
+      var chart = nv.models.multiLineChart(),
+          _data = data();
+
+      chart.xAxis
+          .axisLabel('Time')
+          .tickFormat(function (d) { return d; })
+
+      chart.yAxis
+          .axisLabel('Rating')
+          .tickFormat(d3.format('.2r'));
+
+      var d3chart = d3.select('#chart svg')
+          .datum(_data)
+          .transition().duration(500)
+          .call(chart);
+
+    $('#chart svg').on('click', function(e){
+        var elem = $(e.target),
+            currentItem, currentUrl;
+        
+        if(elem.parent('.nv-point-paths').length) {
+            currentItem = e.target.getAttribute('class').match(/\d+/)[0];
+            currentUrl = _data[0].urls[ currentItem ];
+            $('#log').text(currentUrl);
+        }
+    })
+
+      nv.utils.windowResize(chart.update);
+
+      return chart;
+    });
+
+    function getRandomNumber(seed) { 
+    	var randomNumber = Math.floor(Math.random()*99999);
+    	randomNumber += seed;
+    	return randomNumber;
+    }
+    
+    function data() {
+
+      var data = [{ x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello a' + getRandomNumber(0)},
+                   { x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello b' + getRandomNumber(0)},
+                   { x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello c' + getRandomNumber(0)},
+                   { x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello d' + getRandomNumber(0)},
+                   { x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello e' + getRandomNumber(0)},
+                   { x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello f' + getRandomNumber(0)},
+                   { x: getRandomNumber(1347440000), y: getRandomNumber(-7500), text: 'Hello g' + getRandomNumber(0)}];
+      data.sort(function(a,b){return a.x-b.x});
+          url_data = new Array(data.length).join('#|').split('#').map(function(v,i) { return "/" + i + "/" })
+      return [
+        {
+          values: data,
+          urls: url_data,
+          key: 'Placeholder',
+          color: "#23b066"
+        }
+      ];
+    }       
+});
+
+</script>
+
+
+</head>
+<body>
+    <div id="chart">
+    <svg></svg>
+  </div>
+<div id='log'></div>
+
+  
+</body>
+
+
+</html>
+

@@ -2,23 +2,21 @@ from UI.PageControllers.BaseController import *
 from Database.Instance.Players import PlayersDbLayer
 
 class SearchResultsController(BaseController):
-    @staticmethod
-    def Display(request, route):
-        BaseController.importBaseController()
+    
+    def ViewDisplay(self, request, route):
         dbLayer = PlayersDbLayer()
         foundPlayers = dbLayer.queryByLetter(route['searchLetter'])
         env = Environment(loader=PackageLoader('PDOT', Configuration.pagesFolder))
         template = env.get_template(Configuration.webpageDirectory['searchResults'])
         
         
-        return template.render(route=route, futureQuote=FutureQuote.getRandomQuote(), serverVersion=DatabaseUtility.getVersion(),
+        return template.render(route=route, futureQuote=self.getFutureQuote(), serverVersion=DatabaseUtility.getVersion(),
                                queryDescription = 'Last Name of ' + route['searchLetter'] + '*',
-                               playerResult=foundPlayers)
+                               playerResult=foundPlayers,
+                               url=self.url)
         
         
-    @staticmethod
-    def ByPlayerSearch(request, route):
-        BaseController.importBaseController()
+    def ViewByPlayerSearch(self, request, route):
         dbLayer = PlayersDbLayer()            
         
         firstName = route['firstName']
@@ -56,18 +54,18 @@ class SearchResultsController(BaseController):
         template = env.get_template(Configuration.webpageDirectory['searchResults'])  
         
         searchParameter = '<ul>'
-        for item in SearchResultsController.getDeepQueryString(route):
+        for item in self.getDeepQueryString(route):
             searchParameter += '<li>' + item + '</li>'
         searchParameter += '</ul><br>'
                            
-        return template.render(route=route, futureQuote=FutureQuote.getRandomQuote(), 
+        return template.render(route=route, futureQuote=self.getFutureQuote(), 
                                serverVersion=DatabaseUtility.getVersion(),
                                queryDescription = 'Deep Query',
                                playerResult=foundPlayers,
-                               deepQueryParameters=searchParameter)
+                               deepQueryParameters=searchParameter,
+                               url=self.url)
         
-    @staticmethod
-    def getDeepQueryString(route):
+    def getDeepQueryString(self, route):
         firstName = route['firstName']
         fnType = route ['fnSearch']
         

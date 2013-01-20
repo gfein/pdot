@@ -5,9 +5,8 @@ from Database.Instance.PlayerAlias import AliasDbLayer
 from Database.Instance.StatLine import StatLineDbLayer
 
 class PlayerProfileController(BaseController):
-    @staticmethod
-    def Profile(request, route):
-        BaseController.importBaseController()
+
+    def ViewProfile(self, request, route):
         env = Environment(loader=PackageLoader('PDOT', Configuration.pagesFolder))
         dbLayer = PlayersDbLayer()
         foundPlayer = dbLayer.queryById(route['playerId'])
@@ -20,7 +19,7 @@ class PlayerProfileController(BaseController):
         
         if foundPlayer.uniqueId is not None:                            
             template = env.get_template(Configuration.webpageDirectory['playerProfile'])                        
-            return template.render(route=route, futureQuote=FutureQuote.getRandomQuote(), serverVersion=DatabaseUtility.getVersion(),
+            return template.render(route=route, futureQuote=self.getFutureQuote(), serverVersion=DatabaseUtility.getVersion(),
                                    playerName=foundPlayer.firstName + ' ' + foundPlayer.lastName,
                                    uniqueId=foundPlayer.uniqueId,
                                    firstName=foundPlayer.firstName,
@@ -31,8 +30,10 @@ class PlayerProfileController(BaseController):
                                    playedFrom=foundPlayer.playedFrom,
                                    playedTo=foundPlayer.playedTo,
                                    aliases=knownAliases,
-                                   statsResults=statsArray )
+                                   statsResults=statsArray,
+                                   url=self.url)
         else:
             template = env.get_template(Configuration.webpageDirectory['playerProfileError'])                        
-            return template.render(route=route, futureQuote=FutureQuote.getRandomQuote(), serverVersion=DatabaseUtility.getVersion(),
-                                   uniqueId=route['playerId'])
+            return template.render(route=route, futureQuote=self.getFutureQuote(), serverVersion=DatabaseUtility.getVersion(),
+                                   uniqueId=route['playerId'],
+                                   url=self.url)
